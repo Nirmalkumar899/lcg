@@ -171,24 +171,24 @@
     <!-- Global Background Reels -->
     <div class="fixed inset-0 z-0 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 opacity-20 pointer-events-none">
         <div class="flex flex-col gap-4 reel-column">
-            <video autoplay loop muted playsinline class="rounded-xl" src="assets/reel1.mp4"></video>
-            <video autoplay loop muted playsinline class="rounded-xl" src="assets/reel2.mp4"></video>
+            <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
+            <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
         </div>
         <div class="flex flex-col gap-4 reel-column-reverse">
-            <video autoplay loop muted playsinline class="rounded-xl" src="assets/reel3.mp4"></video>
-            <video autoplay loop muted playsinline class="rounded-xl" src="assets/reel1.mp4"></video>
+            <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4"></video>
+            <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
         </div>
         <div class="hidden md:flex flex-col gap-4 reel-column">
-            <video autoplay loop muted playsinline class="rounded-xl" src="assets/reel2.mp4"></video>
-            <video autoplay loop muted playsinline class="rounded-xl" src="assets/reel3.mp4"></video>
+            <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
+            <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4"></video>
         </div>
         <div class="hidden md:flex flex-col gap-4 reel-column-reverse">
-            <video autoplay loop muted playsinline class="rounded-xl" src="assets/reel1.mp4"></video>
-            <video autoplay loop muted playsinline class="rounded-xl" src="assets/reel2.mp4"></video>
+            <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
+            <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
         </div>
         <div class="hidden lg:flex flex-col gap-4 reel-column">
-            <video autoplay loop muted playsinline class="rounded-xl" src="assets/reel3.mp4"></video>
-            <video autoplay loop muted playsinline class="rounded-xl" src="assets/reel1.mp4"></video>
+            <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4"></video>
+            <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
         </div>
     </div>
     <div class="fixed inset-0 z-[1] global-vignette pointer-events-none"></div>
@@ -221,9 +221,15 @@
     <section class="relative h-screen w-full overflow-hidden flex items-center justify-center bg-black">
         <!-- Hero Video Background -->
         <div class="video-foreground">
-            <video autoplay loop muted playsinline class="w-full h-full object-cover">
-                <source src="assets/hero.mp4" type="video/mp4">
+            <video id="hero-video" autoplay loop muted playsinline class="w-full h-full object-cover">
+                <source src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/reels/hero%20(1)%20(1).mp4" type="video/mp4">
             </video>
+        </div>
+        <!-- Mute/Unmute Toggle -->
+        <div class="absolute bottom-8 right-8 z-[15]">
+            <button id="audio-toggle" class="w-12 h-12 rounded-full bg-black/20 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-black/40 transition-all duration-300 group">
+                <span id="audio-icon" class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">volume_off</span>
+            </button>
         </div>
         <div class="absolute inset-0 scrim-overlay z-[5]"></div>
         <!-- Minimalist Hero Overlay (No Text/Buttons) -->
@@ -281,7 +287,7 @@
                 <a href="https://www.instagram.com/lcgdigitalcinematheque/reels/" target="_blank"
                     class="md:col-span-6 group relative overflow-hidden rounded-xl bg-surface-container-low h-[400px] border border-white/10 block">
                     <div class="absolute inset-0">
-                        <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-50 group-hover:scale-110 transition-all duration-700" src="assets/reel2.mp4"></video>
+                        <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-50 group-hover:scale-110 transition-all duration-700" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
                     </div>
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                     <div class="absolute bottom-0 left-0 p-8">
@@ -477,6 +483,23 @@
             </div>
         </div>
     </footer>
+    <script>
+        const heroVideo = document.getElementById('hero-video');
+        const audioToggle = document.getElementById('audio-toggle');
+        const audioIcon = document.getElementById('audio-icon');
+
+        audioToggle.addEventListener('click', () => {
+            if (heroVideo.muted) {
+                heroVideo.muted = false;
+                audioIcon.textContent = 'volume_up';
+                audioToggle.classList.add('bg-primary/20', 'border-primary/30');
+            } else {
+                heroVideo.muted = true;
+                audioIcon.textContent = 'volume_off';
+                audioToggle.classList.remove('bg-primary/20', 'border-primary/30');
+            }
+        });
+    </script>
 </body>
 
 </html>
