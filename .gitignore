@@ -1,0 +1,5 @@
+# Ignore large video files exceeding GitHub's 100MB limit
+assets/hero.mp4
+
+# Ignore OS files
+.DS_Store

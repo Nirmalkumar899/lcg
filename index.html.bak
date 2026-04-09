@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>LCG | Cinematic Social Media Excellence</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800;900&amp;family=Manrope:wght@300;400;500;600&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#0e0e0f",
+                        "error": "#ff716c",
+                        "secondary-container": "#ae3200",
+                        "primary-dim": "#9b4de0",
+                        "on-tertiary-fixed-variant": "#665500",
+                        "on-primary-fixed": "#2e1065",
+                        "secondary-fixed-dim": "#ffb199",
+                        "outline": "#767576",
+                        "surface-container-lowest": "#000000",
+                        "on-secondary-fixed-variant": "#962a00",
+                        "surface-container": "#1a191b",
+                        "on-primary": "#4c1d95",
+                        "tertiary-fixed": "#ffd709",
+                        "secondary-fixed": "#ffc4b3",
+                        "surface-container-highest": "#262627",
+                        "background": "#0e0e0f",
+                        "on-tertiary-container": "#5b4b00",
+                        "secondary": "#ff7346",
+                        "on-secondary-container": "#fff6f3",
+                        "on-error-container": "#ffa8a3",
+                        "inverse-surface": "#fcf8f9",
+                        "on-secondary": "#420d00",
+                        "on-tertiary": "#655400",
+                        "inverse-primary": "#6b21a8",
+                        "inverse-on-surface": "#565556",
+                        "on-primary-container": "#4c1d95",
+                        "on-surface-variant": "#adaaab",
+                        "primary-fixed": "#d8b4fe",
+                        "error-dim": "#d7383b",
+                        "on-primary-fixed-variant": "#4c1d95",
+                        "surface-container-low": "#131314",
+                        "on-tertiary-fixed": "#453900",
+                        "on-error": "#490006",
+                        "secondary-dim": "#ff7346",
+                        "on-surface": "#ffffff",
+                        "tertiary-fixed-dim": "#efc900",
+                        "tertiary-dim": "#efc900",
+                        "on-background": "#ffffff",
+                        "surface": "#0e0e0f",
+                        "primary-container": "#d8b4fe",
+                        "surface-bright": "#2c2c2d",
+                        "tertiary-container": "#ffd709",
+                        "tertiary": "#ffe792",
+                        "error-container": "#9f0519",
+                        "surface-container-high": "#201f21",
+                        "outline-variant": "#484849",
+                        "on-secondary-fixed": "#651900",
+                        "primary-fixed-dim": "#c084fc",
+                        "primary": "#bf7af0",
+                        "surface-tint": "#bf7af0",
+                        "surface-variant": "#262627"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Epilogue"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+
+        .font-headline {
+            font-family: 'Epilogue', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Custom Scrolling Reel Effect */
+        .reel-column {
+            animation: scroll-vertical 60s linear infinite;
+        }
+
+        .reel-column-reverse {
+            animation: scroll-vertical-reverse 65s linear infinite;
+        }
+
+        @keyframes scroll-vertical {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+
+        @keyframes scroll-vertical-reverse {
+            0% {
+                transform: translateY(-50%);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .scrim-overlay {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(14, 14, 15, 0.7) 40%, rgba(14, 14, 15, 0.7) 60%, rgba(0, 0, 0, 1) 100%);
+        }
+
+        .global-vignette {
+            background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.8) 100%);
+        }
+
+        .text-shadow-lg {
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Video Background Fixes */
+        .video-foreground {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .video-foreground iframe {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 56.25vw;
+            /* 16:9 aspect ratio */
+            min-height: 100vh;
+            min-width: 177.77vh;
+            /* 16:9 aspect ratio */
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-surface selection:bg-primary selection:text-on-primary-fixed overflow-x-hidden">
+    <!-- Global Background Reels -->
+    <div class="fixed inset-0 z-0 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 opacity-20 pointer-events-none">
+        <div class="flex flex-col gap-4 reel-column">
+            <div class="h-[1200px] w-full bg-cover bg-center rounded-xl"
+                style="background-image: url('https://lh3.googleusercontent.com/aida/ADBb0ujLdh3QWgYnRGPyi6IxFTI8_fM28qGedp3zhQUuUcekU3cd0phorAO3S7D2b6HLi9HBD97GKxxAhKl5Xo7QsNHtQiW_rrwtUaSrN_5DJ1R7BaLEm2KXGNWXz-DQCrtM6W7eiWyR8Psx5ZZ5UGKHTXVsJMhcHLjknPxEr-b1UdvHaXjHPz4pZFxrdhIdeLv93joUdsQXGTRhxcO24hwpc3JQBpIlKWEzRNm6d19I7MGAzBV7-M9TIEkULYmE3EeGXpIVFhDwP25xfQ')">
+            </div>
+            <div class="h-[1200px] w-full bg-cover bg-center rounded-xl"
+                style="background-image: url('https://lh3.googleusercontent.com/aida/ADBb0ujLdh3QWgYnRGPyi6IxFTI8_fM28qGedp3zhQUuUcekU3cd0phorAO3S7D2b6HLi9HBD97GKxxAhKl5Xo7QsNHtQiW_rrwtUaSrN_5DJ1R7BaLEm2KXGNWXz-DQCrtM6W7eiWyR8Psx5ZZ5UGKHTXVsJMhcHLjknPxEr-b1UdvHaXjHPz4pZFxrdhIdeLv93joUdsQXGTRhxcO24hwpc3JQBpIlKWEzRNm6d19I7MGAzBV7-M9TIEkULYmE3EeGXpIVFhDwP25xfQ')">
+            </div>
+        </div>
+        <div class="flex flex-col gap-4 reel-column-reverse">
+            <div class="h-[1200px] w-full bg-cover bg-center rounded-xl"
+                style="background-image: url('https://lh3.googleusercontent.com/aida/ADBb0ujLdh3QWgYnRGPyi6IxFTI8_fM28qGedp3zhQUuUcekU3cd0phorAO3S7D2b6HLi9HBD97GKxxAhKl5Xo7QsNHtQiW_rrwtUaSrN_5DJ1R7BaLEm2KXGNWXz-DQCrtM6W7eiWyR8Psx5ZZ5UGKHTXVsJMhcHLjknPxEr-b1UdvHaXjHPz4pZFxrdhIdeLv93joUdsQXGTRhxcO24hwpc3JQBpIlKWEzRNm6d19I7MGAzBV7-M9TIEkULYmE3EeGXpIVFhDwP25xfQ')">
+            </div>
+            <div class="h-[1200px] w-full bg-cover bg-center rounded-xl"
+                style="background-image: url('https://lh3.googleusercontent.com/aida/ADBb0ujLdh3QWgYnRGPyi6IxFTI8_fM28qGedp3zhQUuUcekU3cd0phorAO3S7D2b6HLi9HBD97GKxxAhKl5Xo7QsNHtQiW_rrwtUaSrN_5DJ1R7BaLEm2KXGNWXz-DQCrtM6W7eiWyR8Psx5ZZ5UGKHTXVsJMhcHLjknPxEr-b1UdvHaXjHPz4pZFxrdhIdeLv93joUdsQXGTRhxcO24hwpc3JQBpIlKWEzRNm6d19I7MGAzBV7-M9TIEkULYmE3EeGXpIVFhDwP25xfQ')">
+            </div>
+        </div>
+        <div class="hidden md:flex flex-col gap-4 reel-column">
+            <div class="h-[1200px] w-full bg-cover bg-center rounded-xl"
+                style="background-image: url('https://lh3.googleusercontent.com/aida/ADBb0ujLdh3QWgYnRGPyi6IxFTI8_fM28qGedp3zhQUuUcekU3cd0phorAO3S7D2b6HLi9HBD97GKxxAhKl5Xo7QsNHtQiW_rrwtUaSrN_5DJ1R7BaLEm2KXGNWXz-DQCrtM6W7eiWyR8Psx5ZZ5UGKHTXVsJMhcHLjknPxEr-b1UdvHaXjHPz4pZFxrdhIdeLv93joUdsQXGTRhxcO24hwpc3JQBpIlKWEzRNm6d19I7MGAzBV7-M9TIEkULYmE3EeGXpIVFhDwP25xfQ')">
+            </div>
+            <div class="h-[1200px] w-full bg-cover bg-center rounded-xl"
+                style="background-image: url('https://lh3.googleusercontent.com/aida/ADBb0ujLdh3QWgYnRGPyi6IxFTI8_fM28qGedp3zhQUuUcekU3cd0phorAO3S7D2b6HLi9HBD97GKxxAhKl5Xo7QsNHtQiW_rrwtUaSrN_5DJ1R7BaLEm2KXGNWXz-DQCrtM6W7eiWyR8Psx5ZZ5UGKHTXVsJMhcHLjknPxEr-b1UdvHaXjHPz4pZFxrdhIdeLv93joUdsQXGTRhxcO24hwpc3JQBpIlKWEzRNm6d19I7MGAzBV7-M9TIEkULYmE3EeGXpIVFhDwP25xfQ')">
+            </div>
+        </div>
+        <div class="hidden md:flex flex-col gap-4 reel-column-reverse">
+            <div class="h-[1200px] w-full bg-cover bg-center rounded-xl"
+                style="background-image: url('https://lh3.googleusercontent.com/aida/ADBb0ujLdh3QWgYnRGPyi6IxFTI8_fM28qGedp3zhQUuUcekU3cd0phorAO3S7D2b6HLi9HBD97GKxxAhKl5Xo7QsNHtQiW_rrwtUaSrN_5DJ1R7BaLEm2KXGNWXz-DQCrtM6W7eiWyR8Psx5ZZ5UGKHTXVsJMhcHLjknPxEr-b1UdvHaXjHPz4pZFxrdhIdeLv93joUdsQXGTRhxcO24hwpc3JQBpIlKWEzRNm6d19I7MGAzBV7-M9TIEkULYmE3EeGXpIVFhDwP25xfQ')">
+            </div>
+            <div class="h-[1200px] w-full bg-cover bg-center rounded-xl"
+                style="background-image: url('https://lh3.googleusercontent.com/aida/ADBb0ujLdh3QWgYnRGPyi6IxFTI8_fM28qGedp3zhQUuUcekU3cd0phorAO3S7D2b6HLi9HBD97GKxxAhKl5Xo7QsNHtQiW_rrwtUaSrN_5DJ1R7BaLEm2KXGNWXz-DQCrtM6W7eiWyR8Psx5ZZ5UGKHTXVsJMhcHLjknPxEr-b1UdvHaXjHPz4pZFxrdhIdeLv93joUdsQXGTRhxcO24hwpc3JQBpIlKWEzRNm6d19I7MGAzBV7-M9TIEkULYmE3EeGXpIVFhDwP25xfQ')">
+            </div>
+        </div>
+        <div class="hidden lg:flex flex-col gap-4 reel-column">
+            <div class="h-[1200px] w-full bg-cover bg-center rounded-xl"
+                style="background-image: url('https://lh3.googleusercontent.com/aida/ADBb0ujLdh3QWgYnRGPyi6IxFTI8_fM28qGedp3zhQUuUcekU3cd0phorAO3S7D2b6HLi9HBD97GKxxAhKl5Xo7QsNHtQiW_rrwtUaSrN_5DJ1R7BaLEm2KXGNWXz-DQCrtM6W7eiWyR8Psx5ZZ5UGKHTXVsJMhcHLjknPxEr-b1UdvHaXjHPz4pZFxrdhIdeLv93joUdsQXGTRhxcO24hwpc3JQBpIlKWEzRNm6d19I7MGAzBV7-M9TIEkULYmE3EeGXpIVFhDwP25xfQ')">
+            </div>
+            <div class="h-[1200px] w-full bg-cover bg-center rounded-xl"
+                style="background-image: url('https://lh3.googleusercontent.com/aida/ADBb0ujLdh3QWgYnRGPyi6IxFTI8_fM28qGedp3zhQUuUcekU3cd0phorAO3S7D2b6HLi9HBD97GKxxAhKl5Xo7QsNHtQiW_rrwtUaSrN_5DJ1R7BaLEm2KXGNWXz-DQCrtM6W7eiWyR8Psx5ZZ5UGKHTXVsJMhcHLjknPxEr-b1UdvHaXjHPz4pZFxrdhIdeLv93joUdsQXGTRhxcO24hwpc3JQBpIlKWEzRNm6d19I7MGAzBV7-M9TIEkULYmE3EeGXpIVFhDwP25xfQ')">
+            </div>
+        </div>
+    </div>
+    <div class="fixed inset-0 z-[1] global-vignette pointer-events-none"></div>
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-black/40 backdrop-blur-xl border-b border-white/5">
+        <div class="flex justify-between items-center px-8 py-6 max-w-full mx-auto">
+            <div class="text-2xl font-black text-white tracking-tighter font-headline">LCG</div>
+            <div class="hidden md:flex gap-12">
+                <a class="text-violet-300 border-b-2 border-violet-400 pb-1 font-['Epilogue'] font-bold tracking-tight"
+                    href="#">Work</a>
+                <a class="text-white/70 hover:text-white transition-colors hover:text-violet-300 transition-all duration-300 font-['Epilogue'] font-bold tracking-tight"
+                    href="#">Services</a>
+                <a class="text-white/70 hover:text-white transition-colors hover:text-violet-300 transition-all duration-300 font-['Epilogue'] font-bold tracking-tight"
+                    href="#">Clients</a>
+                <a class="text-white/70 hover:text-white transition-colors hover:text-violet-300 transition-all duration-300 font-['Epilogue'] font-bold tracking-tight"
+                    href="#">About</a>
+            </div>
+            <button
+                class="bg-primary text-on-primary px-6 py-2.5 rounded-xl font-headline font-bold text-sm scale-95 active:opacity-80 transition-transform">
+                Get Started
+            </button>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="relative h-screen w-full overflow-hidden flex items-center justify-center bg-black">
+        <!-- Hero Video Background -->
+        <div class="video-foreground">
+            <iframe allow="autoplay; encrypted-media" frameborder="0"
+                src="https://www.youtube.com/embed/4poqZjNTZjI?controls=0&amp;showinfo=0&amp;rel=0&amp;autoplay=1&amp;loop=1&amp;mute=1&amp;playlist=4poqZjNTZjI"></iframe>
+        </div>
+        <div class="absolute inset-0 scrim-overlay z-[5]"></div>
+        <!-- Minimalist Hero Overlay (No Text/Buttons) -->
+        <div class="relative z-10 text-center px-4 max-w-5xl invisible">
+        </div>
+    </section>
+    <!-- Client Showcase (Bento Grid) -->
+    <section class="py-32 px-8 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+                <div class="max-w-2xl">
+                    <span
+                        class="text-secondary font-headline font-bold tracking-widest uppercase text-sm mb-4 block">Proven
+                        Impact</span>
+                    <h2
+                        class="text-4xl md:text-6xl font-headline font-black text-on-surface tracking-tight text-shadow-lg">
+                        Our Portfolio</h2>
+                </div>
+                <button
+                    class="text-primary font-body font-semibold flex items-center gap-2 hover:translate-x-2 transition-transform">
+                    View all projects <span class="material-symbols-outlined">arrow_forward</span>
+                </button>
+            </div>
+            <!-- Portfolio Grid with New Imagery -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto">
+                <!-- Main Featured Project -->
+                <div
+                    class="md:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container-low h-[500px] md:h-[600px] transition-all duration-500 border border-white/10">
+                    <img alt=""
+                        class="w-full h-full object-cover opacity-60 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOMNhLRttg-mLvOuE_DdoejGlImjc4s9y9GsfdmY_zfkSZ_zF6yfMvoLc29LJOr_cq_mZrqxSDFXTEnJY4QhA8nN1HCw5x0p3K38YeNPTA6ZMQeH75W7XHrEvb1wwFlbKZpLIlQZqqsADAOQgQdc_FKh7Hgp4kdnHrhp8eOkz0kvK6M_IruqEuZlNBc790Crdd5E6zO6HYKQQoeodirjqHVlblib542I_iayILe-JxlPeHC7D5qRSM7Rv-XHXe_sQcunppO03zbhKi" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-8">
+                        <div class="text-tertiary font-headline font-bold text-sm mb-2">FASHION &amp; EDITORIAL</div>
+                        <h3 class="text-3xl font-headline font-bold text-white mb-4">Vogue Collective 2024</h3>
+                        <p class="text-on-surface-variant max-w-md">3.2M Impressions in 48 hours through cinematic
+                            short-form storytelling.</p>
+                    </div>
+                </div>
+                <!-- New Integrated Grid Project from IMAGE_5 -->
+                <div
+                    class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container-low h-[500px] md:h-[600px] border border-white/10">
+                    <img alt=""
+                        class="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-all duration-700"
+                        src="https://lh3.googleusercontent.com/aida/ADBb0ujs6N9HB5n2h3FF8Ac_oXqmpDap0XFSLFtNeQFYa4Y3C1A39Ivd9FZtUxk895_Tku9UHmUcm6Ff_qcLU9aQIxRasVBfqxTEnggZMWXIcGblM1L5IhMnjftX3ulWFE8JeKGi4MWyf-uanDDlAAqpTdFoJnl0q1HV8EH44mqL0EtzUxtGrkPcIidZOcJDm1D6vBuZKyXVLmfpJcKahmXVuuiEBXiFGGcj_ccNSOCxJsUOd-fcTaGYV7Fh2UX1jAY1joAkza88MJNrmg" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-8">
+                        <div class="text-primary font-headline font-bold text-sm mb-2">CONTENT SERIES</div>
+                        <h3 class="text-2xl font-headline font-bold text-white mb-2">Wefilm: The Behind-the-Scenes
+                            Journey</h3>
+                        <p class="text-sm text-on-surface-variant">Defining new visual standards for high-engagement
+                            social storytelling.</p>
+                    </div>
+                </div>
+                <div
+                    class="md:col-span-6 group relative overflow-hidden rounded-xl bg-surface-container-low h-[400px] border border-white/10">
+                    <img alt=""
+                        class="w-full h-full object-cover opacity-50 group-hover:scale-110 transition-all duration-700"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBa5l-58DT9MK4EljIDGe6qkRAGWw6uI8PTxM4OQqlDw1MB4DQzrJgiugQx-Jt6f1MifojpI4ROnQzDqU2SQMWXasaJlT47DqhatoVolx9cSoMieyJ_Q8O6d8zLxTsibBK2R63umcexS1rHgxo4LAwjujtzU5pxjYAJWTc5SWxKEGOSiFyTtaXpgTmNZyHnd4VjtV0o5R5YqnM5zcKG-zi4DYPcr-TnWCpUJgL0JApbuE4fRL6gpivjKeFNWeDeQiQ3uXSMTvrHuNYa" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-8">
+                        <div class="text-secondary font-headline font-bold text-sm mb-2">GAMING</div>
+                        <h3 class="text-2xl font-headline font-bold text-white mb-2">Razer Nexus Launch</h3>
+                    </div>
+                </div>
+                <div
+                    class="md:col-span-6 group relative overflow-hidden rounded-xl bg-surface-container-low h-[400px] border border-white/10">
+                    <img alt=""
+                        class="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-all duration-700"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZsexLTlMBXU9O4PUdXn1QmdV8jpRrnpFNH3GyPrYNANW5GM3PrbJjLAvJydy-eOtP5oa64RAIPllrqpbLQjmNo5YeSWdwSdcsycLDvoFZAhxhUtJFpUYpMPJUSImc7RXBLXe2tAGNQWxH5NN78gTOn_bY-mMz6CpeGqXBcPOniDJONah1BEg5hk3L38oKg1LrNNJ8RXqjecz2x8kCi3DYtIkgpz5Q5p3x0xx8HiSv-eQxBGTLG6YtsDz086s_SEB6hc1we09LqSug" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-8">
+                        <div class="text-tertiary font-headline font-bold text-sm mb-2">LIVE EVENTS</div>
+                        <h3 class="text-3xl font-headline font-bold text-white mb-2">Sonic Horizons Tour</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Services Section -->
+    <section class="py-32 relative z-10 bg-black/40 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+                <div>
+                    <h2
+                        class="text-5xl md:text-7xl font-headline font-black text-on-surface mb-16 leading-[0.9] text-shadow-lg">
+                        Our <br /><span class="text-primary">Ecosystem</span>
+                    </h2>
+                    <div class="space-y-16">
+                        <div class="group">
+                            <div class="flex items-center gap-6 mb-4">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary border border-primary/20">
+                                    <span class="material-symbols-outlined"
+                                        style="font-variation-settings: 'FILL' 1;">movie</span>
+                                </div>
+                                <h3 class="text-2xl font-headline font-bold text-white text-shadow-lg">Cinematic
+                                    Production</h3>
+                            </div>
+                            <p class="text-on-surface-variant font-body leading-relaxed pl-18">
+                                4K vertical storytelling that blends the polish of a feature film with the urgency of
+                                social media trends.
+                            </p>
+                        </div>
+                        <div class="group">
+                            <div class="flex items-center gap-6 mb-4">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center text-secondary border border-secondary/20">
+                                    <span class="material-symbols-outlined"
+                                        style="font-variation-settings: 'FILL' 1;">insights</span>
+                                </div>
+                                <h3 class="text-2xl font-headline font-bold text-white text-shadow-lg">Content Strategy
+                                </h3>
+                            </div>
+                            <p class="text-on-surface-variant font-body leading-relaxed pl-18">
+                                Data-driven roadmaps that identify your unique brand voice and the algorithms that crave
+                                it.
+                            </p>
+                        </div>
+                        <div class="group">
+                            <div class="flex items-center gap-6 mb-4">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary border border-tertiary/20">
+                                    <span class="material-symbols-outlined"
+                                        style="font-variation-settings: 'FILL' 1;">hub</span>
+                                </div>
+                                <h3 class="text-2xl font-headline font-bold text-white text-shadow-lg">Engagement Growth
+                                </h3>
+                            </div>
+                            <p class="text-on-surface-variant font-body leading-relaxed pl-18">
+                                Active community management and viral engineering designed to turn followers into
+                                fanatics.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="absolute -top-12 -left-12 w-64 h-64 bg-primary/20 rounded-full blur-[100px] opacity-30">
+                    </div>
+                    <div
+                        class="absolute -bottom-12 -right-12 w-64 h-64 bg-secondary/20 rounded-full blur-[100px] opacity-30">
+                    </div>
+                    <div class="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+                        <img alt="" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQe2J-PvgaoX0wGysIQ312Ym_BfAb-a5aoWj-eSimmc6LYZLUknQ2tjzMFdmX4ZQ9kLJ43X3zUpV7Pzzk1LhxaymcaxCGvkwkYYXZOEcnuoKfEAg_j4lYquHJVr9u9eR8fn7kQZgCIMCBT-B6waNQPvaVwXoH6CELLK9H09yOiqKsmoifW63C143wbYq5cB4yrFO6r9lKfz_sw826nv00zsfBrF2FkivCVbPA1XJFR6N10WbJvqi3qZ4l9Gmn39QzjuqzreIedcsGT" />
+                        <div class="absolute inset-0 bg-surface-container-highest/60 backdrop-blur-[2px]"></div>
+                        <div class="absolute inset-0 flex flex-col justify-end p-12">
+                            <div class="bg-black/40 backdrop-blur-xl border border-white/10 p-8 rounded-xl">
+                                <div class="text-6xl font-headline font-black text-primary mb-2">94%</div>
+                                <div class="text-white font-body text-lg uppercase tracking-widest font-semibold">
+                                    Average ROI Increase</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonials Section -->
+    <section class="py-32 relative z-10">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="text-center mb-24">
+                <h2
+                    class="text-4xl md:text-6xl font-headline font-black text-on-surface tracking-tight mb-4 text-shadow-lg">
+                    Trusted by Visionaries</h2>
+                <div class="h-1.5 w-24 bg-primary mx-auto"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div
+                    class="p-10 rounded-xl bg-black/60 backdrop-blur-md border border-white/10 hover:bg-black/80 transition-colors duration-300">
+                    <span class="material-symbols-outlined text-primary text-5xl mb-8"
+                        style="font-variation-settings: 'FILL' 1;">format_quote</span>
+                    <p class="text-xl italic font-body text-white mb-10 leading-relaxed">
+                        "LCG didn't just manage our socials; they redefined our brand's visual identity. The cinematic
+                        quality is unmatched."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden border border-white/10">
+                            <img alt=""
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlWwfHUbzRJixTwsej-EyP1U33B4bJvy74y9oxTLBnakvSFxg28FDi6gBh2VikXw7mYXVK5ZDB6wm59mNl8KHhNpMYKHo3wYdhYuym1S2AeIaBqY0bgu8_Ya35lRcpbk27XM0eO_zeKVe9P3ibgcetwuuBgqyXi4gicRFeL_rqqNFDiYe4GmfYowiVRMb7vyPl2dgj_PCRLTKzT5e_D54FxNrzscOmZ0EJgzdS8krreZhN6Unrzws-nNVAkLq7DPnQ6FWHY7OMgE2F" />
+                        </div>
+                        <div>
+                            <div class="font-headline font-bold text-white">Julian Vance</div>
+                            <div class="text-sm text-secondary font-semibold">CMO, Nexa Global</div>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="p-10 rounded-xl bg-black/60 backdrop-blur-md border border-white/10 hover:bg-black/80 transition-colors duration-300">
+                    <span class="material-symbols-outlined text-secondary text-5xl mb-8"
+                        style="font-variation-settings: 'FILL' 1;">format_quote</span>
+                    <p class="text-xl italic font-body text-white mb-10 leading-relaxed">
+                        "The results were immediate. Our engagement soared by 400% in the first quarter. Truly the elite
+                        agency for social."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden border border-white/10">
+                            <img alt=""
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAe4lMpvRGE6-Wm2hPUxqbegfDbBJrsN1nNigQZG_L0WzZNgFpQp5Wj8t3my9sX1AVIq7hIYVtNtJq7IonFQe9GkyVVvaWDpr-Hf8s_nMhZJhvcSQDoUJwKWw-rqJFRTN9-zn1rVbCatcQg2IZ1LXoNgsZlUZwE8Nh0Dua476Oh-QZMCpBQInR35thNHz7j5xBvDUjbA9aTluOy5CTwRZiq8hcg1ef0ZTlmpTnXeFem99Z4HYQxwkS-qRLst8e3CiQmdiTZZIpp29Tw" />
+                        </div>
+                        <div>
+                            <div class="font-headline font-bold text-white">Elena Rossi</div>
+                            <div class="text-sm text-primary font-semibold">Founder, AESTHETIX</div>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="p-10 rounded-xl bg-black/60 backdrop-blur-md border border-white/10 hover:bg-black/80 transition-colors duration-300">
+                    <span class="material-symbols-outlined text-tertiary text-5xl mb-8"
+                        style="font-variation-settings: 'FILL' 1;">format_quote</span>
+                    <p class="text-xl italic font-body text-white mb-10 leading-relaxed">
+                        "Working with LCG is like having a Hollywood production team in your back pocket. Simply
+                        phenomenal execution."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden border border-white/10">
+                            <img alt=""
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCF16UINPbitan9ISuYEo0yJ8e13E2U9IhIXxif57ONe2ax4GJf7LmchAIn38BJnfnSqPmU76gF5NV9A5IsIo3_iLArqYxCldjqGxRrPrKiOlQLOTY9nDozmz6ZdEmqUMOivhyNi4zbV03ZRDIw9Zm90G8eFbH6G5uyeT0hC59kBmDrwELdNVHH1pZk1J7vkKgLGAdScPA4WzWsB14Av3-LOMS5rBiJ7-IkvY2wOIT0pkwhgUUS5Mtwroeq9UC373fVfzbC5dt9d9D0" />
+                        </div>
+                        <div>
+                            <div class="font-headline font-bold text-white">Marcus Thorne</div>
+                            <div class="text-sm text-tertiary font-semibold">CEO, Velocity Labs</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="relative z-10 bg-black text-violet-400 font-['Manrope'] text-sm tracking-wide w-full rounded-none">
+        <div class="flex flex-col md:flex-row justify-between items-center px-12 py-16 border-t border-white/10">
+            <div class="mb-8 md:mb-0">
+                <div class="text-xl font-black text-white mb-2">LCG</div>
+                <p class="text-gray-500 max-w-xs leading-relaxed">Crafting cinematic digital experiences for the next
+                    generation of global brands.</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-8 md:gap-16">
+                <a class="text-gray-500 hover:text-violet-400 transition-colors underline-offset-4 hover:underline"
+                    href="#">Privacy Policy</a>
+                <a class="text-gray-500 hover:text-violet-400 transition-colors underline-offset-4 hover:underline"
+                    href="#">Terms of Service</a>
+                <a class="text-gray-500 hover:text-violet-400 transition-colors underline-offset-4 hover:underline"
+                    href="#">Instagram</a>
+                <a class="text-gray-500 hover:text-violet-400 transition-colors underline-offset-4 hover:underline"
+                    href="#">LinkedIn</a>
+            </div>
+            <div class="mt-8 md:mt-0 text-gray-500">
+                © 2024 LCG Digital Cinematheque. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
