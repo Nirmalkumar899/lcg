@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | LCG Cinematic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;900&family=Manrope:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700" rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #f2f2f5;
+            --s-light: #ffffff;
+            --s-dark: #d8d8e1;
+            --accent: #ff00ff;
+        }
+
+        body {
+            background-color: var(--bg);
+            font-family: 'Manrope', sans-serif;
+            color: #222;
+            margin: 0;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Giant Background Branding */
+        .bg-brand {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50vw;
+            font-family: 'Epilogue', sans-serif;
+            font-weight: 900;
+            color: rgba(0, 0, 0, 0.015);
+            z-index: -1;
+            pointer-events: none;
+            letter-spacing: -0.05em;
+        }
+
+        /* Neumorphic Typography */
+        .n-text {
+            color: var(--bg);
+            text-shadow:
+                2px 2px 4px var(--s-dark),
+                -2px -2px 4px var(--s-light);
+            transition: all 0.3s ease;
+        }
+
+        /* Navigation */
+        .nav-link {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            color: #999;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #222;
+        }
+
+        /* Grid Layout */
+        .main-container {
+            height: 100vh;
+            display: grid;
+            grid-template-columns: 1.2fr 2fr;
+            padding: 0 6vw;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            perspective: 1000px;
+        }
+
+        /* The Cards */
+        .card {
+            background: var(--bg);
+            border-radius: 40px;
+            box-shadow:
+                12px 12px 24px var(--s-dark),
+                -12px -12px 24px var(--s-light);
+            aspect-ratio: 1/1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow:
+                20px 20px 40px var(--s-dark),
+                -20px -20px 40px var(--s-light);
+        }
+
+        .card-inner {
+            box-shadow:
+                inset 8px 8px 16px var(--s-dark),
+                inset -8px -8px 16px var(--s-light);
+        }
+
+        .card-tall {
+            aspect-ratio: 0.8/1;
+        }
+
+        .service-label {
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #888;
+            text-align: center;
+            line-height: 1.4;
+            margin-top: auto;
+            pointer-events: none;
+        }
+
+        .card-icon {
+            font-size: 2.2rem;
+            color: #bbb;
+            margin-top: 20px;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        /* 3D Canvas Layer */
+        #three-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        /* Control Panel */
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+
+        .plus-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff00ff, #cf00cf);
+            box-shadow: 0 10px 25px rgba(255, 0, 255, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            border: none;
+            position: relative;
+            z-index: 20;
+        }
+
+        /* Decorative Background Lines */
+        .lines-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 250px;
+        }
+
+        .line {
+            height: 1px;
+            background: rgba(0, 0, 0, 0.06);
+            width: 100%;
+            border-radius: 1px;
+        }
+
+        .w-badge {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 38px;
+            height: 38px;
+            background: #111;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-weight: 900;
+            font-size: 14px;
+            font-family: 'Epilogue', sans-serif;
+            z-index: 100;
+        }
+
+        .japanese-sub {
+            font-size: 10px;
+            color: #aaa;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-brand">Design</div>
+    <div class="w-badge">w.</div>
+    <canvas id="three-canvas"></canvas>
+
+    <!-- Top Navigation -->
+    <div class="fixed top-10 left-12 right-12 flex justify-between items-center z-50">
+        <a href="index.html" class="nav-link">
+            <span class="material-symbols-outlined text-lg">west</span> BACK
+        </a>
+        <div class="text-[9px] font-bold text-zinc-400 tracking-widest uppercase">
+            Product & Digital Design Studio — LCG
+        </div>
+    </div>
+
+    <main class="main-container">
+        <!-- Left Section: Typography and Controls -->
+        <div class="controls">
+            <div>
+                <div class="japanese-sub">サービス紹介</div>
+                <h1 class="text-9xl font-black n-text leading-[0.85] tracking-tighter">OUR<br>SERVICES</h1>
+            </div>
+
+            <div class="flex items-center gap-12">
+                <button id="main-plus" class="plus-btn group hover:scale-110 transition-transform duration-300">
+                    <span class="material-symbols-outlined text-4xl">add</span>
+                </button>
+                <div class="lines-container">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Section: Cards -->
+        <div class="services-grid">
+            <!-- Col 1 -->
+            <div class="flex flex-col gap-8">
+                <div id="card-0" class="card card-tall">
+                    <span class="material-symbols-outlined card-icon">fingerprint</span>
+                    <div class="service-label">Brand<br>Identity</div>
+                </div>
+                <div id="card-1" class="card">
+                    <span class="material-symbols-outlined card-icon">restaurant</span>
+                    <div class="service-label">Shoyu<br>Ramen</div>
+                </div>
+            </div>
+
+            <!-- Col 2 -->
+            <div class="flex flex-col gap-8 pt-20">
+                <div id="card-2" class="card card-inner">
+                    <!-- For 3D Object -->
+                </div>
+                <div id="card-3" class="card">
+                    <span class="material-symbols-outlined card-icon">face</span>
+                    <div class="service-label">Emotional<br>Support</div>
+                </div>
+            </div>
+
+            <!-- Col 3 -->
+            <div class="flex flex-col gap-8">
+                <div id="card-4" class="card card-inner">
+                    <!-- For 3D Object -->
+                </div>
+                <div id="card-5" class="card card-tall">
+                    <span class="material-symbols-outlined card-icon">language</span>
+                    <div class="service-label">Website<br>Design</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // --- THREE.JS SETUP ---
+        const canvas = document.getElementById('three-canvas');
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        const scene = new THREE.Scene();
+        // Use Orthographic for that clean "flat-3D" look from the reference
+        const aspect = window.innerWidth / window.innerHeight;
+        const d = 20;
+        const camera = new THREE.OrthographicCamera(-d * aspect, d * aspect, d, -d, 1, 1000);
+        camera.position.set(30, 30, 30);
+        camera.lookAt(0, 0, 0);
+
+        // Studio Lighting
+        const amb = new THREE.AmbientLight(0xffffff, 1);
+        scene.add(amb);
+
+        const spot = new THREE.DirectionalLight(0xffffff, 0.8);
+        spot.position.set(30, 50, 20);
+        scene.add(spot);
+
+        // Geometry: Rounded Cubes
+        const size = 6.2;
+        const radius = 1.8;
+        const segments = 12;
+
+        function createSoftCube() {
+            const shape = new THREE.Shape();
+            const x = -size / 2, y = -size / 2;
+            shape.moveTo(x, y + radius);
+            shape.lineTo(x, y + size - radius);
+            shape.quadraticCurveTo(x, y + size, x + radius, y + size);
+            shape.lineTo(x + size - radius, y + size);
+            shape.quadraticCurveTo(x + size, y + size, x + size, y + size - radius);
+            shape.lineTo(x + size, y + radius);
+            shape.quadraticCurveTo(x + size, y, x + size - radius, y);
+            shape.lineTo(x + radius, y);
+            shape.quadraticCurveTo(x, y, x, y + radius);
+
+            const extrudeSettings = { depth: 4, bevelEnabled: true, bevelThickness: 0.8, bevelSize: 0.8, bevelSegments: 12 };
+            const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+            const material = new THREE.MeshPhysicalMaterial({
+                color: 0xeeeeef,
+                roughness: 0.1,
+                metalness: 0,
+                clearcoat: 1.0,
+                clearcoatRoughness: 0.1,
+                reflectivity: 1
+            });
+            return new THREE.Mesh(geometry, material);
+        }
+
+        const objects = [];
+        const cardIds = [0, 1, 2, 3, 4, 5]; // Sync with these cards
+
+        function syncObjects() {
+            objects.forEach(obj => scene.remove(obj));
+            objects.length = 0;
+
+            cardIds.forEach((id) => {
+                const card = document.getElementById(`card-${id}`);
+                const object = createSoftCube();
+
+                const rect = card.getBoundingClientRect();
+                const x = ((rect.left + rect.width / 2) / window.innerWidth) * 2 - 1;
+                const y = -((rect.top + rect.height / 2) / window.innerHeight) * 2 + 1;
+
+                // Map screen coords to Ortho camera space
+                object.position.x = x * d * aspect;
+                object.position.y = y * d;
+                object.position.z = 0;
+
+                object.userData.originY = object.position.y;
+                object.userData.id = id;
+                object.rotation.set(0.4, 0.4, 0);
+
+                // Only show cubes in "inner" cards (as in the ref)
+                if ([2, 4].includes(id)) {
+                    object.scale.set(1.5, 1.5, 1.5);
+                } else {
+                    object.scale.set(0.6, 0.6, 0.6);
+                    object.material.opacity = 0.4;
+                    object.material.transparent = true;
+                    // Lower priority cubes move behind
+                    object.position.z = -5;
+                }
+
+                scene.add(object);
+                objects.push(object);
+            });
+        }
+
+        syncObjects();
+
+        // --- ANIMATION ENGINE ---
+        let time = 0;
+        let yOffset = 0;
+
+        function animate() {
+            time += 0.015;
+
+            objects.forEach((obj, i) => {
+                // Subtle floating
+                const float = Math.sin(time + i) * 0.4;
+                obj.position.y = obj.userData.originY + float + yOffset;
+
+                // Slow rotation
+                obj.rotation.y += 0.005;
+                obj.rotation.x += 0.002;
+            });
+
+            // Decor lines movement
+            const lines = document.querySelectorAll('.line');
+            lines.forEach((line, i) => {
+                const move = Math.sin(time * 2 + i * 0.2) * 15;
+                line.style.transform = `translateX(${move}px)`;
+                line.style.opacity = 0.1 + (Math.sin(time + i) * 0.05);
+            });
+
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // --- INTERACTION ---
+        document.getElementById('main-plus').addEventListener('click', () => {
+            gsap.to(window, {
+                yOffset: yOffset + 5,
+                duration: 2,
+                ease: "expo.out",
+                onUpdate: () => { }
+            });
+            gsap.to(".services-grid", {
+                y: "-=60",
+                duration: 2,
+                ease: "expo.out"
+            });
+
+            // Pop effect on plus button
+            gsap.fromTo("#main-plus", { scale: 0.8 }, { scale: 1, duration: 0.5, ease: "elastic.out(1, 0.3)" });
+        });
+
+        // Resize
+        window.addEventListener('resize', () => {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            const aspect = window.innerWidth / window.innerHeight;
+            camera.left = -d * aspect;
+            camera.right = d * aspect;
+            camera.updateProjectionMatrix();
+            syncObjects();
+        });
+
+        window.addEventListener('scroll', syncObjects);
+    </script>
+</body>
+
+</html>
+delay: i * 0.05,
+ease: "power3.inOut"
+});
+gsap.to(item.mesh.rotation, {
+x: 0, y: 0,
+duration: 1,
+delay: i * 0.05,
+ease: "power3.inOut"
+});
+});
+});
+
+function animate() {
+requestAnimationFrame(animate);
+blocks.forEach((item, i) => {
+if(!gsap.isTweening(item.mesh.position)) {
+item.mesh.position.y += Math.sin(Date.now() * 0.002 + i) * 0.003;
+}
+});
+renderer.render(scene, camera);
+}
+animate();
+</script>
+</body>
+
+</html>
