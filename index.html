@@ -136,6 +136,37 @@
             background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.8) 100%);
         }
 
+        .mobile-menu-active {
+            overflow: hidden;
+        }
+
+        .mobile-nav-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-nav-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        :root {
+            --primary: #FFD700;
+            --on-primary: #000000;
+            --background: #050505;
+            --surface: #121212;
+            --on-surface: #FFFFFF;
+            --surface-variant: #1E1E1E;
+            --outline: #333333;
+        }
+
+        /* Mobile Height Fix */
+        .h-screen-dynamic {
+            height: 100vh;
+            height: 100dvh;
+        }
+
         .text-shadow-lg {
             text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
         }
@@ -169,7 +200,7 @@
 
 <body class="bg-background text-on-surface selection:bg-primary selection:text-on-primary-fixed overflow-x-hidden">
     <!-- Global Background Reels -->
-    <div class="fixed inset-0 z-0 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 opacity-20 pointer-events-none">
+    <div class="fixed inset-0 z-0 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-4 opacity-20 pointer-events-none">
         <div class="flex flex-col gap-4 reel-column">
             <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
             <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4"></video>
@@ -178,9 +209,10 @@
             <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
             <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel2.mp4"></video>
         </div>
+        <!-- Hide excessive columns on mobile -->
         <div class="hidden md:flex flex-col gap-4 reel-column">
             <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4"></video>
-            <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/fasrhreel3.mp4"></video>
+            <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
         </div>
         <div class="hidden md:flex flex-col gap-4 reel-column-reverse">
             <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4"></video>
@@ -207,18 +239,28 @@
                     href="https://www.instagram.com/lcgdigitalcinematheque/" target="_blank">Instagram</a>
             </div>
             <div class="flex items-center gap-4">
-                 <a href="https://www.instagram.com/lcgdigitalcinematheque/" target="_blank" class="text-white/70 hover:text-primary transition-colors hidden md:block">
-                    <span class="material-symbols-outlined">brand_awareness</span>
-                </a>
-                <button
-                    class="bg-primary text-on-primary px-6 py-2.5 rounded-xl font-headline font-bold text-sm scale-95 active:opacity-80 transition-transform">
-                    Get Started
+                <a href="#contact" class="hidden sm:inline-flex px-6 py-2 bg-primary text-on-primary rounded-full font-medium hover:bg-primary/90 transition-colors">Get Started</a>
+                <!-- Mobile Menu Toggle -->
+                <button id="mobile-menu-toggle" class="md:hidden w-10 h-10 flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined text-3xl">menu</span>
                 </button>
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div id="mobile-nav" class="fixed inset-0 z-[60] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 md:hidden mobile-nav-overlay">
+        <button id="mobile-menu-close" class="absolute top-8 right-8 text-white">
+            <span class="material-symbols-outlined text-4xl">close</span>
+        </button>
+        <a href="#work" class="text-3xl font-bold text-white hover:text-primary transition-colors mobile-nav-link">Work</a>
+        <a href="#services" class="text-3xl font-bold text-white hover:text-primary transition-colors mobile-nav-link">Services</a>
+        <a href="#clients" class="text-3xl font-bold text-white hover:text-primary transition-colors mobile-nav-link">Clients</a>
+        <a href="https://www.instagram.com/lcg.reel/" class="text-3xl font-bold text-white hover:text-primary transition-colors mobile-nav-link text-primary">Instagram</a>
+        <a href="#contact" class="mt-4 px-10 py-4 bg-primary text-on-primary rounded-full text-xl font-bold">Get Started</a>
+    </div>
     <!-- Hero Section -->
-    <section class="relative h-screen w-full overflow-hidden flex items-center justify-center bg-black">
+    <section class="relative h-screen-dynamic w-full overflow-hidden flex items-center justify-center bg-black">
         <!-- Hero Video Background -->
         <div class="video-foreground">
             <video id="hero-video" autoplay loop muted playsinline class="w-full h-full object-cover">
@@ -226,7 +268,7 @@
             </video>
         </div>
         <!-- Mute/Unmute Toggle -->
-        <div class="absolute bottom-8 right-8 z-[15]">
+        <div class="absolute bottom-12 right-6 md:bottom-8 md:right-8 z-[15]">
             <button id="audio-toggle" class="w-12 h-12 rounded-full bg-black/20 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-black/40 transition-all duration-300 group">
                 <span id="audio-icon" class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">volume_off</span>
             </button>
@@ -253,58 +295,25 @@
                     View all projects <span class="material-symbols-outlined">arrow_forward</span>
                 </button>
             </div>
-            <!-- Portfolio Grid with New Imagery -->
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto">
-                <!-- Main Featured Project -->
-                <div
-                    class="md:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container-low h-[500px] md:h-[600px] transition-all duration-500 border border-white/10">
-                    <img alt=""
-                        class="w-full h-full object-cover opacity-60 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOMNhLRttg-mLvOuE_DdoejGlImjc4s9y9GsfdmY_zfkSZ_zF6yfMvoLc29LJOr_cq_mZrqxSDFXTEnJY4QhA8nN1HCw5x0p3K38YeNPTA6ZMQeH75W7XHrEvb1wwFlbKZpLIlQZqqsADAOQgQdc_FKh7Hgp4kdnHrhp8eOkz0kvK6M_IruqEuZlNBc790Crdd5E6zO6HYKQQoeodirjqHVlblib542I_iayILe-JxlPeHC7D5qRSM7Rv-XHXe_sQcunppO03zbhKi" />
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 p-8">
-                        <div class="text-tertiary font-headline font-bold text-sm mb-2">FASHION &amp; EDITORIAL</div>
-                        <h3 class="text-3xl font-headline font-bold text-white mb-4">Vogue Collective 2024</h3>
-                        <p class="text-on-surface-variant max-w-md">3.2M Impressions in 48 hours through cinematic
-                            short-form storytelling.</p>
+            <!-- Bento Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 h-auto md:h-[1300px]">
+                <!-- Item 1: Featured Reel (Vertical focus) -->
+                <div class="md:col-span-8 md:row-span-1 rounded-3xl overflow-hidden glass-card group relative h-[500px] md:h-full">
+                    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
+                    <div class="absolute bottom-0 left-0 p-6 md:p-10">
+                        <span class="text-primary font-mono text-sm tracking-widest uppercase mb-2 block">Campaign / 2024</span>
+                        <h3 class="text-2xl md:text-4xl font-bold">Midnight Pulse</h3>
                     </div>
                 </div>
-                <!-- New Integrated Grid Project from IMAGE_5 -->
-                <div
-                    class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container-low h-[500px] md:h-[600px] border border-white/10">
-                    <img alt=""
-                        class="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-all duration-700"
-                        src="https://lh3.googleusercontent.com/aida/ADBb0ujs6N9HB5n2h3FF8Ac_oXqmpDap0XFSLFtNeQFYa4Y3C1A39Ivd9FZtUxk895_Tku9UHmUcm6Ff_qcLU9aQIxRasVBfqxTEnggZMWXIcGblM1L5IhMnjftX3ulWFE8JeKGi4MWyf-uanDDlAAqpTdFoJnl0q1HV8EH44mqL0EtzUxtGrkPcIidZOcJDm1D6vBuZKyXVLmfpJcKahmXVuuiEBXiFGGcj_ccNSOCxJsUOd-fcTaGYV7Fh2UX1jAY1joAkza88MJNrmg" />
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 p-8">
-                        <div class="text-primary font-headline font-bold text-sm mb-2">CONTENT SERIES</div>
-                        <h3 class="text-2xl font-headline font-bold text-white mb-2">Wefilm: The Behind-the-Scenes
-                            Journey</h3>
-                        <p class="text-sm text-on-surface-variant">Defining new visual standards for high-engagement
-                            social storytelling.</p>
-                    </div>
-                </div>
-                <a href="https://www.instagram.com/lcgdigitalcinematheque/reels/" target="_blank"
-                    class="md:col-span-6 group relative overflow-hidden rounded-xl bg-surface-container-low h-[400px] border border-white/10 block">
-                    <div class="absolute inset-0">
-                        <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-50 group-hover:scale-110 transition-all duration-700" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 p-8">
-                        <div class="text-secondary font-headline font-bold text-sm mb-2">INSTAGRAM</div>
-                        <h3 class="text-2xl font-headline font-bold text-white mb-2">Cinematic Reels Series</h3>
-                        <p class="text-sm text-white/60 opacity-0 group-hover:opacity-100 transition-opacity">Click to watch on Instagram →</p>
-                    </div>
-                </a>
-                <div
-                    class="md:col-span-6 group relative overflow-hidden rounded-xl bg-surface-container-low h-[400px] border border-white/10">
-                    <img alt=""
-                        class="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-all duration-700"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZsexLTlMBXU9O4PUdXn1QmdV8jpRrnpFNH3GyPrYNANW5GM3PrbJjLAvJydy-eOtP5oa64RAIPllrqpbLQjmNo5YeSWdwSdcsycLDvoFZAhxhUtJFpUYpMPJUSImc7RXBLXe2tAGNQWxH5NN78gTOn_bY-mMz6CpeGqXBcPOniDJONah1BEg5hk3L38oKg1LrNNJ8RXqjecz2x8kCi3DYtIkgpz5Q5p3x0xx8HiSv-eQxBGTLG6YtsDz086s_SEB6hc1we09LqSug" />
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 p-8">
-                        <div class="text-tertiary font-headline font-bold text-sm mb-2">LIVE EVENTS</div>
-                        <h3 class="text-3xl font-headline font-bold text-white mb-2">Sonic Horizons Tour</h3>
+
+                <!-- Item 2: Portrait Reel -->
+                <div class="md:col-span-4 md:row-span-1 rounded-3xl overflow-hidden glass-card group relative h-[500px] md:h-full">
+                    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
+                    <div class="absolute bottom-0 left-0 p-6 md:p-10">
+                        <span class="text-primary font-mono text-sm tracking-widest uppercase mb-2 block">Brand Story</span>
+                        <h3 class="text-xl md:text-2xl font-bold">Urban Flow</h3>
                     </div>
                 </div>
             </div>
@@ -499,6 +508,30 @@
                 audioToggle.classList.remove('bg-primary/20', 'border-primary/30');
             }
         });
+
+        // Mobile Menu Logic
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileNav = document.getElementById('mobile-nav');
+        const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+        const toggleMenu = (show) => {
+            if (show) {
+                mobileNav.classList.add('active');
+                document.body.classList.add('mobile-menu-active');
+            } else {
+                mobileNav.classList.remove('active');
+                document.body.classList.remove('mobile-menu-active');
+            }
+        };
+
+        if (mobileMenuToggle && mobileMenuClose) {
+            mobileMenuToggle.addEventListener('click', () => toggleMenu(true));
+            mobileMenuClose.addEventListener('click', () => toggleMenu(false));
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => toggleMenu(false));
+            });
+        }
     </script>
 </body>
 
