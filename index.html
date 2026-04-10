@@ -240,6 +240,44 @@
             left: 0;
             display: block;
         }
+        /* Mobile Touch States */
+        @media (max-width: 1024px) {
+            .moodboard-wrap {
+                transform: rotate(-5deg) scale(1) translateY(0);
+            }
+            .moodboard-video {
+                width: 100px; /* Smaller for mobile */
+            }
+            .active-mobile .moodboard-video,
+            .moodboard-video.active-mobile {
+                filter: grayscale(0) opacity(1) !important;
+                transform: scale(1.1) !important;
+            }
+            .group.active-mobile .group-hover\:grayscale-0 {
+                filter: grayscale(0) !important;
+            }
+            .group.active-mobile .group-hover\:opacity-100 {
+                opacity: 1 !important;
+            }
+            .group.active-mobile .group-hover\:translate-y-0 {
+                transform: translateY(0) !important;
+            }
+            .group.active-mobile .group-hover\:scale-\[1\.02\] {
+                transform: scale(1.02) !important;
+            }
+            .group.active-mobile .group-hover\:scale-110 {
+                transform: scale(1.1) !important;
+            }
+            .group.active-mobile h3 {
+                color: #fff !important;
+            }
+            .active-mobile span[class*="opacity-20"] {
+                opacity: 0.8 !important;
+            }
+            .active-mobile p[class*="text-on-surface-variant"] {
+                color: #fff !important;
+            }
+        }
     </style>
 </head>
 
@@ -328,10 +366,12 @@
             <img src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg" 
                  alt="LCG" class="h-10 w-auto object-contain">
         </div>
-                        <li><a class="hover:text-primary transition-colors" href="index.html#work">Work</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="index.html#services">Services</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="clients.html">Clients</a></li>
-                <a class="text-white/70 hover:text-primary transition-colors" href="https://www.instagram.com/lcg.reel/" target="_blank">Instagram</a>
+        <ul class="hidden lg:flex items-center gap-8 text-sm font-headline font-bold uppercase tracking-widest list-none">
+            <li><a class="text-white/70 hover:text-primary transition-colors" href="index.html#work">Work</a></li>
+            <li><a class="text-white/70 hover:text-primary transition-colors" href="index.html#services">Services</a></li>
+            <li><a class="text-white/70 hover:text-primary transition-colors" href="clients.html">Clients</a></li>
+            <li><a class="text-white/70 hover:text-primary transition-colors" href="https://www.instagram.com/lcg.reel/" target="_blank">Instagram</a></li>
+        </ul>
         <div class="flex items-center gap-4">
             <a href="#contact"
                 class="hidden sm:inline-flex px-6 py-2 bg-primary text-on-primary rounded-full font-medium hover:bg-primary/90 transition-colors">Get
@@ -353,7 +393,7 @@
             class="text-3xl font-bold text-white hover:text-primary transition-colors mobile-nav-link">Work</a>
         <a href="#services"
             class="text-3xl font-bold text-white hover:text-primary transition-colors mobile-nav-link">Services</a>
-        <a href="#clients"
+        <a href="clients.html"
             class="text-3xl font-bold text-white hover:text-primary transition-colors mobile-nav-link">Clients</a>
         <a href="https://www.instagram.com/lcg.reel/"
             class="text-3xl font-bold text-white hover:text-primary transition-colors mobile-nav-link text-primary">Instagram</a>
@@ -837,6 +877,52 @@
         window.addEventListener('scroll', updateReel);
         window.addEventListener('resize', updateReel);
         updateReel();
+    </script>
+    <script>
+        // Mobile Interactions & Hover Effects
+        const mobileInteractions = () => {
+            const groups = document.querySelectorAll('.group');
+            const moodVideos = document.querySelectorAll('.moodboard-video');
+            
+            // Intersection Observer
+            const observerOptions = {
+                threshold: 0.5,
+                rootMargin: '0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (window.innerWidth <= 1024) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active-mobile');
+                            const video = entry.target.querySelector('video');
+                            if (video) video.play().catch(() => {});
+                        } else {
+                            entry.target.classList.remove('active-mobile');
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            const allInteractions = [...groups, ...moodVideos];
+            allInteractions.forEach(el => {
+                observer.observe(el);
+                el.addEventListener('touchstart', function() {
+                    allInteractions.forEach(g => g.classList.remove('active-mobile'));
+                    this.classList.add('active-mobile');
+                    const video = this.tagName === 'VIDEO' ? this : this.querySelector('video');
+                    if (video) video.play().catch(() => {});
+                }, {passive: true});
+            });
+        };
+
+        // Initialize mobile interactions
+        window.addEventListener('load', mobileInteractions);
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 1024) {
+                document.querySelectorAll('.active-mobile').forEach(el => el.classList.remove('active-mobile'));
+            }
+        });
     </script>
 </body>
 
