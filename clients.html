@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clients | LCG Showcase</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800;900&amp;family=Manrope:wght@300;400;500;600&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#daff82",
+                        "on-primary": "#0d1a01",
+                        background: "#0e0e0f",
+                        surface: "#1a191b",
+                        "on-surface-variant": "#adaaab",
+                    },
+                    fontFamily: {
+                        headline: ["Epilogue"],
+                        body: ["Manrope"],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #0e0e0f;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .client-card {
+            perspective: 1000px;
+            transition: transform 0.1s ease-out;
+        }
+
+        .card-inner {
+            transform-style: preserve-3d;
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .client-card:hover .card-inner {
+            transform: scale(1.02);
+        }
+
+        .parallax-bg {
+            transition: transform 0.2s ease-out;
+        }
+
+        .glass-nav {
+            background: rgba(14, 14, 15, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .verified-badge {
+            font-size: 14px;
+            color: #4facfe;
+        }
+
+        .social-icon {
+            opacity: 0.6;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .social-icon:hover {
+            opacity: 1;
+            color: #daff82;
+            transform: scale(1.2);
+        }
+
+        /* Subtle scanline effect for cinematic feel */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+
+<body class="selection:bg-primary selection:text-on-primary">
+    <div class="scanlines"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-[60] glass-nav border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2">
+                <img src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg" 
+                     alt="LCG" class="h-8 w-auto object-contain">
+            </a>
+            <div class="flex items-center gap-8 text-sm font-headline font-bold">
+                <a href="index.html#work" class="text-white/70 hover:text-primary transition-colors">Work</a>
+                <a href="clients.html" class="text-primary transition-colors">Clients</a>
+                <a href="index.html#services" class="text-white/70 hover:text-primary transition-colors">Services</a>
+                <a href="#" class="px-5 py-2 bg-primary text-on-primary rounded-full transition-transform hover:scale-105">Let's Talk</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-20 px-6">
+        <header class="max-w-7xl mx-auto mb-20">
+            <span class="text-primary/60 font-mono text-xs tracking-[0.5em] uppercase mb-4 block">Archive 2024</span>
+            <h1 class="text-5xl md:text-7xl font-headline font-black tracking-tighter mb-4">The <br/><span class="text-primary italic">Portfolio</span> Grid</h1>
+            <p class="text-on-surface-variant max-w-xl text-lg">Every brand is a movement. Explore the digital chronicles of the visionaries we've managed.</p>
+        </header>
+
+        <!-- Dynamic Grid -->
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="client-grid">
+            <!-- Grid item template -->
+        </div>
+    </main>
+
+    <footer class="py-20 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+            <img src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg" 
+                 alt="LCG" class="h-8 w-auto object-contain grayscale">
+            <p class="text-gray-500 text-sm">© 2024 LCG Showcase. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const clients = [
+            {
+                name: "Wefilm",
+                title: "Stay tuned",
+                subtitle: "THE REEL ARCHIVE",
+                image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&q=80&w=800",
+                badge: "LIVE REELS",
+                videos: [
+                    "https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4",
+                    "https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4",
+                    "https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4"
+                ]
+            },
+            {
+                name: "Studio X",
+                title: "Behind the scenes",
+                subtitle: "PREMIUM",
+                image: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&q=80&w=800",
+                badge: "LUXE"
+            },
+            {
+                name: "Arctic Digital",
+                title: "Freeze",
+                subtitle: "PART 2",
+                image: "https://images.unsplash.com/photo-1473282352875-c9bc070377e8?auto=format&fit=crop&q=80&w=800",
+                badge: "ICY"
+            },
+            {
+                name: "Urban Flow",
+                title: "Zero traffic deaths in 2050",
+                subtitle: "INTERPOLIS",
+                image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=800",
+                badge: "VISION"
+            },
+            {
+                name: "Chromatic",
+                title: "Mixing all colors gives you black",
+                subtitle: "OMROEP ZWART",
+                image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800",
+                badge: "VIBRANT"
+            },
+            {
+                name: "Bio-Logic",
+                title: "A glimpse into the future of food",
+                subtitle: "LINK IN BIO",
+                image: "https://images.unsplash.com/photo-1516585427167-9f4af9627e6c?auto=format&fit=crop&q=80&w=800",
+                badge: "FUTURE"
+            }
+        ];
+
+        const grid = document.getElementById('client-grid');
+
+        function createCard(client) {
+            let mediaHTML = `<img src="${client.image}" 
+                             class="parallax-bg w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                             alt="${client.name}">`;
+
+            if (client.videos) {
+                mediaHTML = `
+                    <div class="w-full h-full relative">
+                        <img src="${client.image}" 
+                             class="w-full h-full object-cover main-thumb transition-opacity duration-300 group-hover:opacity-0" 
+                             alt="${client.name}">
+                        <!-- Video Montage Overlay -->
+                        <div class="absolute inset-0 grid grid-cols-3 gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 scale-125 group-hover:scale-100">
+                            ${client.videos.map(v => `
+                                <video loop muted playsinline class="w-full h-full object-cover grayscale brightness-125 contrast-125">
+                                    <source src="${v}" type="video/mp4">
+                                </video>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            return `
+            <div class="client-card" data-tilt>
+                <div class="card-inner overflow-hidden rounded-[1.5rem] bg-surface/40 border border-white/5 backdrop-blur-3xl relative">
+                    <!-- Card Header -->
+                    <div class="p-4 flex items-center justify-between border-b border-white/5 bg-black/20">
+                        <div class="flex items-center gap-2">
+                            <div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
+                                <span class="text-[8px] font-black text-on-primary">LCG</span>
+                            </div>
+                            <span class="text-xs font-bold text-white/90 uppercase tracking-widest">${client.name}</span>
+                            <span class="material-symbols-outlined verified-badge">check_circle</span>
+                        </div>
+                        <span class="material-symbols-outlined text-white/40 text-sm">more_horiz</span>
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="relative aspect-square overflow-hidden group">
+                        ${mediaHTML}
+                        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 pointer-events-none"></div>
+                        
+                        <!-- Content Overlay -->
+                        <div class="absolute inset-0 p-8 flex flex-col justify-center items-center text-center pointer-events-none">
+                            <div class="bg-primary px-2 py-0.5 text-[8px] font-black text-on-primary mb-4 tracking-widest">${client.badge}</div>
+                            <h3 class="text-4xl lg:text-5xl font-headline font-black text-white leading-[0.85] tracking-tighter uppercase mb-4 transition-transform group-hover:scale-110 duration-500">
+                                ${client.title.split(' ').join('<br/>')}
+                            </h3>
+                            <div class="mt-2 text-[10px] font-mono tracking-[0.4em] text-white/40 uppercase">${client.subtitle}</div>
+                        </div>
+                    </div>
+
+                    <!-- Card Footer -->
+                    <div class="p-4 flex items-center justify-between bg-black/40">
+                        <div class="flex items-center gap-4">
+                            <span class="material-symbols-outlined social-icon">favorite</span>
+                            <span class="material-symbols-outlined social-icon">sms</span>
+                            <span class="material-symbols-outlined social-icon">send</span>
+                        </div>
+                        <span class="material-symbols-outlined social-icon">bookmark</span>
+                    </div>
+                </div>
+            </div>
+            `;
+        }
+
+        grid.innerHTML = clients.map(c => createCard(c)).join('');
+
+        // 3D Tilt & Video Playback Logic
+        document.querySelectorAll('.client-card').forEach(card => {
+            const inner = card.querySelector('.card-inner');
+            const videos = card.querySelectorAll('video');
+            const bg = card.querySelector('.parallax-bg');
+
+            card.addEventListener('mouseenter', () => {
+                videos.forEach(v => v.play());
+            });
+
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (centerY - y) / 10;
+                const rotateY = (x - centerX) / 10;
+                
+                inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                if (bg) {
+                    bg.style.transform = `scale(1.1) translate(${-rotateY * 2}px, ${rotateX * 2}px)`;
+                }
+            });
+
+            card.addEventListener('mouseleave', () => {
+                inner.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
+                if (bg) {
+                    bg.style.transform = `scale(1) translate(0, 0)`;
+                }
+                videos.forEach(v => {
+                    v.pause();
+                    v.currentTime = 0;
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
