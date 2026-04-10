@@ -245,17 +245,10 @@
 
 <body class="bg-black text-on-surface selection:bg-primary selection:text-on-primary">
     <!-- Splash Screen -->
-    <div id="splash-screen">
-        <!-- Desktop Logo -->
-        <img src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/animate_this_logo_.gif" 
-             alt="LCG Desktop" class="splash-logo hidden md:block">
-        <!-- Mobile Splash Video -->
-        <video autoplay muted playsinline loop class="md:hidden w-full h-full object-cover">
+    <div id="splash-screen" class="flex items-center justify-center bg-black">
+        <video id="splash-video" playsinline class="w-full h-full object-cover">
             <source src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/WhatsApp%20Video%202026-04-10%20at%206.19.09%20PM.mp4" type="video/mp4">
         </video>
-        <!-- Desktop Splash GIF -->
-        <img src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/animate_this_logo_.gif"
-            alt="LCG Logo" class="hidden md:block w-full h-full object-cover">
     </div>
 
     <!-- Global Background Atmospheric Mural -->
@@ -698,12 +691,35 @@
 
     <script>
         // Splash Screen Logic
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const splash = document.getElementById('splash-screen');
-                if (splash) splash.classList.add('hidden');
-            }, 2500); // 2.5s display time
-        });
+        const splash = document.getElementById('splash-screen');
+        const splashVideo = document.getElementById('splash-video');
+
+        const splashSeen = sessionStorage.getItem('lcg_splash_seen_v5'); 
+
+        if (splashSeen) {
+            if (splash) splash.style.display = 'none';
+        } else {
+            if (splashVideo) {
+                // Try to play with music first
+                splashVideo.muted = false;
+                
+                const playPromise = splashVideo.play();
+
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log("Audio autoplay blocked by browser. Muteking to allow visuals.");
+                        splashVideo.muted = true;
+                        splashVideo.play();
+                    });
+                }
+
+                splashVideo.onended = () => {
+                    splash.classList.add('hidden');
+                    sessionStorage.setItem('lcg_splash_seen_v5', 'true');
+                    setTimeout(() => splash.style.display = 'none', 800);
+                };
+            }
+        }
 
         const heroVideo = document.getElementById('hero-video');
         const audioToggle = document.getElementById('audio-toggle');
