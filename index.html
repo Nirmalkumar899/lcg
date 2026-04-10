@@ -22,15 +22,15 @@
                         "surface-dim": "#0e0e0f",
                         "error": "#ff716c",
                         "secondary-container": "#ae3200",
-                        "primary-dim": "#9b4de0",
+                        "primary-dim": "#a3e635",
                         "on-tertiary-fixed-variant": "#665500",
-                        "on-primary-fixed": "#2e1065",
+                        "on-primary-fixed": "#1a2e05",
                         "secondary-fixed-dim": "#ffb199",
                         "outline": "#767576",
                         "surface-container-lowest": "#000000",
                         "on-secondary-fixed-variant": "#962a00",
                         "surface-container": "#1a191b",
-                        "on-primary": "#4c1d95",
+                        "on-primary": "#1a2e05",
                         "tertiary-fixed": "#ffd709",
                         "secondary-fixed": "#ffc4b3",
                         "surface-container-highest": "#262627",
@@ -42,13 +42,13 @@
                         "inverse-surface": "#fcf8f9",
                         "on-secondary": "#420d00",
                         "on-tertiary": "#655400",
-                        "inverse-primary": "#6b21a8",
+                        "inverse-primary": "#d4ff3f",
                         "inverse-on-surface": "#565556",
-                        "on-primary-container": "#4c1d95",
+                        "on-primary-container": "#1a2e05",
                         "on-surface-variant": "#adaaab",
-                        "primary-fixed": "#d8b4fe",
+                        "primary-fixed": "#ecfccb",
                         "error-dim": "#d7383b",
-                        "on-primary-fixed-variant": "#4c1d95",
+                        "on-primary-fixed-variant": "#1a2e05",
                         "surface-container-low": "#131314",
                         "on-tertiary-fixed": "#453900",
                         "on-error": "#490006",
@@ -58,7 +58,7 @@
                         "tertiary-dim": "#efc900",
                         "on-background": "#ffffff",
                         "surface": "#0e0e0f",
-                        "primary-container": "#d8b4fe",
+                        "primary-container": "#f7fee7",
                         "surface-bright": "#2c2c2d",
                         "tertiary-container": "#ffd709",
                         "tertiary": "#ffe792",
@@ -66,9 +66,9 @@
                         "surface-container-high": "#201f21",
                         "outline-variant": "#484849",
                         "on-secondary-fixed": "#651900",
-                        "primary-fixed-dim": "#c084fc",
-                        "primary": "#bf7af0",
-                        "surface-tint": "#bf7af0",
+                        "primary-fixed-dim": "#bef264",
+                        "primary": "#d4ff3f",
+                        "surface-tint": "#d4ff3f",
                         "surface-variant": "#262627"
                     },
                     "borderRadius": {
@@ -104,41 +104,33 @@
 
         .moodboard-video {
             width: 140px;
-            filter: grayscale(1) opacity(0.5) blur(2px);
+            filter: grayscale(0.4) opacity(0.7);
             transition: all 0.8s ease;
         }
 
         .moodboard-video:hover {
-            filter: grayscale(0) opacity(1) blur(0);
+            filter: grayscale(0) opacity(1);
             transform: scale(1.1);
         }
 
         .moodboard-column {
-            animation: moodboard-scroll 180s linear infinite;
+            animation: moodboard-scroll 45s linear infinite;
+            flex-shrink: 0;
         }
 
         .moodboard-column-reverse {
-            animation: moodboard-scroll-reverse 200s linear infinite;
+            animation: moodboard-scroll-reverse 55s linear infinite;
+            flex-shrink: 0;
         }
 
         @keyframes moodboard-scroll {
-            0% {
-                transform: translateY(0);
-            }
-
-            100% {
-                transform: translateY(-50%);
-            }
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
         }
 
         @keyframes moodboard-scroll-reverse {
-            0% {
-                transform: translateY(-50%);
-            }
-
-            100% {
-                transform: translateY(0);
-            }
+            0% { transform: translateY(-50%); }
+            100% { transform: translateY(0); }
         }
 
         /* UI Components */
@@ -191,7 +183,7 @@
         }
 
         .profile-card {
-            width: 400px;
+            width: 280px;
             transform-origin: bottom center;
             will-change: transform;
             transition: transform 0.3s ease;
@@ -218,13 +210,50 @@
             height: 100%;
             object-fit: cover;
         }
+
+        /* Splash Screen */
+        #splash-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
+        }
+        #splash-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .splash-logo {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: block;
+        }
     </style>
 </head>
 
-<body class="bg-background text-on-surface selection:bg-primary selection:text-on-primary-fixed overflow-x-hidden">
+<body class="bg-black text-on-surface selection:bg-primary selection:text-on-primary">
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <!-- Desktop Logo -->
+        <img src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/animate_this_logo_.gif" 
+             alt="LCG Desktop" class="splash-logo hidden md:block">
+        <!-- Mobile Logo -->
+        <img src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/animate_this_logo_%20(1).gif" 
+             alt="LCG Mobile" class="splash-logo md:hidden">
+    </div>
+
     <!-- Global Background Atmospheric Mural -->
-    <div class="fixed inset-0 z-0 overflow-hidden opacity-20 pointer-events-none bg-black">
+    <div class="fixed inset-0 z-0 overflow-hidden opacity-45 pointer-events-none bg-black">
         <div class="moodboard-wrap flex gap-12 justify-center">
+            <!-- Column 1 -->
             <div class="flex flex-col gap-12 moodboard-column">
                 <video autoplay loop muted playsinline class="moodboard-video rounded-lg"
                     src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
@@ -232,7 +261,15 @@
                     src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4"></video>
                 <video autoplay loop muted playsinline class="moodboard-video rounded-lg"
                     src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
+                <!-- Duplicate for seamless loop -->
+                <video autoplay loop muted playsinline class="moodboard-video rounded-lg"
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
+                <video autoplay loop muted playsinline class="moodboard-video rounded-full aspect-square object-cover"
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4"></video>
+                <video autoplay loop muted playsinline class="moodboard-video rounded-lg"
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
             </div>
+            <!-- Column 2 (Reverse) -->
             <div class="flex flex-col gap-12 moodboard-column-reverse pt-24">
                 <video autoplay loop muted playsinline class="moodboard-video rounded-lg border border-primary/30"
                     src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4"></video>
@@ -240,7 +277,15 @@
                     src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel2.mp4"></video>
                 <video autoplay loop muted playsinline class="moodboard-video rounded-full aspect-square object-cover"
                     src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
+                <!-- Duplicate for seamless loop -->
+                <video autoplay loop muted playsinline class="moodboard-video rounded-lg border border-primary/30"
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4"></video>
+                <video autoplay loop muted playsinline class="moodboard-video rounded-lg"
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel2.mp4"></video>
+                <video autoplay loop muted playsinline class="moodboard-video rounded-full aspect-square object-cover"
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
             </div>
+            <!-- Column 3 -->
             <div class="hidden md:flex flex-col gap-12 moodboard-column">
                 <video autoplay loop muted playsinline class="moodboard-video rounded-lg"
                     src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
@@ -248,8 +293,23 @@
                     src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4"></video>
                 <video autoplay loop muted playsinline class="moodboard-video rounded-lg"
                     src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4"></video>
+                <!-- Duplicate for seamless loop -->
+                <video autoplay loop muted playsinline class="moodboard-video rounded-lg"
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
+                <video autoplay loop muted playsinline class="moodboard-video rounded-full aspect-square object-cover"
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4"></video>
+                <video autoplay loop muted playsinline class="moodboard-video rounded-lg"
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4"></video>
             </div>
+            <!-- Column 4 (Reverse) -->
             <div class="hidden lg:flex flex-col gap-12 moodboard-column-reverse pt-48">
+                <video autoplay loop muted playsinline class="moodboard-video rounded-lg"
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
+                <video autoplay loop muted playsinline class="moodboard-video rounded-lg"
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
+                <video autoplay loop muted playsinline class="moodboard-video rounded-lg"
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4"></video>
+                <!-- Duplicate for seamless loop -->
                 <video autoplay loop muted playsinline class="moodboard-video rounded-lg"
                     src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
                 <video autoplay loop muted playsinline class="moodboard-video rounded-lg"
@@ -261,15 +321,12 @@
     </div>
     <div class="fixed inset-0 z-[1] vignette-heavy pointer-events-none"></div>
     <!-- TopNavBar -->
-    <nav class="fixed top-0 w-full z-50 px-6 py-6 transition-all duration-500" id="main-nav">
-        <div
-            class="max-w-7xl mx-auto flex justify-between items-center bg-white/10 backdrop-blur-md rounded-2xl px-6 py-3 border border-black/5">
-            <div class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                    <span class="material-symbols-outlined text-white font-bold">movie_filter</span>
-                </div>
-                <span class="text-xl font-headline font-black tracking-tighter text-white">LCG</span>
-            </div>
+    <nav
+        class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 py-6 bg-transparent backdrop-blur-sm">
+        <div class="flex items-center gap-2">
+            <img src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg" 
+                 alt="LCG" class="h-10 w-auto object-contain">
+        </div>
             <div class="hidden md:flex items-center gap-8 text-sm font-headline font-bold">
                 <a class="text-white/70 hover:text-primary transition-colors" href="#work">Work</a>
                 <a class="text-white/70 hover:text-primary transition-colors" href="#services">Services</a>
@@ -277,15 +334,14 @@
                 <a class="text-white/70 hover:text-primary transition-colors" href="https://www.instagram.com/lcg.reel/"
                     target="_blank">Instagram</a>
             </div>
-            <div class="flex items-center gap-4">
-                <a href="#contact"
-                    class="hidden sm:inline-flex px-6 py-2 bg-primary text-on-primary rounded-full font-medium hover:bg-primary/90 transition-colors">Get
-                    Started</a>
-                <!-- Mobile Menu Toggle -->
-                <button id="mobile-menu-toggle" class="md:hidden w-10 h-10 flex items-center justify-center text-white">
-                    <span class="material-symbols-outlined text-3xl">menu</span>
-                </button>
-            </div>
+        <div class="flex items-center gap-4">
+            <a href="#contact"
+                class="hidden sm:inline-flex px-6 py-2 bg-primary text-on-primary rounded-full font-medium hover:bg-primary/90 transition-colors">Get
+                Started</a>
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-toggle" class="md:hidden w-10 h-10 flex items-center justify-center text-white">
+                <span class="material-symbols-outlined text-3xl">menu</span>
+            </button>
         </div>
     </nav>
 
@@ -404,22 +460,49 @@
         <div class="max-w-7xl mx-auto px-8">
             <div class="flex flex-col lg:flex-row gap-20">
                 <!-- Sticky Left Info -->
-                <div class="lg:w-1/3 lg:sticky lg:top-32 h-fit">
-                    <span
-                        class="text-primary font-headline font-bold tracking-[0.4em] uppercase text-xs mb-6 block opacity-60">The
-                        Workflow</span>
-                    <h2
-                        class="text-6xl md:text-8xl font-headline font-black text-white leading-[0.8] mb-12 tracking-tighter">
-                        Our <br /><span class="text-primary/40">Ecosystem</span>
-                    </h2>
-                    <p class="text-on-surface-variant font-body text-lg leading-relaxed max-w-xs mb-12">
-                        We don't just post content; we engineer cinematic movements across the digital landscape.
-                    </p>
+                <div class="lg:w-1/3 lg:sticky lg:top-32 h-fit space-y-12">
+                    <div>
+                        <span
+                            class="text-primary font-headline font-bold tracking-[0.4em] uppercase text-xs mb-6 block opacity-60">The
+                            Workflow</span>
+                        <h2
+                            class="text-6xl md:text-8xl font-headline font-black text-white leading-[0.8] mb-12 tracking-tighter">
+                            Our <br /><span class="text-primary/40">Ecosystem</span>
+                        </h2>
+                        <p class="text-on-surface-variant font-body text-lg leading-relaxed max-w-xs">
+                            We don't just post content; we engineer cinematic movements across the digital landscape.
+                        </p>
+                    </div>
+
+                    <!-- Performance Visualizer Node -->
+                    <div class="relative p-8 rounded-[2rem] bg-white/[0.02] border border-white/5 backdrop-blur-3xl overflow-hidden group">
+                        <div class="absolute top-0 right-0 p-4">
+                            <div class="flex gap-1">
+                                <span class="w-1 h-3 bg-primary/40 rounded-full animate-pulse"></span>
+                                <span class="w-1 h-5 bg-primary rounded-full animate-pulse" style="animation-delay: 0.2s"></span>
+                                <span class="w-1 h-2 bg-primary/20 rounded-full animate-pulse" style="animation-delay: 0.4s"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="relative z-10">
+                            <div class="text-xs font-mono text-primary/60 tracking-widest uppercase mb-6">Audience Logic v2.0</div>
+                            <div class="flex items-end gap-1 h-12 mb-6">
+                                <div class="flex-1 bg-white/10 h-[20%] group-hover:h-[60%] transition-all duration-700"></div>
+                                <div class="flex-1 bg-primary/40 h-[40%] group-hover:h-[90%] transition-all duration-700 delay-75"></div>
+                                <div class="flex-1 bg-primary h-[80%] group-hover:h-[40%] transition-all duration-700 delay-100"></div>
+                                <div class="flex-1 bg-white/10 h-[30%] group-hover:h-[70%] transition-all duration-700 delay-150"></div>
+                                <div class="flex-1 bg-primary/60 h-[60%] group-hover:h-[30%] transition-all duration-700 delay-200"></div>
+                            </div>
+                            <div class="text-sm font-bold text-white mb-1">Algorithmic Velocity</div>
+                            <div class="text-[10px] text-on-surface-variant font-mono uppercase tracking-tighter">Syncing with global clusters...</div>
+                        </div>
+                    </div>
 
                     <!-- Advanced ROI Counter -->
-                    <div class="p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
-                        <div class="text-5xl font-headline font-black text-primary mb-2 line-height-1 italic">94%</div>
-                        <div class="text-on-surface-variant font-headline font-bold text-xs uppercase tracking-widest">
+                    <div class="p-8 rounded-2xl bg-primary/10 border border-primary/20 backdrop-blur-md relative overflow-hidden">
+                        <div class="absolute -right-4 -bottom-4 text-primary/5 text-8xl font-black">ROI</div>
+                        <div class="text-5xl font-headline font-black text-primary mb-2 line-height-1 italic relative z-10">94%</div>
+                        <div class="text-on-surface-variant font-headline font-bold text-xs uppercase tracking-widest relative z-10">
                             Avg Growth Velocity</div>
                     </div>
                 </div>
@@ -565,7 +648,10 @@
     <footer class="relative z-10 bg-black text-violet-400 font-['Manrope'] text-sm tracking-wide w-full rounded-none">
         <div class="flex flex-col md:flex-row justify-between items-center px-12 py-16 border-t border-white/10">
             <div class="mb-8 md:mb-0">
-                <div class="text-xl font-black text-white mb-2">LCG</div>
+                <div class="flex items-center gap-3 mb-4">
+                    <img src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg" 
+                         alt="LCG" class="h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all">
+                </div>
                 <p class="text-gray-500 max-w-xs leading-relaxed">Crafting cinematic digital experiences for the next
                     generation of global brands.</p>
             </div>
@@ -597,14 +683,23 @@
                     The <br />Collective</h2>
             </div>
 
-            <div class="collective-container relative w-full h-[650px] flex items-end">
-                <div id="collective-track" class="collective-track flex gap-12 whitespace-nowrap">
+            <div class="collective-container relative w-full h-[480px] flex items-end">
+                <div id="collective-track" class="collective-track flex gap-8 whitespace-nowrap">
                     <!-- Cards will be populated and duplicated here -->
                 </div>
             </div>
         </div>
     </section>
+
     <script>
+        // Splash Screen Logic
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const splash = document.getElementById('splash-screen');
+                if (splash) splash.classList.add('hidden');
+            }, 2500); // 2.5s display time
+        });
+
         const heroVideo = document.getElementById('hero-video');
         const audioToggle = document.getElementById('audio-toggle');
         const audioIcon = document.getElementById('audio-icon');
@@ -670,9 +765,9 @@
                     <div class="profile-image-container relative aspect-[4/6] overflow-hidden">
                         ${mediaHTML}
                         <div class="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 p-10 w-full translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
-                            <h3 class="text-3xl font-bold text-white mb-2">${p.name}</h3>
-                            <p class="text-${p.color} font-mono text-sm tracking-[0.2em] uppercase font-bold">${p.role}</p>
+                        <div class="absolute bottom-0 left-0 p-6 w-full translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
+                            <h3 class="text-xl font-bold text-white mb-1 uppercase tracking-tight">${p.name}</h3>
+                            <p class="text-primary font-mono text-[10px] tracking-[0.2em] uppercase font-bold">${p.role}</p>
                         </div>
                     </div>
                 </a>
