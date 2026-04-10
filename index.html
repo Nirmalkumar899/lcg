@@ -87,28 +87,41 @@
         }
     </script>
     <style>
+        /* Base Styles */
         body {
             font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
         }
 
         .font-headline {
             font-family: 'Epilogue', sans-serif;
         }
 
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        /* Moodboard: Smaller, More Subtle */
+        .moodboard-wrap {
+            transform: rotate(-12deg) scale(1.1) translateY(-10%);
         }
 
-        /* Custom Scrolling Reel Effect */
-        .reel-column {
-            animation: scroll-vertical 60s linear infinite;
+        .moodboard-video {
+            width: 140px;
+            filter: grayscale(1) opacity(0.5) blur(2px);
+            transition: all 0.8s ease;
         }
 
-        .reel-column-reverse {
-            animation: scroll-vertical-reverse 65s linear infinite;
+        .moodboard-video:hover {
+            filter: grayscale(0) opacity(1) blur(0);
+            transform: scale(1.1);
         }
 
-        @keyframes scroll-vertical {
+        .moodboard-column {
+            animation: moodboard-scroll 180s linear infinite;
+        }
+
+        .moodboard-column-reverse {
+            animation: moodboard-scroll-reverse 200s linear infinite;
+        }
+
+        @keyframes moodboard-scroll {
             0% {
                 transform: translateY(0);
             }
@@ -118,7 +131,7 @@
             }
         }
 
-        @keyframes scroll-vertical-reverse {
+        @keyframes moodboard-scroll-reverse {
             0% {
                 transform: translateY(-50%);
             }
@@ -128,29 +141,31 @@
             }
         }
 
-        .scrim-overlay {
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
-        }
-
-        .global-vignette {
-            background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.9) 100%);
+        /* UI Components */
+        .vignette-heavy {
+            background: radial-gradient(circle, transparent 0%, rgba(0, 0, 0, 0.4) 40%, rgba(0, 0, 0, 0.98) 100%);
         }
 
         .glass-card {
-            background: rgba(0, 0, 0, 0.03);
+            background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .mobile-menu-active {
-            overflow: hidden;
+        .scrim-overlay {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.8));
         }
 
+        .h-screen-dynamic {
+            height: 100vh;
+            height: 100dvh;
+        }
+
+        /* Mobile Nav */
         .mobile-nav-overlay {
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .mobile-nav-overlay.active {
@@ -158,21 +173,11 @@
             pointer-events: auto;
         }
 
-        :root {
-            --primary: #bf7af0;
-            --background: #0e0e0f;
-            --surface: #0e0e0f;
-            --on-surface: #ffffff;
-            --surface-variant: #262627;
-            --outline: #767576;
+        .mobile-menu-active {
+            overflow: hidden;
         }
 
-        /* Mobile Height Fix */
-        .h-screen-dynamic {
-            height: 100vh;
-            height: 100dvh;
-        }
-
+        /* Collective Section Styles */
         .collective-container {
             mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
             cursor: pointer;
@@ -189,16 +194,16 @@
             width: 400px;
             transform-origin: bottom center;
             will-change: transform;
+            transition: transform 0.3s ease;
         }
-        
+
         .profile-image-container {
             border-top-left-radius: 4rem;
             border-top-right-radius: 4rem;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Video Background Fixes */
         .video-foreground {
             position: absolute;
             top: 0;
@@ -213,56 +218,48 @@
             height: 100%;
             object-fit: cover;
         }
-
-        .reel-column video,
-        .reel-column-reverse video {
-            width: 100%;
-            height: 1200px;
-            object-fit: cover;
-            border-radius: 0.75rem;
-            opacity: 1;
-            background: #1a191b;
-        }
     </style>
 </head>
 
 <body class="bg-background text-on-surface selection:bg-primary selection:text-on-primary-fixed overflow-x-hidden">
-    <!-- Global Background Reels -->
-    <div
-        class="fixed inset-0 z-0 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-4 opacity-10 pointer-events-none">
-        <div class="flex flex-col gap-4 reel-column">
-            <video autoplay loop muted playsinline class="rounded-xl"
-                src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
-            <video autoplay loop muted playsinline class="rounded-xl"
-                src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4"></video>
-        </div>
-        <div class="flex flex-col gap-4 reel-column-reverse">
-            <video autoplay loop muted playsinline class="rounded-xl"
-                src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
-            <video autoplay loop muted playsinline class="rounded-xl"
-                src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel2.mp4"></video>
-        </div>
-        <!-- Hide excessive columns on mobile -->
-        <div class="hidden md:flex flex-col gap-4 reel-column">
-            <video autoplay loop muted playsinline class="rounded-xl"
-                src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4"></video>
-            <video autoplay loop muted playsinline class="rounded-xl"
-                src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
-        </div>
-        <div class="hidden md:flex flex-col gap-4 reel-column-reverse">
-            <video autoplay loop muted playsinline class="rounded-xl"
-                src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4"></video>
-            <video autoplay loop muted playsinline class="rounded-xl"
-                src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
-        </div>
-        <div class="hidden lg:flex flex-col gap-4 reel-column">
-            <video autoplay loop muted playsinline class="rounded-xl"
-                src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel2.mp4"></video>
-            <video autoplay loop muted playsinline class="rounded-xl"
-                src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
+    <!-- Global Background Atmospheric Mural -->
+    <div class="fixed inset-0 z-0 overflow-hidden opacity-20 pointer-events-none bg-black">
+        <div class="moodboard-wrap flex gap-12 justify-center">
+            <div class="flex flex-col gap-12 moodboard-column">
+                <video autoplay loop muted playsinline class="moodboard-video rounded-lg"
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
+                <video autoplay loop muted playsinline class="moodboard-video rounded-full aspect-square object-cover"
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4"></video>
+                <video autoplay loop muted playsinline class="moodboard-video rounded-lg"
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
+            </div>
+            <div class="flex flex-col gap-12 moodboard-column-reverse pt-24">
+                <video autoplay loop muted playsinline class="moodboard-video rounded-lg border border-primary/30"
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4"></video>
+                <video autoplay loop muted playsinline class="moodboard-video rounded-lg"
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel2.mp4"></video>
+                <video autoplay loop muted playsinline class="moodboard-video rounded-full aspect-square object-cover"
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
+            </div>
+            <div class="hidden md:flex flex-col gap-12 moodboard-column">
+                <video autoplay loop muted playsinline class="moodboard-video rounded-lg"
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
+                <video autoplay loop muted playsinline class="moodboard-video rounded-full aspect-square object-cover"
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4"></video>
+                <video autoplay loop muted playsinline class="moodboard-video rounded-lg"
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4"></video>
+            </div>
+            <div class="hidden lg:flex flex-col gap-12 moodboard-column-reverse pt-48">
+                <video autoplay loop muted playsinline class="moodboard-video rounded-lg"
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
+                <video autoplay loop muted playsinline class="moodboard-video rounded-lg"
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
+                <video autoplay loop muted playsinline class="moodboard-video rounded-lg"
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4"></video>
+            </div>
         </div>
     </div>
-    <div class="fixed inset-0 z-[1] global-vignette pointer-events-none"></div>
+    <div class="fixed inset-0 z-[1] vignette-heavy pointer-events-none"></div>
     <!-- TopNavBar -->
     <nav class="fixed top-0 w-full z-50 px-6 py-6 transition-all duration-500" id="main-nav">
         <div
@@ -328,136 +325,164 @@
             </button>
         </div>
         <div class="absolute inset-0 scrim-overlay z-[5]"></div>
-        <!-- Minimalist Hero Overlay (No Text/Buttons) -->
-        <div class="relative z-10 text-center px-4 max-w-5xl invisible">
+        <!-- Pure Cinematic View (No Text) -->
+        <div class="relative z-10 text-center px-6 max-w-5xl"></div>
+    </section>
+    <!-- Portfolio Section (Creative Mosaic Gallery) -->
+    <section id="work" class="py-32 px-8 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
+                <div class="max-w-xl">
+                    <span
+                        class="text-primary font-headline font-bold tracking-[0.4em] uppercase text-xs mb-4 block opacity-60">The
+                        Portfolio</span>
+                    <h2 class="text-5xl md:text-7xl font-headline font-black text-white tracking-tight leading-[0.9]">
+                        Selected <br /><span class="text-primary italic">Works.</span></h2>
+                </div>
+            </div>
+
+            <!-- Creative Mosaic Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-12 gap-6 auto-rows-[250px] md:auto-rows-[300px]">
+                <!-- Item 1: Large Featured -->
+                <a href="https://www.instagram.com/lcg.reel/" target="_blank"
+                    class="md:col-span-8 md:row-span-2 rounded-[2.5rem] overflow-hidden glass-card group relative block">
+                    <video autoplay loop muted playsinline
+                        class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
+                        src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60">
+                    </div>
+                    <div
+                        class="absolute bottom-0 left-0 p-10 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        <span class="text-primary font-mono text-xs tracking-widest uppercase mb-2 block">Premium
+                            Campaign</span>
+                        <h3 class="text-3xl md:text-4xl font-bold text-white">Midnight Pulse</h3>
+                    </div>
+                </a>
+
+                <!-- Item 2: Portrait Vertical -->
+                <a href="https://www.instagram.com/lcg.reel/" target="_blank"
+                    class="md:col-span-4 md:row-span-3 rounded-[2.5rem] overflow-hidden glass-card group relative block">
+                    <video autoplay loop muted playsinline
+                        class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
+                        src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60">
+                    </div>
+                    <div
+                        class="absolute bottom-0 left-0 p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        <span class="text-secondary font-mono text-xs tracking-widest uppercase mb-2 block">Brand
+                            Identity</span>
+                        <h3 class="text-2xl font-bold text-white">Urban Flow</h3>
+                    </div>
+                </a>
+
+                <!-- Item 3: Square Content -->
+                <a href="https://www.instagram.com/lcg.reel/" target="_blank"
+                    class="md:col-span-4 md:row-span-2 rounded-[2.5rem] overflow-hidden glass-card group relative block">
+                    <video autoplay loop muted playsinline
+                        class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
+                        src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4"></video>
+                    <div class="absolute bottom-0 left-0 p-8">
+                        <h3 class="text-xl font-bold text-white">Digital Soul</h3>
+                    </div>
+                </a>
+
+                <!-- Item 4: Wide Feature -->
+                <a href="https://www.instagram.com/lcg.reel/" target="_blank"
+                    class="md:col-span-4 md:row-span-2 rounded-[2.5rem] overflow-hidden glass-card group relative block">
+                    <video autoplay loop muted playsinline
+                        class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
+                        src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4"></video>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-8">
+                        <h3 class="text-xl font-bold text-white">Neon Nights</h3>
+                    </div>
+                </a>
+            </div>
         </div>
     </section>
-    <!-- Client Showcase (Bento Grid) -->
-    <section class="py-32 px-8 relative z-10">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-                <div class="max-w-2xl">
+    <section id="services" class="relative z-10 bg-black overflow-hidden py-32">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="flex flex-col lg:flex-row gap-20">
+                <!-- Sticky Left Info -->
+                <div class="lg:w-1/3 lg:sticky lg:top-32 h-fit">
                     <span
-                        class="text-secondary font-headline font-bold tracking-widest uppercase text-sm mb-4 block">Proven
-                        Impact</span>
+                        class="text-primary font-headline font-bold tracking-[0.4em] uppercase text-xs mb-6 block opacity-60">The
+                        Workflow</span>
                     <h2
-                        class="text-4xl md:text-6xl font-headline font-black text-on-surface tracking-tight text-shadow-lg">
-                        Our Portfolio</h2>
-                </div>
-                <button
-                    class="text-primary font-body font-semibold flex items-center gap-2 hover:translate-x-2 transition-transform">
-                    View all projects <span class="material-symbols-outlined">arrow_forward</span>
-                </button>
-            </div>
-            <!-- Bento Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 h-auto md:h-[1300px]">
-                <!-- Item 1: Featured Reel (Vertical focus) -->
-                <div
-                    class="md:col-span-8 md:row-span-1 rounded-3xl overflow-hidden glass-card group relative h-[500px] md:h-full">
-                    <video autoplay loop muted playsinline
-                        class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                        src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
-                    <div
-                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60">
-                    </div>
-                    <div class="absolute bottom-0 left-0 p-6 md:p-10">
-                        <span class="text-primary font-mono text-sm tracking-widest uppercase mb-2 block">Campaign /
-                            2024</span>
-                        <h3 class="text-2xl md:text-4xl font-bold">Midnight Pulse</h3>
+                        class="text-6xl md:text-8xl font-headline font-black text-white leading-[0.8] mb-12 tracking-tighter">
+                        Our <br /><span class="text-primary/40">Ecosystem</span>
+                    </h2>
+                    <p class="text-on-surface-variant font-body text-lg leading-relaxed max-w-xs mb-12">
+                        We don't just post content; we engineer cinematic movements across the digital landscape.
+                    </p>
+
+                    <!-- Advanced ROI Counter -->
+                    <div class="p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
+                        <div class="text-5xl font-headline font-black text-primary mb-2 line-height-1 italic">94%</div>
+                        <div class="text-on-surface-variant font-headline font-bold text-xs uppercase tracking-widest">
+                            Avg Growth Velocity</div>
                     </div>
                 </div>
 
-                <!-- Item 2: Portrait Reel -->
-                <div
-                    class="md:col-span-4 md:row-span-1 rounded-3xl overflow-hidden glass-card group relative h-[500px] md:h-full">
-                    <video autoplay loop muted playsinline
-                        class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                        src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
+                <!-- Scrolling Right Scenes -->
+                <div class="lg:w-2/3 space-y-32">
+                    <!-- Scene 01 -->
                     <div
-                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60">
-                    </div>
-                    <div class="absolute bottom-0 left-0 p-6 md:p-10">
-                        <span class="text-primary font-mono text-sm tracking-widest uppercase mb-2 block">Brand
-                            Story</span>
-                        <h3 class="text-xl md:text-2xl font-bold">Urban Flow</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Services Section -->
-    <section class="py-32 relative z-10 bg-black/40 backdrop-blur-sm">
-        <div class="max-w-7xl mx-auto px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-                <div>
-                    <h2
-                        class="text-5xl md:text-7xl font-headline font-black text-on-surface mb-16 leading-[0.9] text-shadow-lg">
-                        Our <br /><span class="text-primary">Ecosystem</span>
-                    </h2>
-                    <div class="space-y-16">
-                        <div class="group">
-                            <div class="flex items-center gap-6 mb-4">
-                                <div
-                                    class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary border border-primary/20">
-                                    <span class="material-symbols-outlined"
-                                        style="font-variation-settings: 'FILL' 1;">movie</span>
-                                </div>
-                                <h3 class="text-2xl font-headline font-bold text-white text-shadow-lg">Cinematic
-                                    Production</h3>
-                            </div>
-                            <p class="text-on-surface-variant font-body leading-relaxed pl-18">
-                                4K vertical storytelling that blends the polish of a feature film with the urgency of
-                                social media trends.
-                            </p>
-                        </div>
-                        <div class="group">
-                            <div class="flex items-center gap-6 mb-4">
-                                <div
-                                    class="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center text-secondary border border-secondary/20">
-                                    <span class="material-symbols-outlined"
-                                        style="font-variation-settings: 'FILL' 1;">insights</span>
-                                </div>
-                                <h3 class="text-2xl font-headline font-bold text-white text-shadow-lg">Content Strategy
-                                </h3>
-                            </div>
-                            <p class="text-on-surface-variant font-body leading-relaxed pl-18">
-                                Data-driven roadmaps that identify your unique brand voice and the algorithms that crave
-                                it.
-                            </p>
-                        </div>
-                        <div class="group">
-                            <div class="flex items-center gap-6 mb-4">
-                                <div
-                                    class="w-12 h-12 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary border border-tertiary/20">
-                                    <span class="material-symbols-outlined"
-                                        style="font-variation-settings: 'FILL' 1;">hub</span>
-                                </div>
-                                <h3 class="text-2xl font-headline font-bold text-white text-shadow-lg">Engagement Growth
-                                </h3>
-                            </div>
-                            <p class="text-on-surface-variant font-body leading-relaxed pl-18">
-                                Active community management and viral engineering designed to turn followers into
-                                fanatics.
+                        class="group relative aspect-[16/10] md:aspect-[16/8] rounded-[3rem] overflow-hidden bg-surface-container-highest transition-all duration-700 hover:scale-[1.02] shadow-2xl">
+                        <video autoplay loop muted playsinline
+                            class="absolute inset-0 w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000"
+                            src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
+                        <div class="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent"></div>
+                        <div class="relative h-full flex flex-col justify-center p-12 md:p-20">
+                            <span
+                                class="text-primary text-6xl font-headline font-black opacity-20 mb-4 block group-hover:opacity-100 transition-opacity duration-500">01</span>
+                            <h3 class="text-3xl md:text-5xl font-headline font-black text-white mb-6 tracking-tight">
+                                Cinematic <br />Production</h3>
+                            <p
+                                class="text-on-surface-variant font-body max-w-md text-lg leading-relaxed group-hover:text-white transition-colors">
+                                4K vertical storytelling that blends the polish of feature films with the urgency of
+                                social algorithms.
                             </p>
                         </div>
                     </div>
-                </div>
-                <div class="relative">
-                    <div class="absolute -top-12 -left-12 w-64 h-64 bg-primary/20 rounded-full blur-[100px] opacity-30">
-                    </div>
+
+                    <!-- Scene 02 -->
                     <div
-                        class="absolute -bottom-12 -right-12 w-64 h-64 bg-secondary/20 rounded-full blur-[100px] opacity-30">
+                        class="group relative aspect-[16/10] md:aspect-[16/8] rounded-[3rem] overflow-hidden bg-surface-container-highest transition-all duration-700 hover:scale-[1.02] shadow-2xl">
+                        <video autoplay loop muted playsinline
+                            class="absolute inset-0 w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000"
+                            src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4"></video>
+                        <div class="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent"></div>
+                        <div class="relative h-full flex flex-col justify-center p-12 md:p-20">
+                            <span
+                                class="text-secondary text-6xl font-headline font-black opacity-20 mb-4 block group-hover:opacity-100 transition-opacity duration-500">02</span>
+                            <h3 class="text-3xl md:text-5xl font-headline font-black text-white mb-6 tracking-tight">
+                                Viral <br />Strategy</h3>
+                            <p
+                                class="text-on-surface-variant font-body max-w-md text-lg leading-relaxed group-hover:text-white transition-colors">
+                                Data-driven roadmaps that identify your unique voice and the millions of eyes craving to
+                                see it.
+                            </p>
+                        </div>
                     </div>
-                    <div class="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl border border-white/10">
-                        <img alt="" class="w-full h-full object-cover"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQe2J-PvgaoX0wGysIQ312Ym_BfAb-a5aoWj-eSimmc6LYZLUknQ2tjzMFdmX4ZQ9kLJ43X3zUpV7Pzzk1LhxaymcaxCGvkwkYYXZOEcnuoKfEAg_j4lYquHJVr9u9eR8fn7kQZgCIMCBT-B6waNQPvaVwXoH6CELLK9H09yOiqKsmoifW63C143wbYq5cB4yrFO6r9lKfz_sw826nv00zsfBrF2FkivCVbPA1XJFR6N10WbJvqi3qZ4l9Gmn39QzjuqzreIedcsGT" />
-                        <div class="absolute inset-0 bg-surface-container-highest/60 backdrop-blur-[2px]"></div>
-                        <div class="absolute inset-0 flex flex-col justify-end p-12">
-                            <div class="bg-black/40 backdrop-blur-xl border border-white/10 p-8 rounded-xl">
-                                <div class="text-6xl font-headline font-black text-primary mb-2">94%</div>
-                                <div class="text-white font-body text-lg uppercase tracking-widest font-semibold">
-                                    Average ROI Increase</div>
-                            </div>
+
+                    <!-- Scene 03 -->
+                    <div
+                        class="group relative aspect-[16/10] md:aspect-[16/8] rounded-[3rem] overflow-hidden bg-surface-container-highest transition-all duration-700 hover:scale-[1.02] shadow-2xl">
+                        <video autoplay loop muted playsinline
+                            class="absolute inset-0 w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000"
+                            src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4"></video>
+                        <div class="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent"></div>
+                        <div class="relative h-full flex flex-col justify-center p-12 md:p-20">
+                            <span
+                                class="text-tertiary text-6xl font-headline font-black opacity-20 mb-4 block group-hover:opacity-100 transition-opacity duration-500">03</span>
+                            <h3 class="text-3xl md:text-5xl font-headline font-black text-white mb-6 tracking-tight">
+                                Growth <br />Engineering</h3>
+                            <p
+                                class="text-on-surface-variant font-body max-w-md text-lg leading-relaxed group-hover:text-white transition-colors">
+                                Active community management and viral loops designed to turn passive followers into
+                                die-hard fanatics.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -561,12 +586,17 @@
     </footer>
     <!-- Collective Section (Refined 3D Fanning) -->
     <section id="collective-wrap" class="relative h-[400vh] w-full bg-black">
-        <div id="collective-sticky" class="sticky top-0 h-screen w-full flex flex-col justify-end overflow-hidden pb-24">
+        <div id="collective-sticky"
+            class="sticky top-0 h-screen w-full flex flex-col justify-end overflow-hidden pb-24">
             <div class="max-w-7xl mx-auto px-8 w-full mb-12">
-                <span class="text-primary font-headline font-bold tracking-[0.3em] uppercase text-xs mb-4 block opacity-50">Our Inner Circle</span>
-                <h2 class="text-5xl md:text-8xl font-headline font-black text-white/20 tracking-tighter uppercase leading-none">The <br/>Collective</h2>
+                <span
+                    class="text-primary font-headline font-bold tracking-[0.3em] uppercase text-xs mb-4 block opacity-50">Our
+                    Inner Circle</span>
+                <h2
+                    class="text-5xl md:text-8xl font-headline font-black text-white/20 tracking-tighter uppercase leading-none">
+                    The <br />Collective</h2>
             </div>
-            
+
             <div class="collective-container relative w-full h-[650px] flex items-end">
                 <div id="collective-track" class="collective-track flex gap-12 whitespace-nowrap">
                     <!-- Cards will be populated and duplicated here -->
@@ -618,30 +648,40 @@
         // Collective Section Advanced 3D Loop logic
         const track = document.getElementById('collective-track');
         const scrollWrap = document.getElementById('collective-wrap');
-        const profilesList = [
-            { name: 'Alex Rivera', role: 'Creative Director', img: 'assets/profile1.png', color: 'primary' },
-            { name: 'Sarah Chen', role: 'Cinematographer', img: 'assets/profile2.png', color: 'secondary' },
-            { name: 'Marcus Thorne', role: 'Data Architect', img: 'assets/profile3.png', color: 'tertiary' },
-            { name: 'Elena Rossi', role: 'VFX Artist', img: 'assets/profile1.png', color: 'primary' },
-            { name: 'Javed Khan', role: 'Sound Designer', img: 'assets/profile2.png', color: 'secondary' }
+        const collectiveList = [
+            { type: 'reel', name: 'Midnight Pulse', role: 'Campaign', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4', color: 'primary' },
+            { type: 'reel', name: 'Urban Flow', role: 'Brand Story', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4', color: 'secondary' },
+            { type: 'reel', name: 'Neon Nights', role: 'Social Short', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4', color: 'tertiary' },
+            { type: 'reel', name: 'Cyber Chic', role: 'Fashion Edit', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4', color: 'primary' },
+            { type: 'reel', name: 'Digital Soul', role: 'Cinematic Reel', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel2.mp4', color: 'secondary' },
+            { type: 'profile', name: 'Alex Rivera', role: 'Creative Director', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAlWwfHUbzRJixTwsej-EyP1U33B4bJvy74y9oxTLBnakvSFxg28FDi6gBh2VikXw7mYXVK5ZDB6wm59mNl8KHhNpMYKHo3wYdhYuym1S2AeIaBqY0bgu8_Ya35lRcpbk27XM0eO_zeKVe9P3ibgcetwuuBgqyXi4gicRFeL_rqqNFDiYe4GmfYowiVRMb7vyPl2dgj_PCRLTKzT5e_D54FxNrzscOmZ0EJgzdS8krreZhN6Unrzws-nNVAkLq7DPnQ6FWHY7OMgE2F', color: 'primary' },
+            { type: 'profile', name: 'Sarah Chen', role: 'Cinematographer', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAe4lMpvRGE6-Wm2hPUxqbegfDbBJrsN1nNigQZG_L0WzZNgFpQp5Wj8t3my9sX1AVIq7hIYVtNtJq7IonFQe9GkyVVvaWDpr-Hf8s_nMhZJhvcSQDoUJwKWw-rqJFRTN9-zn1rVbCatcQg2IZ1LXoNgsZlUZwE8Nh0Dua476Oh-QZMCpBQInR35thNHz7j5xBvDUjbA9aTluOy5CTwRZiq8hcg1ef0ZTlmpTnXeFem99Z4HYQxwkS-qRLst8e3CiQmdiTZZIpp29Tw', color: 'secondary' },
+            { type: 'profile', name: 'Marcus Thorne', role: 'Data Architect', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCF16UINPbitan9ISuYEo0yJ8e13E2U9IhIXxif57ONe2ax4GJf7LmchAIn38BJnfnSqPmU76gF5NV9A5IsIo3_iLArqYxCldjqGxRrPrKiOlQLOTY9nDozmz6ZdEmqUMOivhyNi4zbV03ZRDIw9Zm90G8eFbH6G5uyeT0hC59kBmDrwELdNVHH1pZk1J7vkKgLGAdScPA4WzWsB14Av3-LOMS5rBiJ7-IkvY2wOIT0pkwhgUUS5Mtwroeq9UC373fVfzbC5dt9d9D0', color: 'tertiary' }
         ];
 
-        const createCardHTML = (p) => `
-            <div class="profile-card flex-shrink-0">
-                <div class="profile-image-container relative aspect-[4/6] overflow-hidden group">
-                    <img src="${p.img}" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" alt="${p.name}">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 p-10 w-full translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
-                        <h3 class="text-3xl font-bold text-white mb-2">${p.name}</h3>
-                        <p class="text-${p.color} font-mono text-sm tracking-[0.2em] uppercase font-bold">${p.role}</p>
+        const createCardHTML = (p) => {
+            const isReel = p.type === 'reel';
+            const mediaHTML = isReel
+                ? `<video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" src="${p.src}"></video>`
+                : `<img src="${p.img}" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" alt="${p.name}">`;
+
+            return `
+                <a href="https://www.instagram.com/lcg.reel/" target="_blank" class="profile-card flex-shrink-0 group block decoration-none">
+                    <div class="profile-image-container relative aspect-[4/6] overflow-hidden">
+                        ${mediaHTML}
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-10 w-full translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
+                            <h3 class="text-3xl font-bold text-white mb-2">${p.name}</h3>
+                            <p class="text-${p.color} font-mono text-sm tracking-[0.2em] uppercase font-bold">${p.role}</p>
+                        </div>
                     </div>
-                </div>
-            </div>
-        `;
+                </a>
+            `;
+        };
 
         if (track) {
-            const content = profilesList.map(createCardHTML).join('');
-            track.innerHTML = content + content + content + content; // 4x for density
+            const content = collectiveList.map(createCardHTML).join('');
+            track.innerHTML = content + content + content; // 3x for density
         }
 
         const updateReel = () => {
@@ -665,12 +705,12 @@
                 const cardRect = card.getBoundingClientRect();
                 const cardMid = cardRect.left + (cardRect.width / 2);
                 const distanceFromCenter = (cardMid - (winW / 2)) / (winW / 2);
-                
+
                 // Rotation and lift calculations
                 const rotY = distanceFromCenter * -25; // Tilt toward center
                 const rotZ = distanceFromCenter * 15;  // Fan out
                 const lift = Math.abs(distanceFromCenter) * 100; // Rise as they go to edges
-                
+
                 const imgWrap = card.querySelector('.profile-image-container');
                 if (imgWrap) {
                     imgWrap.style.transform = `rotateY(${rotY}deg) rotateZ(${rotZ}deg) translateY(${lift}px) scale(${1 - Math.abs(distanceFromCenter) * 0.15})`;
