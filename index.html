@@ -129,11 +129,18 @@
         }
 
         .scrim-overlay {
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(14, 14, 15, 0.7) 40%, rgba(14, 14, 15, 0.7) 60%, rgba(0, 0, 0, 1) 100%);
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
         }
 
         .global-vignette {
-            background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.8) 100%);
+            background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.9) 100%);
+        }
+
+        .glass-card {
+            background: rgba(0, 0, 0, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .mobile-menu-active {
@@ -152,13 +159,12 @@
         }
 
         :root {
-            --primary: #FFD700;
-            --on-primary: #000000;
-            --background: #050505;
-            --surface: #121212;
-            --on-surface: #FFFFFF;
-            --surface-variant: #1E1E1E;
-            --outline: #333333;
+            --primary: #bf7af0;
+            --background: #0e0e0f;
+            --surface: #0e0e0f;
+            --on-surface: #ffffff;
+            --surface-variant: #262627;
+            --outline: #767576;
         }
 
         /* Mobile Height Fix */
@@ -167,8 +173,29 @@
             height: 100dvh;
         }
 
-        .text-shadow-lg {
-            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+        .collective-container {
+            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+            cursor: pointer;
+        }
+
+        .collective-track {
+            display: flex;
+            gap: 2rem;
+            transform-style: preserve-3d;
+            perspective: 1200px;
+        }
+
+        .profile-card {
+            width: 400px;
+            transform-origin: bottom center;
+            will-change: transform;
+        }
+        
+        .profile-image-container {
+            border-top-left-radius: 4rem;
+            border-top-right-radius: 4rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         /* Video Background Fixes */
@@ -187,7 +214,8 @@
             object-fit: cover;
         }
 
-        .reel-column video, .reel-column-reverse video {
+        .reel-column video,
+        .reel-column-reverse video {
             width: 100%;
             height: 1200px;
             object-fit: cover;
@@ -200,46 +228,62 @@
 
 <body class="bg-background text-on-surface selection:bg-primary selection:text-on-primary-fixed overflow-x-hidden">
     <!-- Global Background Reels -->
-    <div class="fixed inset-0 z-0 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-4 opacity-20 pointer-events-none">
+    <div
+        class="fixed inset-0 z-0 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-4 opacity-10 pointer-events-none">
         <div class="flex flex-col gap-4 reel-column">
-            <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
-            <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4"></video>
+            <video autoplay loop muted playsinline class="rounded-xl"
+                src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
+            <video autoplay loop muted playsinline class="rounded-xl"
+                src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4"></video>
         </div>
         <div class="flex flex-col gap-4 reel-column-reverse">
-            <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
-            <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel2.mp4"></video>
+            <video autoplay loop muted playsinline class="rounded-xl"
+                src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
+            <video autoplay loop muted playsinline class="rounded-xl"
+                src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel2.mp4"></video>
         </div>
         <!-- Hide excessive columns on mobile -->
         <div class="hidden md:flex flex-col gap-4 reel-column">
-            <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4"></video>
-            <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
+            <video autoplay loop muted playsinline class="rounded-xl"
+                src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4"></video>
+            <video autoplay loop muted playsinline class="rounded-xl"
+                src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
         </div>
         <div class="hidden md:flex flex-col gap-4 reel-column-reverse">
-            <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4"></video>
-            <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
+            <video autoplay loop muted playsinline class="rounded-xl"
+                src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4"></video>
+            <video autoplay loop muted playsinline class="rounded-xl"
+                src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
         </div>
         <div class="hidden lg:flex flex-col gap-4 reel-column">
-            <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel2.mp4"></video>
-            <video autoplay loop muted playsinline class="rounded-xl" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
+            <video autoplay loop muted playsinline class="rounded-xl"
+                src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel2.mp4"></video>
+            <video autoplay loop muted playsinline class="rounded-xl"
+                src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
         </div>
     </div>
     <div class="fixed inset-0 z-[1] global-vignette pointer-events-none"></div>
     <!-- TopNavBar -->
-    <nav class="fixed top-0 w-full z-50 bg-black/40 backdrop-blur-xl border-b border-white/5">
-            <div class="flex justify-between items-center px-8 py-6 max-w-full mx-auto">
-            <div class="text-2xl font-black text-white tracking-tighter font-headline">LCG</div>
-            <div class="hidden md:flex gap-12 items-center">
-                <a class="text-violet-300 border-b-2 border-violet-400 pb-1 font-['Epilogue'] font-bold tracking-tight"
-                    href="#">Work</a>
-                <a class="text-white/70 hover:text-white transition-colors hover:text-violet-300 transition-all duration-300 font-['Epilogue'] font-bold tracking-tight"
-                    href="#">Services</a>
-                <a class="text-white/70 hover:text-white transition-colors hover:text-violet-300 transition-all duration-300 font-['Epilogue'] font-bold tracking-tight"
-                    href="#">Clients</a>
-                <a class="text-white/70 hover:text-white transition-colors hover:text-violet-300 transition-all duration-300 font-['Epilogue'] font-bold tracking-tight"
-                    href="https://www.instagram.com/lcgdigitalcinematheque/" target="_blank">Instagram</a>
+    <nav class="fixed top-0 w-full z-50 px-6 py-6 transition-all duration-500" id="main-nav">
+        <div
+            class="max-w-7xl mx-auto flex justify-between items-center bg-white/10 backdrop-blur-md rounded-2xl px-6 py-3 border border-black/5">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                    <span class="material-symbols-outlined text-white font-bold">movie_filter</span>
+                </div>
+                <span class="text-xl font-headline font-black tracking-tighter text-white">LCG</span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-headline font-bold">
+                <a class="text-white/70 hover:text-primary transition-colors" href="#work">Work</a>
+                <a class="text-white/70 hover:text-primary transition-colors" href="#services">Services</a>
+                <a class="text-white/70 hover:text-primary transition-colors" href="#clients">Clients</a>
+                <a class="text-white/70 hover:text-primary transition-colors" href="https://www.instagram.com/lcg.reel/"
+                    target="_blank">Instagram</a>
             </div>
             <div class="flex items-center gap-4">
-                <a href="#contact" class="hidden sm:inline-flex px-6 py-2 bg-primary text-on-primary rounded-full font-medium hover:bg-primary/90 transition-colors">Get Started</a>
+                <a href="#contact"
+                    class="hidden sm:inline-flex px-6 py-2 bg-primary text-on-primary rounded-full font-medium hover:bg-primary/90 transition-colors">Get
+                    Started</a>
                 <!-- Mobile Menu Toggle -->
                 <button id="mobile-menu-toggle" class="md:hidden w-10 h-10 flex items-center justify-center text-white">
                     <span class="material-symbols-outlined text-3xl">menu</span>
@@ -249,28 +293,38 @@
     </nav>
 
     <!-- Mobile Navigation Overlay -->
-    <div id="mobile-nav" class="fixed inset-0 z-[60] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 md:hidden mobile-nav-overlay">
+    <div id="mobile-nav"
+        class="fixed inset-0 z-[60] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 md:hidden mobile-nav-overlay">
         <button id="mobile-menu-close" class="absolute top-8 right-8 text-white">
             <span class="material-symbols-outlined text-4xl">close</span>
         </button>
-        <a href="#work" class="text-3xl font-bold text-white hover:text-primary transition-colors mobile-nav-link">Work</a>
-        <a href="#services" class="text-3xl font-bold text-white hover:text-primary transition-colors mobile-nav-link">Services</a>
-        <a href="#clients" class="text-3xl font-bold text-white hover:text-primary transition-colors mobile-nav-link">Clients</a>
-        <a href="https://www.instagram.com/lcg.reel/" class="text-3xl font-bold text-white hover:text-primary transition-colors mobile-nav-link text-primary">Instagram</a>
-        <a href="#contact" class="mt-4 px-10 py-4 bg-primary text-on-primary rounded-full text-xl font-bold">Get Started</a>
+        <a href="#work"
+            class="text-3xl font-bold text-white hover:text-primary transition-colors mobile-nav-link">Work</a>
+        <a href="#services"
+            class="text-3xl font-bold text-white hover:text-primary transition-colors mobile-nav-link">Services</a>
+        <a href="#clients"
+            class="text-3xl font-bold text-white hover:text-primary transition-colors mobile-nav-link">Clients</a>
+        <a href="https://www.instagram.com/lcg.reel/"
+            class="text-3xl font-bold text-white hover:text-primary transition-colors mobile-nav-link text-primary">Instagram</a>
+        <a href="#contact" class="mt-4 px-10 py-4 bg-primary text-on-primary rounded-full text-xl font-bold">Get
+            Started</a>
     </div>
     <!-- Hero Section -->
     <section class="relative h-screen-dynamic w-full overflow-hidden flex items-center justify-center bg-black">
         <!-- Hero Video Background -->
         <div class="video-foreground">
             <video id="hero-video" autoplay loop muted playsinline class="w-full h-full object-cover">
-                <source src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/reels/hero%20(1)%20(1).mp4" type="video/mp4">
+                <source
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/reels/hero%20(1)%20(1).mp4"
+                    type="video/mp4">
             </video>
         </div>
         <!-- Mute/Unmute Toggle -->
         <div class="absolute bottom-12 right-6 md:bottom-8 md:right-8 z-[15]">
-            <button id="audio-toggle" class="w-12 h-12 rounded-full bg-black/20 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-black/40 transition-all duration-300 group">
-                <span id="audio-icon" class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">volume_off</span>
+            <button id="audio-toggle"
+                class="w-12 h-12 rounded-full bg-black/10 backdrop-blur-md border border-black/10 flex items-center justify-center text-black hover:bg-black/20 transition-all duration-300 group">
+                <span id="audio-icon"
+                    class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">volume_off</span>
             </button>
         </div>
         <div class="absolute inset-0 scrim-overlay z-[5]"></div>
@@ -298,21 +352,33 @@
             <!-- Bento Grid -->
             <div class="grid grid-cols-1 md:grid-cols-12 gap-4 h-auto md:h-[1300px]">
                 <!-- Item 1: Featured Reel (Vertical focus) -->
-                <div class="md:col-span-8 md:row-span-1 rounded-3xl overflow-hidden glass-card group relative h-[500px] md:h-full">
-                    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
+                <div
+                    class="md:col-span-8 md:row-span-1 rounded-3xl overflow-hidden glass-card group relative h-[500px] md:h-full">
+                    <video autoplay loop muted playsinline
+                        class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                        src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60">
+                    </div>
                     <div class="absolute bottom-0 left-0 p-6 md:p-10">
-                        <span class="text-primary font-mono text-sm tracking-widest uppercase mb-2 block">Campaign / 2024</span>
+                        <span class="text-primary font-mono text-sm tracking-widest uppercase mb-2 block">Campaign /
+                            2024</span>
                         <h3 class="text-2xl md:text-4xl font-bold">Midnight Pulse</h3>
                     </div>
                 </div>
 
                 <!-- Item 2: Portrait Reel -->
-                <div class="md:col-span-4 md:row-span-1 rounded-3xl overflow-hidden glass-card group relative h-[500px] md:h-full">
-                    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
+                <div
+                    class="md:col-span-4 md:row-span-1 rounded-3xl overflow-hidden glass-card group relative h-[500px] md:h-full">
+                    <video autoplay loop muted playsinline
+                        class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                        src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60">
+                    </div>
                     <div class="absolute bottom-0 left-0 p-6 md:p-10">
-                        <span class="text-primary font-mono text-sm tracking-widest uppercase mb-2 block">Brand Story</span>
+                        <span class="text-primary font-mono text-sm tracking-widest uppercase mb-2 block">Brand
+                            Story</span>
                         <h3 class="text-xl md:text-2xl font-bold">Urban Flow</h3>
                     </div>
                 </div>
@@ -469,7 +535,8 @@
         </div>
         </div>
     </section>
-    <!-- Footer -->
+
+
     <footer class="relative z-10 bg-black text-violet-400 font-['Manrope'] text-sm tracking-wide w-full rounded-none">
         <div class="flex flex-col md:flex-row justify-between items-center px-12 py-16 border-t border-white/10">
             <div class="mb-8 md:mb-0">
@@ -492,6 +559,21 @@
             </div>
         </div>
     </footer>
+    <!-- Collective Section (Refined 3D Fanning) -->
+    <section id="collective-wrap" class="relative h-[400vh] w-full bg-black">
+        <div id="collective-sticky" class="sticky top-0 h-screen w-full flex flex-col justify-end overflow-hidden pb-24">
+            <div class="max-w-7xl mx-auto px-8 w-full mb-12">
+                <span class="text-primary font-headline font-bold tracking-[0.3em] uppercase text-xs mb-4 block opacity-50">Our Inner Circle</span>
+                <h2 class="text-5xl md:text-8xl font-headline font-black text-white/20 tracking-tighter uppercase leading-none">The <br/>Collective</h2>
+            </div>
+            
+            <div class="collective-container relative w-full h-[650px] flex items-end">
+                <div id="collective-track" class="collective-track flex gap-12 whitespace-nowrap">
+                    <!-- Cards will be populated and duplicated here -->
+                </div>
+            </div>
+        </div>
+    </section>
     <script>
         const heroVideo = document.getElementById('hero-video');
         const audioToggle = document.getElementById('audio-toggle');
@@ -532,6 +614,73 @@
                 link.addEventListener('click', () => toggleMenu(false));
             });
         }
+
+        // Collective Section Advanced 3D Loop logic
+        const track = document.getElementById('collective-track');
+        const scrollWrap = document.getElementById('collective-wrap');
+        const profilesList = [
+            { name: 'Alex Rivera', role: 'Creative Director', img: 'assets/profile1.png', color: 'primary' },
+            { name: 'Sarah Chen', role: 'Cinematographer', img: 'assets/profile2.png', color: 'secondary' },
+            { name: 'Marcus Thorne', role: 'Data Architect', img: 'assets/profile3.png', color: 'tertiary' },
+            { name: 'Elena Rossi', role: 'VFX Artist', img: 'assets/profile1.png', color: 'primary' },
+            { name: 'Javed Khan', role: 'Sound Designer', img: 'assets/profile2.png', color: 'secondary' }
+        ];
+
+        const createCardHTML = (p) => `
+            <div class="profile-card flex-shrink-0">
+                <div class="profile-image-container relative aspect-[4/6] overflow-hidden group">
+                    <img src="${p.img}" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" alt="${p.name}">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-10 w-full translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
+                        <h3 class="text-3xl font-bold text-white mb-2">${p.name}</h3>
+                        <p class="text-${p.color} font-mono text-sm tracking-[0.2em] uppercase font-bold">${p.role}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        if (track) {
+            const content = profilesList.map(createCardHTML).join('');
+            track.innerHTML = content + content + content + content; // 4x for density
+        }
+
+        const updateReel = () => {
+            if (!track || !scrollWrap) return;
+            const rect = scrollWrap.getBoundingClientRect();
+            const winW = window.innerWidth;
+            const winH = window.innerHeight;
+
+            // Calculate progress of scroll through the tall wrap section
+            let progress = -rect.top / (rect.height - winH);
+            progress = Math.max(0, Math.min(1, progress));
+
+            // Move the track horizontally
+            const totalWidth = track.scrollWidth / 4; // Width of one set
+            const xOffset = progress * totalWidth * 2; // Speed up the scroll
+            track.style.transform = `translateX(${-xOffset % totalWidth}px)`;
+
+            // Update individual card rotations for the fanning effect
+            const cards = track.querySelectorAll('.profile-card');
+            cards.forEach(card => {
+                const cardRect = card.getBoundingClientRect();
+                const cardMid = cardRect.left + (cardRect.width / 2);
+                const distanceFromCenter = (cardMid - (winW / 2)) / (winW / 2);
+                
+                // Rotation and lift calculations
+                const rotY = distanceFromCenter * -25; // Tilt toward center
+                const rotZ = distanceFromCenter * 15;  // Fan out
+                const lift = Math.abs(distanceFromCenter) * 100; // Rise as they go to edges
+                
+                const imgWrap = card.querySelector('.profile-image-container');
+                if (imgWrap) {
+                    imgWrap.style.transform = `rotateY(${rotY}deg) rotateZ(${rotZ}deg) translateY(${lift}px) scale(${1 - Math.abs(distanceFromCenter) * 0.15})`;
+                }
+            });
+        };
+
+        window.addEventListener('scroll', updateReel);
+        window.addEventListener('resize', updateReel);
+        updateReel();
     </script>
 </body>
 
