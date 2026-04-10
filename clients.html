@@ -97,6 +97,44 @@
             z-index: 50;
             opacity: 0.5;
         }
+        /* Mobile Touch States & Parallax */
+        @media (max-width: 1024px) {
+            #client-grid {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 5rem !important;
+                overflow-x: hidden !important;
+                padding-bottom: 20vh !important;
+            }
+            .client-card {
+                width: 100% !important;
+                transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.6s !important;
+                will-change: transform, opacity;
+            }
+            /* Alternating Initial Offsets */
+            .client-card:nth-child(even) {
+                transform: translateX(30%) scale(0.9);
+                opacity: 0.3;
+            }
+            .client-card:nth-child(odd) {
+                transform: translateX(-30%) scale(0.9);
+                opacity: 0.3;
+            }
+            /* Active State (Centered) */
+            .client-card.active-mobile {
+                transform: translateX(0) scale(1) !important;
+                opacity: 1 !important;
+            }
+            .group.active-mobile .group-hover\:opacity-0 {
+                opacity: 0 !important;
+            }
+            .group.active-mobile .group-hover\:opacity-100 {
+                opacity: 1 !important;
+            }
+            .group.active-mobile .group-hover\:scale-100 {
+                transform: scale(1) !important;
+            }
+        }
     </style>
 </head>
 
@@ -110,14 +148,36 @@
                 <img src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg" 
                      alt="LCG" class="h-8 w-auto object-contain">
             </a>
-            <div class="flex items-center gap-8 text-sm font-headline font-bold">
+            <div class="hidden md:flex items-center gap-8 text-sm font-headline font-bold uppercase tracking-widest">
                 <a href="index.html#work" class="text-white/70 hover:text-primary transition-colors">Work</a>
                 <a href="clients.html" class="text-primary transition-colors">Clients</a>
                 <a href="index.html#services" class="text-white/70 hover:text-primary transition-colors">Services</a>
                 <a href="#" class="px-5 py-2 bg-primary text-on-primary rounded-full transition-transform hover:scale-105">Let's Talk</a>
             </div>
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-toggle" class="md:hidden w-10 h-10 flex items-center justify-center text-white">
+                <span class="material-symbols-outlined text-3xl">menu</span>
+            </button>
         </div>
     </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div id="mobile-nav"
+        class="fixed inset-0 z-[70] bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 md:hidden mobile-nav-overlay pointer-events-none opacity-0 transition-opacity duration-300">
+        <button id="mobile-menu-close" class="absolute top-8 right-8 text-white">
+            <span class="material-symbols-outlined text-4xl">close</span>
+        </button>
+        <a href="index.html#work"
+            class="text-3xl font-bold text-white hover:text-primary transition-colors mobile-nav-link">Work</a>
+        <a href="index.html#services"
+            class="text-3xl font-bold text-white hover:text-primary transition-colors mobile-nav-link">Services</a>
+        <a href="clients.html"
+            class="text-3xl font-bold text-white hover:text-primary transition-colors mobile-nav-link">Clients</a>
+        <a href="https://www.instagram.com/lcg.reel/"
+            class="text-3xl font-bold text-white hover:text-primary transition-colors mobile-nav-link text-primary">Instagram</a>
+        <a href="#contact" class="mt-4 px-10 py-4 bg-primary text-on-primary rounded-full text-xl font-bold">Get
+            Started</a>
+    </div>
 
     <main class="pt-32 pb-20 px-6">
         <header class="max-w-7xl mx-auto mb-20">
@@ -298,6 +358,61 @@
                     v.pause();
                     v.currentTime = 0;
                 });
+            });
+        });
+
+        // Mobile Interactions & Swipe Parallax
+        const initMobileInteractions = () => {
+            const cards = document.querySelectorAll('.client-card');
+            const observerOptions = { 
+                threshold: 0.45,
+                rootMargin: '-10% 0px -10% 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (window.innerWidth <= 1024) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active-mobile');
+                            const videos = entry.target.querySelectorAll('video');
+                            videos.forEach(v => {
+                                v.currentTime = 0;
+                                v.play().catch(() => {});
+                            });
+                        } else {
+                            entry.target.classList.remove('active-mobile');
+                            // Pause videos when not in focus to save battery/performance
+                            entry.target.querySelectorAll('video').forEach(v => v.pause());
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            cards.forEach(card => observer.observe(card));
+        };
+
+        // Run after grid is populated
+        setTimeout(initMobileInteractions, 100);
+
+        // Mobile Menu Logic
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileNav = document.getElementById('mobile-nav');
+
+        mobileMenuToggle?.addEventListener('click', () => {
+            mobileNav.classList.remove('opacity-0', 'pointer-events-none');
+            mobileNav.classList.add('opacity-100', 'pointer-events-auto');
+        });
+
+        mobileMenuClose?.addEventListener('click', () => {
+            mobileNav.classList.add('opacity-0', 'pointer-events-none');
+            mobileNav.classList.remove('opacity-100', 'pointer-events-auto');
+        });
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.add('opacity-0', 'pointer-events-none');
+                mobileNav.classList.remove('opacity-100', 'pointer-events-auto');
             });
         });
     </script>
