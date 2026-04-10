@@ -155,6 +155,7 @@
         .h-screen-dynamic {
             height: 100vh;
             height: 100dvh;
+            min-height: -webkit-fill-available;
         }
 
         /* Mobile Nav */
@@ -202,17 +203,21 @@
 
         .video-foreground {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            transform: translate(-50%, -50%);
             pointer-events: none;
+            z-index: 0;
         }
 
         .video-foreground video {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center 20%; /* Focus more on the top-middle part of the frame */
         }
 
         /* Splash Screen */
@@ -404,7 +409,14 @@
     <section class="relative h-screen-dynamic w-full overflow-hidden flex items-center justify-center bg-black">
         <!-- Hero Video Background -->
         <div class="video-foreground">
-            <video id="hero-video" autoplay loop muted playsinline class="w-full h-full object-cover">
+            <!-- Desktop Video -->
+            <video id="hero-video-desktop" autoplay loop muted playsinline class="hidden md:block w-full h-full object-cover">
+                <source
+                    src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/reels/Group%20Animation_NEW%20(1).mp4"
+                    type="video/mp4">
+            </video>
+            <!-- Mobile Video (User Specified) -->
+            <video id="hero-video-mobile" autoplay loop muted playsinline class="block md:hidden w-full h-full object-cover">
                 <source
                     src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/reels/Group%20Animation_NEW%20(1).mp4"
                     type="video/mp4">

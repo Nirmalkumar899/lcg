@@ -157,36 +157,8 @@
 
         .plus-btn {
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            box-shadow: 0 8px 16px rgba(184, 230, 76, 0.3);
-            color: #000;
-            margin-bottom: 20px;
-        }
-
-        .minus-btn {
-            background: var(--bg);
-            box-shadow: 
-                6px 6px 12px var(--s-dark),
-                -6px -6px 12px var(--s-light);
-            color: #888;
-        }
-
-        /* Control Buttons */
-        .btn-circle {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            border: none;
-            transition: all 0.3s ease;
-        }
-
-        .plus-btn {
-            background: linear-gradient(135deg, #a855f7, #7e22ce);
             box-shadow: 0 8px 16px var(--accent-glow);
-            color: white;
+            color: #000;
             margin-bottom: 20px;
         }
 
@@ -197,7 +169,7 @@
 
         .minus-btn {
             background: var(--bg);
-            box-shadow:
+            box-shadow: 
                 6px 6px 12px var(--s-dark),
                 -6px -6px 12px var(--s-light);
             color: #888;
@@ -262,15 +234,92 @@
             transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        /* 3D Canvas Layer */
-        #three-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 5;
-            pointer-events: none;
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                padding: 100px 6vw;
+                height: auto;
+                min-height: 100vh;
+                gap: 40px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .controls {
+                width: 100%;
+                gap: 30px;
+            }
+            .inset-list {
+                width: 100%;
+                max-width: 320px;
+                margin: 0 auto;
+            }
+            .grid-mask {
+                height: 500px;
+                width: 100%;
+                margin: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .services-grid-inner {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            .text-8xl {
+                font-size: 3.2rem !important;
+                line-height: 1;
+            }
+            .card {
+                padding: 15px;
+                border-radius: 25px;
+            }
+            .card-icon {
+                font-size: 1.5rem;
+            }
+            .service-label {
+                font-size: 8px;
+            }
+            .btn-circle {
+                width: 55px;
+                height: 55px;
+            }
+            .inset-list {
+                display: none;
+            }
+            .grid-mask {
+                height: 400px;
+                mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-container {
+                padding-top: 80px;
+                gap: 20px;
+            }
+            .services-grid-inner {
+                grid-template-columns: repeat(1, 1fr);
+                max-width: 260px;
+            }
+            .text-8xl {
+                font-size: 2.5rem !important;
+            }
+            .controls {
+                gap: 15px;
+            }
+            .nav-link {
+                background: var(--bg);
+                padding: 6px 12px;
+                border-radius: 15px;
+                font-size: 9px;
+            }
+            .bg-brand {
+                font-size: 80vw;
+                opacity: 0.05;
+            }
         }
 
         .w-badge {
@@ -292,6 +341,7 @@
             z-index: 100;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
+
     </style>
 </head>
 
