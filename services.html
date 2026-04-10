@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services | LCG Cinematic</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <link
@@ -15,10 +14,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700" rel="stylesheet" />
     <style>
         :root {
-            --bg: #f2f2f5;
+            --bg: #ececf0;
             --s-light: #ffffff;
-            --s-dark: #d8d8e1;
-            --accent: #ff00ff;
+            --s-dark: #ccced6;
+            --accent: #8eb32a;
+            --accent-glow: rgba(142, 179, 42, 0.4);
+            --accent-dark: #6e8c20;
         }
 
         body {
@@ -45,12 +46,13 @@
             letter-spacing: -0.05em;
         }
 
-        /* Neumorphic Typography */
+        /* Neumorphic Typography but with Lime Color */
         .n-text {
-            color: var(--bg);
+            color: var(--accent);
             text-shadow:
                 2px 2px 4px var(--s-dark),
-                -2px -2px 4px var(--s-light);
+                -1px -1px 2px var(--s-light),
+                0 0 20px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
         }
 
@@ -70,7 +72,7 @@
             color: #222;
         }
 
-        /* Grid Layout */
+        /* Main Container */
         .main-container {
             height: 100vh;
             display: grid;
@@ -80,46 +82,44 @@
             gap: 40px;
         }
 
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            perspective: 1000px;
+        /* Control Panel */
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
         }
 
-        /* The Cards */
+        /* Improved Neumorphic Cards */
         .card {
             background: var(--bg);
             border-radius: 40px;
-            box-shadow:
-                12px 12px 24px var(--s-dark),
-                -12px -12px 24px var(--s-light);
+            box-shadow: 
+                16px 16px 32px var(--s-dark),
+                -16px -16px 32px var(--s-light);
             aspect-ratio: 1/1;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 30px;
+            padding: 35px;
             position: relative;
             cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow:
-                20px 20px 40px var(--s-dark),
-                -20px -20px 40px var(--s-light);
+            transform: translateY(-5px);
+            box-shadow: 
+                24px 24px 48px var(--s-dark),
+                -24px -24px 48px var(--s-light);
         }
 
-        .card-inner {
-            box-shadow:
-                inset 8px 8px 16px var(--s-dark),
-                inset -8px -8px 16px var(--s-light);
-        }
-
-        .card-tall {
-            aspect-ratio: 0.8/1;
+        .card.sunken {
+            box-shadow: 
+                inset 10px 10px 20px var(--s-dark),
+                inset -10px -10px 20px var(--s-light);
+            background: var(--bg);
         }
 
         .service-label {
@@ -127,19 +127,139 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            color: #888;
+            color: var(--accent-dark);
             text-align: center;
             line-height: 1.4;
-            margin-top: auto;
             pointer-events: none;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.1);
         }
 
         .card-icon {
             font-size: 2.2rem;
-            color: #bbb;
-            margin-top: 20px;
+            color: var(--accent);
             pointer-events: none;
-            opacity: 0.6;
+            opacity: 1;
+            filter: drop-shadow(0 0 5px rgba(0,0,0,0.1));
+        }
+
+        /* Control Buttons */
+        .btn-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .plus-btn {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            box-shadow: 0 8px 16px rgba(184, 230, 76, 0.3);
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        .minus-btn {
+            background: var(--bg);
+            box-shadow: 
+                6px 6px 12px var(--s-dark),
+                -6px -6px 12px var(--s-light);
+            color: #888;
+        }
+
+        /* Control Buttons */
+        .btn-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .plus-btn {
+            background: linear-gradient(135deg, #a855f7, #7e22ce);
+            box-shadow: 0 8px 16px var(--accent-glow);
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .plus-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 24px var(--accent-glow);
+        }
+
+        .minus-btn {
+            background: var(--bg);
+            box-shadow:
+                6px 6px 12px var(--s-dark),
+                -6px -6px 12px var(--s-light);
+            color: #888;
+        }
+
+        .minus-btn:hover {
+            box-shadow:
+                4px 4px 8px var(--s-dark),
+                -4px -4px 8px var(--s-light);
+            transform: scale(0.98);
+        }
+
+        /* Inset List Area */
+        .inset-list {
+            background: var(--bg);
+            border-radius: 30px;
+            box-shadow:
+                inset 8px 8px 16px var(--s-dark),
+                inset -8px -8px 16px var(--s-light);
+            padding: 30px;
+            width: 320px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .list-line {
+            height: 8px;
+            background: rgba(0, 0, 0, 0.035);
+            border-radius: 10px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .line-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.5s ease;
+            opacity: 0.1;
+        }
+
+        .line-fill.active {
+            width: 100%;
+            opacity: 0.3;
+        }
+
+        /* Grid Layer */
+        .grid-mask {
+            height: 80vh;
+            overflow: hidden;
+            padding: 40px 20px;
+            margin: -40px -20px;
+            mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+        }
+
+        .services-grid-inner {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
         /* 3D Canvas Layer */
@@ -153,69 +273,24 @@
             pointer-events: none;
         }
 
-        /* Control Panel */
-        .controls {
-            display: flex;
-            flex-direction: column;
-            gap: 60px;
-        }
-
-        .plus-btn {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #ff00ff, #cf00cf);
-            box-shadow: 0 10px 25px rgba(255, 0, 255, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            cursor: pointer;
-            border: none;
-            position: relative;
-            z-index: 20;
-        }
-
-        /* Decorative Background Lines */
-        .lines-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            width: 250px;
-        }
-
-        .line {
-            height: 1px;
-            background: rgba(0, 0, 0, 0.06);
-            width: 100%;
-            border-radius: 1px;
-        }
-
         .w-badge {
             position: fixed;
             bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
-            width: 38px;
-            height: 38px;
-            background: #111;
-            color: white;
+            width: 44px;
+            height: 44px;
+            background: #1a1a1a;
+            color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 10px;
+            border-radius: 12px;
             font-weight: 900;
-            font-size: 14px;
+            font-size: 16px;
             font-family: 'Epilogue', sans-serif;
             z-index: 100;
-        }
-
-        .japanese-sub {
-            font-size: 10px;
-            color: #aaa;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            margin-bottom: 8px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
@@ -223,7 +298,6 @@
 <body>
     <div class="bg-brand">Design</div>
     <div class="w-badge">w.</div>
-    <canvas id="three-canvas"></canvas>
 
     <!-- Top Navigation -->
     <div class="fixed top-10 left-12 right-12 flex justify-between items-center z-50">
@@ -239,248 +313,160 @@
         <!-- Left Section: Typography and Controls -->
         <div class="controls">
             <div>
-                <div class="japanese-sub">サービス紹介</div>
-                <h1 class="text-9xl font-black n-text leading-[0.85] tracking-tighter">OUR<br>SERVICES</h1>
+                <h1 class="text-8xl font-black n-text leading-[0.85] tracking-tighter mb-4">OUR<br>SERVICES</h1>
+                <div class="flex gap-2 mb-8 opacity-40">
+                    <span class="material-symbols-outlined text-sm">edit</span>
+                    <span class="material-symbols-outlined text-sm">palette</span>
+                    <span class="material-symbols-outlined text-sm">auto_awesome</span>
+                </div>
             </div>
 
-            <div class="flex items-center gap-12">
-                <button id="main-plus" class="plus-btn group hover:scale-110 transition-transform duration-300">
-                    <span class="material-symbols-outlined text-4xl">add</span>
-                </button>
-                <div class="lines-container">
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
+            <div class="flex items-start gap-10">
+                <div class="flex flex-col">
+                    <button id="btn-plus" class="btn-circle plus-btn">
+                        <span class="material-symbols-outlined text-3xl">add</span>
+                    </button>
+                    <button id="btn-minus" class="btn-circle minus-btn">
+                        <span class="material-symbols-outlined text-3xl">remove</span>
+                    </button>
+                </div>
+
+                <div class="inset-list">
+                    <div class="list-line">
+                        <div class="line-fill active"></div>
+                    </div>
+                    <div class="list-line">
+                        <div class="line-fill"></div>
+                    </div>
+                    <div class="list-line">
+                        <div class="line-fill"></div>
+                    </div>
+                    <div class="list-line">
+                        <div class="line-fill"></div>
+                    </div>
+                    <div class="list-line">
+                        <div class="line-fill"></div>
+                    </div>
+                    <div class="list-line">
+                        <div class="line-fill"></div>
+                    </div>
+                    <div class="list-line">
+                        <div class="line-fill"></div>
+                    </div>
+                    <div class="list-line">
+                        <div class="line-fill"></div>
+                    </div>
+                    <div class="list-line">
+                        <div class="line-fill"></div>
+                    </div>
+                    <div class="list-line">
+                        <div class="line-fill"></div>
+                    </div>
+                    <div class="list-line">
+                        <div class="line-fill"></div>
+                    </div>
+                    <div class="list-line">
+                        <div class="line-fill"></div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Right Section: Cards -->
-        <div class="services-grid">
-            <!-- Col 1 -->
-            <div class="flex flex-col gap-8">
-                <div id="card-0" class="card card-tall">
-                    <span class="material-symbols-outlined card-icon">fingerprint</span>
-                    <div class="service-label">Brand<br>Identity</div>
-                </div>
+        <div class="grid-mask">
+            <div class="services-grid-inner" id="grid-inner">
+                <!-- Row 1 -->
+                <div id="card-0" class="card sunken"></div>
                 <div id="card-1" class="card">
-                    <span class="material-symbols-outlined card-icon">restaurant</span>
-                    <div class="service-label">Shoyu<br>Ramen</div>
+                    <div class="flex flex-col items-center">
+                        <span class="material-symbols-outlined card-icon mb-4">person</span>
+                        <div class="service-label">Brand<br>Identity</div>
+                    </div>
                 </div>
-            </div>
+                <div id="card-2" class="card sunken"></div>
 
-            <!-- Col 2 -->
-            <div class="flex flex-col gap-8 pt-20">
-                <div id="card-2" class="card card-inner">
-                    <!-- For 3D Object -->
-                </div>
+                <!-- Row 2 -->
                 <div id="card-3" class="card">
-                    <span class="material-symbols-outlined card-icon">face</span>
-                    <div class="service-label">Emotional<br>Support</div>
+                    <div class="flex flex-col items-center">
+                        <span class="material-symbols-outlined card-icon mb-4">share</span>
+                        <div class="service-label">Social Media<br>Management</div>
+                    </div>
                 </div>
-            </div>
+                <div id="card-4" class="card sunken" style="transform: translateY(40px)"></div>
+                <div id="card-5" class="card">
+                    <div class="flex flex-col items-center">
+                        <span class="material-symbols-outlined card-icon mb-4">campaign</span>
+                        <div class="service-label">Graphics<br>Design</div>
+                    </div>
+                </div>
 
-            <!-- Col 3 -->
-            <div class="flex flex-col gap-8">
-                <div id="card-4" class="card card-inner">
-                    <!-- For 3D Object -->
+                <!-- Row 3 -->
+                <div id="card-6" class="card sunken"></div>
+                <div id="card-7" class="card">
+                    <div class="flex flex-col items-center">
+                        <span class="material-symbols-outlined card-icon mb-4">language</span>
+                        <div class="service-label">Website<br>Design</div>
+                    </div>
                 </div>
-                <div id="card-5" class="card card-tall">
-                    <span class="material-symbols-outlined card-icon">language</span>
-                    <div class="service-label">Website<br>Design</div>
+                <div id="card-8" class="card sunken"></div>
+
+                <!-- Row 4 (Extra for scrolling) -->
+                <div id="card-9" class="card">
+                    <div class="flex flex-col items-center">
+                        <span class="material-symbols-outlined card-icon mb-4">devices</span>
+                        <div class="service-label">App<br>Design</div>
+                    </div>
+                </div>
+                <div id="card-10" class="card sunken"></div>
+                <div id="card-11" class="card">
+                    <div class="flex flex-col items-center">
+                        <span class="material-symbols-outlined card-icon mb-4">movie_edit</span>
+                        <div class="service-label">Logo<br>Animation</div>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 
     <script>
-        // --- THREE.JS SETUP ---
-        const canvas = document.getElementById('three-canvas');
-        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-        renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        let scrollIndex = 0;
+        const maxScroll = 2; // Fixed for current grid height
 
-        const scene = new THREE.Scene();
-        // Use Orthographic for that clean "flat-3D" look from the reference
-        const aspect = window.innerWidth / window.innerHeight;
-        const d = 20;
-        const camera = new THREE.OrthographicCamera(-d * aspect, d * aspect, d, -d, 1, 1000);
-        camera.position.set(30, 30, 30);
-        camera.lookAt(0, 0, 0);
-
-        // Studio Lighting
-        const amb = new THREE.AmbientLight(0xffffff, 1);
-        scene.add(amb);
-
-        const spot = new THREE.DirectionalLight(0xffffff, 0.8);
-        spot.position.set(30, 50, 20);
-        scene.add(spot);
-
-        // Geometry: Rounded Cubes
-        const size = 6.2;
-        const radius = 1.8;
-        const segments = 12;
-
-        function createSoftCube() {
-            const shape = new THREE.Shape();
-            const x = -size / 2, y = -size / 2;
-            shape.moveTo(x, y + radius);
-            shape.lineTo(x, y + size - radius);
-            shape.quadraticCurveTo(x, y + size, x + radius, y + size);
-            shape.lineTo(x + size - radius, y + size);
-            shape.quadraticCurveTo(x + size, y + size, x + size, y + size - radius);
-            shape.lineTo(x + size, y + radius);
-            shape.quadraticCurveTo(x + size, y, x + size - radius, y);
-            shape.lineTo(x + radius, y);
-            shape.quadraticCurveTo(x, y, x, y + radius);
-
-            const extrudeSettings = { depth: 4, bevelEnabled: true, bevelThickness: 0.8, bevelSize: 0.8, bevelSegments: 12 };
-            const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
-            const material = new THREE.MeshPhysicalMaterial({
-                color: 0xeeeeef,
-                roughness: 0.1,
-                metalness: 0,
-                clearcoat: 1.0,
-                clearcoatRoughness: 0.1,
-                reflectivity: 1
-            });
-            return new THREE.Mesh(geometry, material);
-        }
-
-        const objects = [];
-        const cardIds = [0, 1, 2, 3, 4, 5]; // Sync with these cards
-
-        function syncObjects() {
-            objects.forEach(obj => scene.remove(obj));
-            objects.length = 0;
-
-            cardIds.forEach((id) => {
-                const card = document.getElementById(`card-${id}`);
-                const object = createSoftCube();
-
-                const rect = card.getBoundingClientRect();
-                const x = ((rect.left + rect.width / 2) / window.innerWidth) * 2 - 1;
-                const y = -((rect.top + rect.height / 2) / window.innerHeight) * 2 + 1;
-
-                // Map screen coords to Ortho camera space
-                object.position.x = x * d * aspect;
-                object.position.y = y * d;
-                object.position.z = 0;
-
-                object.userData.originY = object.position.y;
-                object.userData.id = id;
-                object.rotation.set(0.4, 0.4, 0);
-
-                // Only show cubes in "inner" cards (as in the ref)
-                if ([2, 4].includes(id)) {
-                    object.scale.set(1.5, 1.5, 1.5);
-                } else {
-                    object.scale.set(0.6, 0.6, 0.6);
-                    object.material.opacity = 0.4;
-                    object.material.transparent = true;
-                    // Lower priority cubes move behind
-                    object.position.z = -5;
-                }
-
-                scene.add(object);
-                objects.push(object);
-            });
-        }
-
-        syncObjects();
-
-        // --- ANIMATION ENGINE ---
-        let time = 0;
-        let yOffset = 0;
-
-        function animate() {
-            time += 0.015;
-
-            objects.forEach((obj, i) => {
-                // Subtle floating
-                const float = Math.sin(time + i) * 0.4;
-                obj.position.y = obj.userData.originY + float + yOffset;
-
-                // Slow rotation
-                obj.rotation.y += 0.005;
-                obj.rotation.x += 0.002;
-            });
-
-            // Decor lines movement
-            const lines = document.querySelectorAll('.line');
-            lines.forEach((line, i) => {
-                const move = Math.sin(time * 2 + i * 0.2) * 15;
-                line.style.transform = `translateX(${move}px)`;
-                line.style.opacity = 0.1 + (Math.sin(time + i) * 0.05);
-            });
-
-            renderer.render(scene, camera);
-            requestAnimationFrame(animate);
-        }
-        animate();
-
-        // --- INTERACTION ---
-        document.getElementById('main-plus').addEventListener('click', () => {
-            gsap.to(window, {
-                yOffset: yOffset + 5,
-                duration: 2,
-                ease: "expo.out",
-                onUpdate: () => { }
-            });
-            gsap.to(".services-grid", {
-                y: "-=60",
-                duration: 2,
+        function updateScroll() {
+            const shift = scrollIndex * 240;
+            gsap.to("#grid-inner", {
+                y: -shift,
+                duration: 1.2,
                 ease: "expo.out"
             });
 
-            // Pop effect on plus button
-            gsap.fromTo("#main-plus", { scale: 0.8 }, { scale: 1, duration: 0.5, ease: "elastic.out(1, 0.3)" });
+            // Update lines
+            const lines = document.querySelectorAll('.line-fill');
+            lines.forEach((line, i) => {
+                if (i <= scrollIndex * 4 + 1) {
+                    line.classList.add('active');
+                } else {
+                    line.classList.remove('active');
+                }
+            });
+        }
+
+        document.getElementById('btn-plus').addEventListener('click', () => {
+            if (scrollIndex < maxScroll) {
+                scrollIndex++;
+                updateScroll();
+                gsap.fromTo("#btn-plus", { scale: 0.9 }, { scale: 1, duration: 0.4, ease: "back.out(2)" });
+            }
         });
 
-        // Resize
-        window.addEventListener('resize', () => {
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            const aspect = window.innerWidth / window.innerHeight;
-            camera.left = -d * aspect;
-            camera.right = d * aspect;
-            camera.updateProjectionMatrix();
-            syncObjects();
+        document.getElementById('btn-minus').addEventListener('click', () => {
+            if (scrollIndex > 0) {
+                scrollIndex--;
+                updateScroll();
+                gsap.fromTo("#btn-minus", { scale: 0.9 }, { scale: 1, duration: 0.4, ease: "back.out(2)" });
+            }
         });
-
-        window.addEventListener('scroll', syncObjects);
     </script>
-</body>
-
-</html>
-delay: i * 0.05,
-ease: "power3.inOut"
-});
-gsap.to(item.mesh.rotation, {
-x: 0, y: 0,
-duration: 1,
-delay: i * 0.05,
-ease: "power3.inOut"
-});
-});
-});
-
-function animate() {
-requestAnimationFrame(animate);
-blocks.forEach((item, i) => {
-if(!gsap.isTweening(item.mesh.position)) {
-item.mesh.position.y += Math.sin(Date.now() * 0.002 + i) * 0.003;
-}
-});
-renderer.render(scene, camera);
-}
-animate();
-</script>
 </body>
 
 </html>
