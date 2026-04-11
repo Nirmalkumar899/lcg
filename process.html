@@ -364,5 +364,8 @@
     document.getElementById('bd').onclick = function () { if (cur < 2) { cur++; upd(); this.style.transform = 'scale(.85)'; setTimeout(() => this.style.transform = '', 150); } };
     document.addEventListener('keydown', e => { if (e.key === 'ArrowUp') document.getElementById('bu').click(); if (e.key === 'ArrowDown') document.getElementById('bd').click(); });
 </script>
+<!-- ── Cinematic Page Transition Engine ── -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="assets/page-transitions.js"></script>
 </body>
 </html>

@@ -587,80 +587,536 @@
         <!-- Pure Cinematic View (No Text) -->
         <div class="relative z-10 text-center px-6 max-w-5xl"></div>
     </section>
-    <!-- Portfolio Section (Creative Mosaic Gallery) -->
-    <section id="work" class="py-32 px-8 relative z-10">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
-                <div class="max-w-xl">
-                    <span
-                        class="text-primary font-headline font-bold tracking-[0.4em] uppercase text-xs mb-4 block opacity-60">The
-                        Portfolio</span>
-                    <h2 class="text-5xl md:text-7xl font-headline font-black text-white tracking-tight leading-[0.9]">
-                        Selected <br /><span class="text-primary italic">Works.</span></h2>
-                </div>
+    <!-- ═══════════════════════════════════════════════════
+         PORTFOLIO — 3D COVERFLOW CINEMA STAGE
+         ═══════════════════════════════════════════════════ -->
+    <section id="work" class="cf-root">
+
+        <!-- Ghost watermark -->
+        <div class="cf-ghost" aria-hidden="true">WORKS</div>
+
+        <!-- Header -->
+        <div class="cf-header">
+            <div>
+                <p class="cf-eyebrow">Selected Portfolio</p>
+                <h2 class="cf-heading">The <span class="cf-heading-accent">Reel.</span></h2>
             </div>
+            <a href="https://www.instagram.com/lcg.reel/" target="_blank" class="cf-view-all">
+                View All <span class="material-symbols-outlined">arrow_outward</span>
+            </a>
+        </div>
 
-            <!-- Creative Mosaic Grid -->
-            <div class="grid grid-cols-2 md:grid-cols-12 gap-6 auto-rows-[250px] md:auto-rows-[300px]">
-                <!-- Item 1: Large Featured -->
-                <a href="https://www.instagram.com/lcg.reel/" target="_blank"
-                    class="md:col-span-8 md:row-span-2 rounded-[2.5rem] overflow-hidden glass-card group relative block">
-                    <video autoplay loop muted playsinline
-                        class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
-                        src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60">
-                    </div>
-                    <div
-                        class="absolute bottom-0 left-0 p-10 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                        <span class="text-primary font-mono text-xs tracking-widest uppercase mb-2 block">Premium
-                            Campaign</span>
-                        <h3 class="text-3xl md:text-4xl font-bold text-white">Midnight Pulse</h3>
-                    </div>
-                </a>
-
-                <!-- Item 2: Portrait Vertical -->
-                <a href="https://www.instagram.com/lcg.reel/" target="_blank"
-                    class="md:col-span-4 md:row-span-3 rounded-[2.5rem] overflow-hidden glass-card group relative block">
-                    <video autoplay loop muted playsinline
-                        class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
-                        src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60">
-                    </div>
-                    <div
-                        class="absolute bottom-0 left-0 p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                        <span class="text-secondary font-mono text-xs tracking-widest uppercase mb-2 block">Brand
-                            Identity</span>
-                        <h3 class="text-2xl font-bold text-white">Urban Flow</h3>
-                    </div>
-                </a>
-
-                <!-- Item 3: Square Content -->
-                <a href="https://www.instagram.com/lcg.reel/" target="_blank"
-                    class="md:col-span-4 md:row-span-2 rounded-[2.5rem] overflow-hidden glass-card group relative block">
-                    <video autoplay loop muted playsinline
-                        class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
-                        src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4"></video>
-                    <div class="absolute bottom-0 left-0 p-8">
-                        <h3 class="text-xl font-bold text-white">Digital Soul</h3>
-                    </div>
-                </a>
-
-                <!-- Item 4: Wide Feature -->
-                <a href="https://www.instagram.com/lcg.reel/" target="_blank"
-                    class="md:col-span-4 md:row-span-2 rounded-[2.5rem] overflow-hidden glass-card group relative block">
-                    <video autoplay loop muted playsinline
-                        class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
-                        src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4"></video>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 p-8">
-                        <h3 class="text-xl font-bold text-white uppercase tracking-tighter">Neon Nights</h3>
-                    </div>
-                </a>
+        <!-- 3D Stage -->
+        <div class="cf-stage" id="cfStage">
+            <div class="cf-track" id="cfTrack">
+                <!-- cards injected by JS to keep HTML clean -->
             </div>
         </div>
+
+        <!-- Info Panel — animates per active card -->
+        <div class="cf-info-panel">
+            <div class="cf-counter-row">
+                <span class="cf-count-active" id="cfCountActive">01</span>
+                <span class="cf-count-sep">/</span>
+                <span class="cf-count-total">05</span>
+            </div>
+            <div class="cf-info-text">
+                <p class="cf-tag" id="cfTag">Premium Campaign</p>
+                <h3 class="cf-title" id="cfTitle">Midnight Pulse</h3>
+            </div>
+            <a href="https://www.instagram.com/lcg.reel/" target="_blank" class="cf-cta" id="cfCta">
+                Open Reel
+                <span class="material-symbols-outlined">north_east</span>
+            </a>
+        </div>
+
+        <!-- Navigation -->
+        <div class="cf-nav">
+            <button class="cf-btn cf-prev" id="cfPrev" aria-label="Previous">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+            <div class="cf-dots" id="cfDots"></div>
+            <button class="cf-btn cf-next active-btn" id="cfNext" aria-label="Next">
+                <span class="material-symbols-outlined">arrow_forward</span>
+            </button>
+        </div>
+
+        <!-- Scanline overlay for cinematic texture -->
+        <div class="cf-scanlines" aria-hidden="true"></div>
     </section>
 
+    <style>
+    /* ─────────────────────────────────────────────────────────
+       3D COVERFLOW — CINEMA STAGE
+    ───────────────────────────────────────────────────────── */
+    .cf-root {
+        position: relative;
+        background: #000;
+        overflow: hidden;
+        padding: 80px 0 60px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Ghost behind the stage */
+    .cf-ghost {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: 'Epilogue', sans-serif;
+        font-size: clamp(120px, 22vw, 320px);
+        font-weight: 900;
+        color: rgba(218,255,61,0.03);
+        letter-spacing: -0.06em;
+        pointer-events: none;
+        white-space: nowrap;
+        user-select: none;
+        z-index: 0;
+    }
+
+    /* Header */
+    .cf-header {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 1200px;
+        padding: 0 40px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        margin-bottom: 48px;
+    }
+    .cf-eyebrow {
+        font-family: 'Manrope', sans-serif;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.4em;
+        text-transform: uppercase;
+        color: #daff3d;
+        opacity: 0.7;
+        margin-bottom: 12px;
+    }
+    .cf-heading {
+        font-family: 'Epilogue', sans-serif;
+        font-size: clamp(48px, 8vw, 112px);
+        font-weight: 900;
+        color: #fff;
+        line-height: 0.9;
+        letter-spacing: -0.04em;
+    }
+    .cf-heading-accent {
+        color: #daff3d;
+        font-style: italic;
+    }
+    .cf-view-all {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: 'Manrope', sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.35);
+        border: 1px solid rgba(255,255,255,0.1);
+        padding: 12px 20px;
+        border-radius: 100px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+    .cf-view-all:hover {
+        color: #daff3d;
+        border-color: #daff3d;
+        box-shadow: 0 0 20px rgba(218,255,61,0.15);
+    }
+    .cf-view-all .material-symbols-outlined { font-size: 14px; }
+
+    /* Stage: perspective container */
+    .cf-stage {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        height: clamp(360px, 55vh, 600px);
+        perspective: 1400px;
+        perspective-origin: 50% 60%;
+        overflow: visible;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .cf-track {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+    }
+
+    /* Each card in 3D space */
+    .cf-card {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: min(260px, 38vw);
+        height: min(380px, 52vw);
+        border-radius: 24px;
+        overflow: hidden;
+        cursor: pointer;
+        transform-origin: center center;
+        transition: transform 0.75s cubic-bezier(0.4,0,0.2,1),
+                    opacity 0.75s ease,
+                    filter 0.75s ease,
+                    box-shadow 0.75s ease;
+        border: 1px solid rgba(255,255,255,0.06);
+        will-change: transform, opacity, filter;
+        text-decoration: none;
+    }
+    .cf-card video {
+        position: absolute;
+        inset: 0; width: 100%; height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s ease;
+    }
+    .cf-card:hover video { transform: scale(1.06); }
+    .cf-card-veil {
+        position: absolute; inset: 0;
+        background: linear-gradient(to top,
+            rgba(0,0,0,0.95) 0%,
+            rgba(0,0,0,0.4) 50%,
+            rgba(0,0,0,0.15) 100%);
+        transition: opacity 0.5s;
+    }
+
+    /* Active card pulse ring */
+    .cf-card.is-active::after {
+        content: '';
+        position: absolute; inset: -2px;
+        border-radius: 26px;
+        border: 2px solid #daff3d;
+        box-shadow:
+            0 0 30px rgba(218,255,61,0.35),
+            inset 0 0 30px rgba(218,255,61,0.06);
+        animation: cf-pulse 2.5s ease-in-out infinite;
+        pointer-events: none;
+    }
+    @keyframes cf-pulse {
+        0%, 100% { opacity: 1; }
+        50%       { opacity: 0.4; }
+    }
+
+    /* Info Panel */
+    .cf-info-panel {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        gap: clamp(24px, 4vw, 60px);
+        margin-top: 48px;
+        padding: 0 40px;
+    }
+    .cf-counter-row {
+        display: flex;
+        align-items: baseline;
+        gap: 6px;
+        font-family: 'Epilogue', sans-serif;
+    }
+    .cf-count-active {
+        font-size: clamp(42px, 6vw, 72px);
+        font-weight: 900;
+        color: #daff3d;
+        line-height: 1;
+        letter-spacing: -0.04em;
+        transition: opacity 0.3s;
+    }
+    .cf-count-sep, .cf-count-total {
+        font-size: 16px;
+        font-weight: 700;
+        color: rgba(255,255,255,0.2);
+    }
+    .cf-info-text { flex: 1; }
+    .cf-tag {
+        font-family: 'Manrope', sans-serif;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: #daff3d;
+        margin-bottom: 8px;
+        transition: opacity 0.3s;
+    }
+    .cf-title {
+        font-family: 'Epilogue', sans-serif;
+        font-size: clamp(28px, 4vw, 52px);
+        font-weight: 900;
+        color: #fff;
+        letter-spacing: -0.03em;
+        line-height: 1;
+        transition: opacity 0.3s;
+    }
+    /* glitch-flash on title change */
+    .cf-title.glitch {
+        animation: cf-glitch 0.35s steps(2) forwards;
+    }
+    @keyframes cf-glitch {
+        0%   { clip-path: inset(0 0 90% 0); transform: translateX(-4px); opacity:0.5; }
+        25%  { clip-path: inset(30% 0 40% 0); transform: translateX(4px); }
+        50%  { clip-path: inset(60% 0 10% 0); transform: translateX(-2px); }
+        100% { clip-path: inset(0); transform: translateX(0); opacity:1; }
+    }
+    .cf-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: 'Manrope', sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #000;
+        background: #daff3d;
+        padding: 14px 24px;
+        border-radius: 100px;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        box-shadow: 0 0 30px rgba(218,255,61,0.25);
+    }
+    .cf-cta:hover {
+        background: #fff;
+        box-shadow: 0 0 50px rgba(218,255,61,0.5);
+        transform: scale(1.05);
+    }
+    .cf-cta .material-symbols-outlined { font-size: 14px; }
+
+    /* Navigation */
+    .cf-nav {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-top: 36px;
+    }
+    .cf-btn {
+        width: 52px; height: 52px;
+        border-radius: 50%;
+        border: 1px solid rgba(255,255,255,0.12);
+        background: rgba(255,255,255,0.04);
+        color: rgba(255,255,255,0.5);
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        backdrop-filter: blur(10px);
+    }
+    .cf-btn:hover, .cf-btn.active-btn {
+        border-color: #daff3d;
+        color: #daff3d;
+        background: rgba(218,255,61,0.08);
+        box-shadow: 0 0 20px rgba(218,255,61,0.2);
+    }
+    .cf-btn .material-symbols-outlined { font-size: 20px; }
+    .cf-dots { display: flex; gap: 8px; align-items: center; }
+    .cf-dot {
+        width: 6px; height: 6px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.2);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+        padding: 0;
+    }
+    .cf-dot.active {
+        background: #daff3d;
+        width: 24px;
+        border-radius: 3px;
+        box-shadow: 0 0 12px rgba(218,255,61,0.5);
+    }
+
+    /* Scanline cinematic texture */
+    .cf-scanlines {
+        position: absolute; inset: 0;
+        background: repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(0,0,0,0.04) 2px,
+            rgba(0,0,0,0.04) 4px
+        );
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    /* ─── Mobile ─── */
+    @media(max-width: 768px) {
+        .cf-root { padding: 60px 0 40px; min-height: auto; }
+        .cf-header { flex-direction: column; align-items: flex-start; gap: 20px; padding: 0 24px; margin-bottom: 32px; }
+        .cf-view-all { display: none; }
+        .cf-stage { height: clamp(300px, 70vw, 420px); }
+        .cf-card {
+            width: min(200px, 54vw);
+            height: min(300px, 74vw);
+        }
+        .cf-info-panel {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 0 24px;
+            margin-top: 32px;
+        }
+        .cf-counter-row { display: none; }
+        .cf-nav { margin-top: 24px; }
+    }
+    </style>
+
+    <script>
+    (function() {
+        const DATA = [
+            { src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4',  tag: 'Premium Campaign', title: 'Midnight Pulse' },
+            { src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4',  tag: 'Brand Identity',   title: 'Urban Flow',   tagColor: '#ff7346' },
+            { src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4', tag: 'Social Growth', title: 'Digital Soul',  tagColor: '#efc900' },
+            { src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4',  tag: 'Cinematic Ad',  title: 'Neon Nights' },
+            { src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel2.mp4', tag: 'Growth Engine',title: 'Viral Chapter', tagColor: '#ff7346' },
+        ];
+        const N = DATA.length;
+
+        // 3D positions — index is relative distance from active (0=center)
+        const POSITIONS = [
+            { ry:   0, tz:    0, tx:    0, scale: 1.00, opacity: 1.00, brightness: 1.00 }, // center
+            { ry:  42, tz: -180, tx:  260, scale: 0.82, opacity: 0.60, brightness: 0.45 }, // right 1
+            { ry:  72, tz: -360, tx:  440, scale: 0.65, opacity: 0.28, brightness: 0.25 }, // right 2
+            { ry: -72, tz: -360, tx: -440, scale: 0.65, opacity: 0.28, brightness: 0.25 }, // left 2
+            { ry: -42, tz: -180, tx: -260, scale: 0.82, opacity: 0.60, brightness: 0.45 }, // left 1
+        ];
+
+        const track = document.getElementById('cfTrack');
+        const dotsCont = document.getElementById('cfDots');
+        const titleEl = document.getElementById('cfTitle');
+        const tagEl   = document.getElementById('cfTag');
+        const countEl = document.getElementById('cfCountActive');
+
+        let active = 0;
+        let autoTimer = null;
+
+        // Build cards + dots
+        const cards = DATA.map((d, i) => {
+            const a = document.createElement('a');
+            a.href = 'https://www.instagram.com/lcg.reel/';
+            a.target = '_blank';
+            a.className = 'cf-card';
+            a.innerHTML = `
+                <video autoplay loop muted playsinline preload="none" src="${d.src}"></video>
+                <div class="cf-card-veil"></div>`;
+            track.appendChild(a);
+
+            a.addEventListener('click', e => {
+                const rel = getRelPos(i);
+                if (rel !== 0) { e.preventDefault(); goTo(i); }
+            });
+
+            const dot = document.createElement('button');
+            dot.className = 'cf-dot';
+            dot.addEventListener('click', () => goTo(i));
+            dotsCont.appendChild(dot);
+
+            return { el: a, dot };
+        });
+
+        function getRelPos(i) {
+            let rel = (i - active + N) % N;
+            if (rel > Math.floor(N / 2)) rel -= N;
+            return rel;
+        }
+
+        function applyLayout() {
+            cards.forEach((c, i) => {
+                const rel = getRelPos(i);
+                const posIdx = ((rel % N) + N) % N; // map rel to 0..N-1
+                // rel: -2,-1,0,1,2 → map to POSITIONS indices 3,4,0,1,2
+                const posMap = [0, 1, 2, 3, 4];
+                // For positions: rel→ posMap index
+                // rel=0 → 0(center), rel=1→1(r1), rel=2→2(r2), rel=-1→4(l1), rel=-2→3(l2)
+                const pidx = rel === 0 ? 0
+                           : rel === 1 ? 1
+                           : rel === 2 ? 2
+                           : rel === -1 ? 4
+                           : 3;
+                const p = POSITIONS[pidx];
+                const zIndex = 10 - Math.abs(rel);
+                c.el.style.cssText = `
+                    transform: translate(calc(-50% + ${p.tx}px), -50%)
+                               rotateY(${p.ry}deg)
+                               translateZ(${p.tz}px)
+                               scale(${p.scale});
+                    opacity: ${p.opacity};
+                    filter: brightness(${p.brightness});
+                    z-index: ${zIndex};
+                    pointer-events: ${Math.abs(rel) <= 2 ? 'auto' : 'none'};
+                `;
+                c.el.classList.toggle('is-active', rel === 0);
+                c.dot.classList.toggle('active', i === active);
+            });
+
+            // Update info
+            const d = DATA[active];
+            const num = String(active + 1).padStart(2, '0');
+
+            countEl.textContent = num;
+
+            tagEl.textContent  = d.tag;
+            tagEl.style.color  = d.tagColor || '#daff3d';
+
+            // Glitch-flash title
+            titleEl.classList.remove('glitch');
+            void titleEl.offsetWidth; // reflow
+            titleEl.textContent = d.title;
+            titleEl.classList.add('glitch');
+        }
+
+        function goTo(i) {
+            active = ((i % N) + N) % N;
+            applyLayout();
+            resetAuto();
+        }
+
+        function next() { goTo(active + 1); }
+        function prev() { goTo(active - 1); }
+
+        document.getElementById('cfNext').addEventListener('click', next);
+        document.getElementById('cfPrev').addEventListener('click', prev);
+
+        // Keyboard
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight') next();
+            if (e.key === 'ArrowLeft')  prev();
+        });
+
+        // Touch swipe on stage
+        const stage = document.getElementById('cfStage');
+        let touchX = 0;
+        stage.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+        stage.addEventListener('touchend', e => {
+            const dx = touchX - e.changedTouches[0].clientX;
+            if (Math.abs(dx) > 40) dx > 0 ? next() : prev();
+        });
+
+        // Auto-advance
+        function resetAuto() {
+            clearInterval(autoTimer);
+            autoTimer = setInterval(next, 4200);
+        }
+        resetAuto();
+
+        applyLayout();
+    })();
+    </script>
+
+
+
     <!-- Cinematic 'In the Field' Section (Cascading 3D Wall) -->
+
     <section id="in-the-field"
         class="relative min-h-[140vh] bg-black overflow-hidden py-40 flex items-center justify-center">
 
@@ -1210,6 +1666,9 @@
             }
         });
     </script>
+    <!-- ── Cinematic Page Transition Engine ── -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="assets/page-transitions.js"></script>
 </body>
 
 </html>
