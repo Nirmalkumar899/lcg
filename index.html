@@ -8,8 +8,10 @@
     <title>LCG | Cinematic Social Media & Growth Engineering</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/jpeg" href="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg">
-    <link rel="apple-touch-icon" href="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg">
+    <link rel="icon" type="image/jpeg"
+        href="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg">
+    <link rel="apple-touch-icon"
+        href="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800;900&amp;family=Manrope:wght@300;400;500;600&amp;display=swap"
@@ -128,13 +130,23 @@
         }
 
         @keyframes moodboard-scroll {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-50%); }
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-50%);
+            }
         }
 
         @keyframes moodboard-scroll-reverse {
-            0% { transform: translateY(-50%); }
-            100% { transform: translateY(0); }
+            0% {
+                transform: translateY(-50%);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
         }
 
         /* UI Components */
@@ -217,7 +229,8 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center 20%; /* Focus more on the top-middle part of the frame */
+            object-position: center 20%;
+            /* Focus more on the top-middle part of the frame */
         }
 
         /* Splash Screen */
@@ -231,11 +244,13 @@
             justify-content: center;
             transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
         }
+
         #splash-screen.hidden {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
+
         .splash-logo {
             width: 100vw;
             height: 100vh;
@@ -245,44 +260,139 @@
             left: 0;
             display: block;
         }
+
         /* Mobile Touch States */
         @media (max-width: 1024px) {
             .moodboard-wrap {
                 transform: rotate(-5deg) scale(1) translateY(0);
             }
+
             .moodboard-video {
-                width: 100px; /* Smaller for mobile */
+                width: 100px;
+                /* Smaller for mobile */
             }
+
             .active-mobile .moodboard-video,
             .moodboard-video.active-mobile {
                 filter: grayscale(0) opacity(1) !important;
                 transform: scale(1.1) !important;
             }
+
             .group.active-mobile .group-hover\:grayscale-0 {
                 filter: grayscale(0) !important;
             }
+
             .group.active-mobile .group-hover\:opacity-100 {
                 opacity: 1 !important;
             }
+
             .group.active-mobile .group-hover\:translate-y-0 {
                 transform: translateY(0) !important;
             }
+
             .group.active-mobile .group-hover\:scale-\[1\.02\] {
                 transform: scale(1.02) !important;
             }
+
             .group.active-mobile .group-hover\:scale-110 {
                 transform: scale(1.1) !important;
             }
+
             .group.active-mobile h3 {
                 color: #fff !important;
             }
+
             .active-mobile span[class*="opacity-20"] {
                 opacity: 0.8 !important;
             }
+
             .active-mobile p[class*="text-on-surface-variant"] {
                 color: #fff !important;
             }
         }
+        /* ═══ OUR PROCESS INTEGRATION (EXACT MATCH) ═══ */
+        #process-root {
+            --bg: #0e1012;
+            --card-bg: #121417;
+            --sh-dark: #000000;
+            --sh-light: #1e2126;
+            --neon: #daff3d;
+            background: var(--bg);
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            color: #888;
+        }
+        #process-root .wm-container {
+            position: absolute;
+            left: 80px; top: 50%;
+            transform: translate(-50%, -50%) rotate(-90deg);
+            z-index: 0; pointer-events: none; user-select: none;
+            display: flex; align-items: center; gap: 15px; white-space: nowrap;
+        }
+        #process-root .wm-text {
+            font-weight: 900; font-size: clamp(60px, 8vw, 110px); color: var(--neon);
+            text-transform: uppercase; letter-spacing: -1px;
+            text-shadow: 0 0 10px rgba(218, 255, 61, 0.2), 0 0 20px rgba(218, 255, 61, 0.1);
+            opacity: 0.8;
+        }
+        #process-root .pg {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            padding: 100px 50px 100px 240px; gap: 80px; position: relative; z-index: 1;
+        }
+        #process-root .mc {
+            width: 560px; height: 560px; flex-shrink: 0; background: var(--card-bg);
+            border-radius: 48px; box-shadow: 20px 20px 50px var(--sh-dark),-10px -10px 30px var(--sh-light);
+            position: relative; overflow: hidden;
+        }
+        #process-root .dial-wrap {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -52%);
+            width: 420px; height: 420px;
+        }
+        #process-root .dial { width: 100%; height: 100%; position: relative; transition: transform .7s cubic-bezier(.4,0,.2,1); }
+        #process-root .dial-inner {
+            position: absolute; inset: 24px; border-radius: 50%;
+            background: linear-gradient(160deg,#16191d 0%,#0e1012 100%);
+            box-shadow: inset 6px 6px 14px var(--sh-dark),inset -4px -4px 10px var(--sh-light);
+        }
+        #process-root .hub {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 62px; height: 62px; border-radius: 50%;
+            background: linear-gradient(145deg,#1c1f24,#121417);
+            box-shadow: 5px 5px 12px var(--sh-dark),-3px -3px 10px var(--sh-light); z-index: 5;
+        }
+        #process-root .hub::after {
+            content:''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 16px; height: 16px; border-radius: 50%; background: var(--neon);
+            box-shadow: 0 0 15px var(--neon); opacity: 0.8;
+        }
+        #process-root .t { position: absolute; width: 1px; background: rgba(255,255,255,.04); left: 50%; transform-origin: bottom center; }
+        #process-root .t.mj { width: 2px; height: 18px; background: rgba(255,255,255,.08); top: 6px; }
+        #process-root .triple { position: absolute; display: flex; flex-direction: column; gap: 5px; transform-origin: center center; }
+        #process-root .triple span { display: block; width: 30px; height: 2.5px; background: rgba(255,255,255,.05); border-radius: 1px; }
+        #process-root .spoke { position: absolute; transition: opacity .5s, filter .5s; }
+        #process-root .spoke.active { opacity: 1; filter: blur(0); }
+        #process-root .spoke.active .label { color: var(--neon); text-shadow: 0 0 10px rgba(218, 255, 61, 0.3); }
+        #process-root .spoke.active .uline { background: var(--neon); box-shadow: 0 0 10px var(--neon); }
+        #process-root .spoke.inactive { opacity: .12; filter: blur(2.5px); }
+        #process-root .spoke .label { font-size: 18px; font-weight: 600; color: #555; letter-spacing: .1em; text-transform: uppercase; }
+        #process-root .spoke .uline { width: 32px; height: 3px; background: rgba(255,255,255,.05); border-radius: 2px; margin-top: 8px; mx-auto; }
+        #process-root .sb { display: flex; flex-direction: column; align-items: center; gap: 28px; flex-shrink: 0; width: 240px; }
+        #process-root .ic-card {
+            background: var(--card-bg); border-radius: 24px;
+            box-shadow: 12px 12px 28px var(--sh-dark),-6px -6px 20px var(--sh-light);
+            padding: 28px 22px; width: 220px; text-align: center; border: 1px solid rgba(255,255,255,0.02);
+        }
+        #process-root .ic-card h3 { font-weight: 700; font-size: 18px; margin-bottom: 10px; color: var(--neon); text-shadow: 0 0 15px rgba(218, 255, 61, 0.2); }
+        #process-root .ic-card p { font-size: 13px; color: #666; line-height: 1.5; }
+        #process-root .ab { width: 64px; height: 64px; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform .2s; }
+        #process-root .au { background: linear-gradient(145deg,#1a1d21,#121417); box-shadow: 8px 8px 20px var(--sh-dark), -4px -4px 15px var(--sh-light); color: #555; }
+        #process-root .ad { background: linear-gradient(135deg, var(--neon), #b8d433); box-shadow: 0 0 20px rgba(218, 255, 61, 0.3); color: #000; }
+        #process-root .an span { font-family: 'Caveat', cursive; font-size: 18px; color: #444; }
+        #process-root .dg { display: flex; gap: 28px; }
+        #process-root .dt { display: grid; grid-template-columns: repeat(3,6px); gap: 6px; opacity: .03; }
+        #process-root .dt span { width: 6px; height: 6px; border-radius: 50%; background: #fff; }
     </style>
 </head>
 
@@ -290,7 +400,9 @@
     <!-- Splash Screen -->
     <div id="splash-screen" class="flex items-center justify-center bg-black">
         <video id="splash-video" playsinline class="w-full h-full object-cover">
-            <source src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/WhatsApp%20Video%202026-04-10%20at%206.19.09%20PM.mp4" type="video/mp4">
+            <source
+                src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/WhatsApp%20Video%202026-04-10%20at%206.19.09%20PM.mp4"
+                type="video/mp4">
         </video>
     </div>
 
@@ -368,14 +480,17 @@
     <nav
         class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 py-6 bg-transparent backdrop-blur-sm">
         <div class="flex items-center gap-2">
-            <img src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg" 
-                 alt="LCG" class="h-10 w-auto object-contain">
+            <img src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg"
+                alt="LCG" class="h-10 w-auto object-contain">
         </div>
-        <ul class="hidden lg:flex items-center gap-8 text-sm font-headline font-bold uppercase tracking-widest list-none">
+        <ul
+            class="hidden lg:flex items-center gap-8 text-sm font-headline font-bold uppercase tracking-widest list-none">
             <li><a class="text-white/70 hover:text-primary transition-colors" href="index.html#work">Work</a></li>
             <li><a class="text-white/70 hover:text-primary transition-colors" href="services.html">Services</a></li>
+            <li><a class="text-white/70 hover:text-primary transition-colors" href="process.html">Process</a></li>
             <li><a class="text-white/70 hover:text-primary transition-colors" href="clients.html">Clients</a></li>
-            <li><a class="text-white/70 hover:text-primary transition-colors" href="https://www.instagram.com/lcg.reel/" target="_blank">Instagram</a></li>
+            <li><a class="text-white/70 hover:text-primary transition-colors" href="https://www.instagram.com/lcg.reel/"
+                    target="_blank">Instagram</a></li>
         </ul>
         <div class="flex items-center gap-4">
             <a href="#contact"
@@ -410,13 +525,15 @@
         <!-- Hero Video Background -->
         <div class="video-foreground">
             <!-- Desktop Video -->
-            <video id="hero-video-desktop" autoplay loop muted playsinline class="hidden md:block w-full h-full object-cover">
+            <video id="hero-video-desktop" autoplay loop muted playsinline
+                class="hidden md:block w-full h-full object-cover">
                 <source
                     src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/reels/Group%20Animation_NEW%20(1).mp4"
                     type="video/mp4">
             </video>
             <!-- Mobile Video (User Specified) -->
-            <video id="hero-video-mobile" autoplay loop muted playsinline class="block md:hidden w-full h-full object-cover">
+            <video id="hero-video-mobile" autoplay loop muted playsinline
+                class="block md:hidden w-full h-full object-cover">
                 <source
                     src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/reels/Group%20Animation_NEW%20(1).mp4"
                     type="video/mp4">
@@ -507,66 +624,164 @@
     </section>
 
     <!-- Cinematic 'In the Field' Section (Cascading 3D Wall) -->
-    <section id="in-the-field" class="relative min-h-[140vh] bg-black overflow-hidden py-40 flex items-center justify-center">
-        
+    <section id="in-the-field"
+        class="relative min-h-[140vh] bg-black overflow-hidden py-40 flex items-center justify-center">
+
         <!-- Background Massive Text -->
-        <div class="absolute inset-0 flex items-center justify-center opacity-[0.05] select-none pointer-events-none z-0">
+        <div
+            class="absolute inset-0 flex items-center justify-center opacity-[0.05] select-none pointer-events-none z-0">
             <h2 class="text-[40vw] font-headline font-black leading-none tracking-tighter">FIELD</h2>
         </div>
 
         <div class="max-w-[1700px] mx-auto px-6 relative z-10 w-full">
-            
+
             <!-- Cascading Reel Wall -->
             <div class="relative flex justify-center items-center gap-6 md:gap-12 h-[80vh]">
-                
+
                 <!-- Column 1 (Small, Tilted) -->
-                <div class="hidden lg:block w-[18%] h-[60%] mt-[-10%] rotate-[-6deg] group hover:rotate-0 transition-all duration-1000">
-                    <div class="relative w-full h-full rounded-[3.5rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.9)] border border-white/10">
-                        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover" 
-                               src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
+                <div
+                    class="hidden lg:block w-[18%] h-[60%] mt-[-10%] rotate-[-6deg] group hover:rotate-0 transition-all duration-1000">
+                    <div
+                        class="relative w-full h-full rounded-[3.5rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.9)] border border-white/10">
+                        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover"
+                            src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
                     </div>
                 </div>
 
                 <!-- Column 2 (Large, Central-Left) -->
-                <div class="w-[45%] md:w-[28%] h-[85%] mt-[5%] rotate-[3deg] group hover:rotate-0 transition-all duration-1000 z-20">
-                    <div class="relative w-full h-full rounded-[4rem] overflow-hidden shadow-[0_60px_120px_-30px_rgba(0,0,0,1)] border border-white/10">
-                        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover" 
-                               src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                <div
+                    class="w-[45%] md:w-[28%] h-[85%] mt-[5%] rotate-[3deg] group hover:rotate-0 transition-all duration-1000 z-20">
+                    <div
+                        class="relative w-full h-full rounded-[4rem] overflow-hidden shadow-[0_60px_120px_-30px_rgba(0,0,0,1)] border border-white/10">
+                        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover"
+                            src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent">
+                        </div>
                     </div>
                 </div>
 
                 <!-- Column 3 (Medium, Central-Right) -->
-                <div class="w-[45%] md:w-[22%] h-[70%] mt-[-5%] rotate-[-4deg] group hover:rotate-0 transition-all duration-1000 z-10">
-                    <div class="relative w-full h-full rounded-[3.5rem] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)] border border-white/10">
-                        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover" 
-                               src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4"></video>
+                <div
+                    class="w-[45%] md:w-[22%] h-[70%] mt-[-5%] rotate-[-4deg] group hover:rotate-0 transition-all duration-1000 z-10">
+                    <div
+                        class="relative w-full h-full rounded-[3.5rem] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)] border border-white/10">
+                        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover"
+                            src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4"></video>
                     </div>
                 </div>
 
                 <!-- Column 4 (Small, Right Edge) -->
-                <div class="hidden md:block w-[15%] h-[55%] mt-[15%] rotate-[5deg] group hover:rotate-0 transition-all duration-1000">
-                    <div class="relative w-full h-full rounded-[3rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border border-white/10">
-                        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover" 
-                               src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4"></video>
+                <div
+                    class="hidden md:block w-[15%] h-[55%] mt-[15%] rotate-[5deg] group hover:rotate-0 transition-all duration-1000">
+                    <div
+                        class="relative w-full h-full rounded-[3rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border border-white/10">
+                        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover"
+                            src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4"></video>
                     </div>
                 </div>
 
                 <!-- Layered Headline -->
                 <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-30">
-                    <h2 class="text-7xl md:text-[9vw] font-headline font-black text-white leading-[0.75] tracking-tighter uppercase text-center drop-shadow-2xl">
-                        NOT JUST IN <span class="text-primary">THE FEED</span>, <br/> 
+                    <h2
+                        class="text-7xl md:text-[9vw] font-headline font-black text-white leading-[0.75] tracking-tighter uppercase text-center drop-shadow-2xl">
+                        NOT JUST IN <span class="text-primary">THE FEED</span>, <br />
                         <span class="italic opacity-95">IN THE FIELD</span>
                     </h2>
-                    <div class="hidden md:block mt-8 text-white/40 font-headline font-bold text-xl tracking-[0.5em] uppercase">
+                    <div
+                        class="hidden md:block mt-8 text-white/40 font-headline font-bold text-xl tracking-[0.5em] uppercase">
                         Digital Cinematheque & Growth Engineering
                     </div>
                 </div>
-                
+
                 <!-- Front-most Fragment (Visual Magic) -->
-                <div class="absolute bottom-[-10%] left-[-5%] w-[12%] h-[30%] rotate-[12deg] z-40 opacity-40 blur-sm pointer-events-none">
-                     <video autoplay loop muted playsinline class="w-full h-full object-cover rounded-3xl" 
-                               src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
+                <div
+                    class="absolute bottom-[-10%] left-[-5%] w-[12%] h-[30%] rotate-[12deg] z-40 opacity-40 blur-sm pointer-events-none">
+                    <video autoplay loop muted playsinline class="w-full h-full object-cover rounded-3xl"
+                        src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integrated Our Process Section (EXACT MATCH) -->
+    <section id="process-root">
+        <div class="wm-container">
+            <div class="wm-text">OUR</div>
+            <div class="wm-text">PROCESS</div>
+        </div>
+
+        <div class="pg">
+            <div style="display:flex; flex-direction:column; gap:24px;">
+                <!-- card text moved above -->
+                <div style="pointer-events:none;">
+                    <div style="font-size:14px; line-height:1.6; color:#777; font-weight:400; max-width:320px; margin-bottom:20px; transition:opacity .35s, transform .35s;" id="desc">
+                        Our agile 3-step process ensures speed and spontaneity. Ideas turn into results in no time.
+                    </div>
+                    <div style="display:flex; gap:12px; opacity:0.1;">
+                        <span class="material-symbols-outlined" style="font-size:18px;">auto_fix_high</span>
+                        <span class="material-symbols-outlined" style="font-size:18px;">construction</span>
+                        <span class="material-symbols-outlined" style="font-size:18px;">cruelty_free</span>
+                    </div>
+                </div>
+
+                <div class="mc">
+                    <div class="dial-wrap">
+                        <div class="dial" id="dial">
+                            <div class="dial-outer"></div>
+                            <div class="dial-inner"></div>
+                            <div class="tm" id="ticks"></div>
+
+                            <div class="triple" style="top:32px;left:50%;transform:translateX(-50%);"><span></span><span></span><span></span></div>
+                            <div class="triple" style="bottom:82px;left:78px;transform:rotate(-60deg);"><span></span><span></span><span></span></div>
+                            <div class="triple" style="bottom:82px;right:78px;transform:rotate(60deg);"><span></span><span></span><span></span></div>
+
+                            <div class="hub"></div>
+
+                            <div class="spoke active" id="sp0" style="right:54px;top:50%;transform:translateY(-50%);">
+                                <div class="label">Step 01</div>
+                                <div class="uline" style="width:32px; height:3px; background:rgba(255,255,255,.05); border-radius:2px; margin-top:8px; margin-left:auto; margin-right:auto;"></div>
+                            </div>
+                            <div class="spoke inactive" id="sp1" style="left:54px;top:50%;transform:translateY(-50%);">
+                                <div class="label">Step 02</div>
+                                <div class="uline" style="width:32px; height:3px; background:rgba(255,255,255,.05); border-radius:2px; margin-top:8px; margin-left:auto; margin-right:auto;"></div>
+                            </div>
+                            <div class="spoke inactive" id="sp2" style="left:50%;bottom:44px;transform:translateX(-50%);">
+                                <div class="label">Step 03</div>
+                                <div class="uline" style="width:32px; height:3px; background:rgba(255,255,255,.05); border-radius:2px; margin-top:8px; margin-left:auto; margin-right:auto;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sb">
+                <div class="ic-card" id="icard">
+                    <h3 id="ititle">Subscribe</h3>
+                    <p id="idesc">Subscribe and get access to your personal Trello board.</p>
+                </div>
+
+                <div style="display:flex;align-items:start;gap:20px;">
+                    <div class="dg">
+                        <div class="dt"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                        <div class="dt"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="an">
+                        <svg viewBox="0 0 40 58" fill="none">
+                            <path d="M5 5C12 16,33 20,35 50" stroke="#333" stroke-width="1.8" stroke-linecap="round" />
+                            <path d="M29 46L35 50L37 42" stroke="#333" stroke-width="1.8" stroke-linecap="round" fill="none" />
+                        </svg>
+                        <span>look<br>here</span>
+                    </div>
+                </div>
+
+                <div style="display:flex;flex-direction:column;gap:18px;align-items:center;">
+                    <button class="ab au" id="bu"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">arrow_drop_up</span></button>
+                    <button class="ab ad" id="bd"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">arrow_drop_down</span></button>
+                </div>
+
+                <div class="dg">
+                    <div class="dt"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                    <div class="dt"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
                 </div>
             </div>
         </div>
@@ -618,7 +833,8 @@
                         </div>
                         <div>
                             <div class="font-headline font-bold text-white">Julian Vance</div>
-                            <div class="text-sm text-secondary font-semibold uppercase tracking-widest">CMO, Nexa Global</div>
+                            <div class="text-sm text-secondary font-semibold uppercase tracking-widest">CMO, Nexa Global
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -637,7 +853,8 @@
                         </div>
                         <div>
                             <div class="font-headline font-bold text-white">Elena Rossi</div>
-                            <div class="text-sm text-primary font-semibold uppercase tracking-widest">Founder, AESTHETIX</div>
+                            <div class="text-sm text-primary font-semibold uppercase tracking-widest">Founder, AESTHETIX
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -656,7 +873,8 @@
                         </div>
                         <div>
                             <div class="font-headline font-bold text-white">Marcus Thorne</div>
-                            <div class="text-sm text-tertiary font-semibold uppercase tracking-widest">CEO, Velocity Labs</div>
+                            <div class="text-sm text-tertiary font-semibold uppercase tracking-widest">CEO, Velocity
+                                Labs</div>
                         </div>
                     </div>
                 </div>
@@ -669,8 +887,8 @@
         <div class="flex flex-col md:flex-row justify-between items-center px-12 py-16 border-t border-white/10">
             <div class="mb-8 md:mb-0">
                 <div class="flex items-center gap-3 mb-4">
-                    <img src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg" 
-                         alt="LCG" class="h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all">
+                    <img src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg"
+                        alt="LCG" class="h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all">
                 </div>
                 <p class="text-gray-500 max-w-xs leading-relaxed">Crafting cinematic digital experiences for the next
                     generation of global brands.</p>
@@ -698,7 +916,7 @@
         const splash = document.getElementById('splash-screen');
         const splashVideo = document.getElementById('splash-video');
 
-        const splashSeen = sessionStorage.getItem('lcg_splash_seen_v5'); 
+        const splashSeen = sessionStorage.getItem('lcg_splash_seen_v5');
 
         if (splashSeen) {
             if (splash) splash.style.display = 'none';
@@ -706,7 +924,7 @@
             if (splashVideo) {
                 // Try to play with music first
                 splashVideo.muted = false;
-                
+
                 const playPromise = splashVideo.play();
 
                 if (playPromise !== undefined) {
@@ -770,14 +988,14 @@
         const track = document.getElementById('collective-track');
         const scrollWrap = document.getElementById('collective-wrap');
         const collectiveList = [
-            { type: 'reel', name: 'Likes Camera Growth', role: 'Logo Animation', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/logo/01-03-2025_LikesCamera%20Growth%20Animation-02.mp4', color: 'primary' },
-            { type: 'reel', name: 'Veneers', role: 'Logo Animation', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/logo/08-04-2026_Veneers%20Logo%20Animation_01.mp4', color: 'secondary' },
-            { type: 'reel', name: 'Maanav', role: 'Logo Animation', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/logo/10-02-2026_Maanav%20Logo%20Animation.mp4', color: 'tertiary' },
-            { type: 'reel', name: 'Ansaan', role: 'Logo Animation', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/logo/15-05-2025_Ansaan%20Logo%20Animation_02.mp4', color: 'primary' },
-            { type: 'reel', name: 'Premium Brand', role: 'Logo Animation', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/logo/21-05-2025_Logo%20Animation_01.mp4', color: 'secondary' },
-            { type: 'reel', name: 'Astones', role: 'Logo Animation', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/logo/24-01-2025_Astones%20Logo%20animation.mp4', color: 'tertiary' },
-            { type: 'reel', name: 'DB Decor', role: 'Logo Animation', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/logo/DB%20Decor%20Logo%20Animation_02%20(1).mp4', color: 'primary' },
-            { type: 'reel', name: 'Farsh', role: 'Logo Animation', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/logo/Main%20Farsh%20Logo%20Animation_01.mp4', color: 'secondary' }
+            { type: 'reel', name: 'Midnight Pulse', role: 'Campaign', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4', color: 'primary' },
+            { type: 'reel', name: 'Urban Flow', role: 'Brand Story', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4', color: 'secondary' },
+            { type: 'reel', name: 'Neon Nights', role: 'Social Short', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4', color: 'tertiary' },
+            { type: 'reel', name: 'Cyber Chic', role: 'Fashion Edit', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4', color: 'primary' },
+            { type: 'reel', name: 'Digital Soul', role: 'Cinematic Reel', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel2.mp4', color: 'secondary' },
+            { type: 'profile', name: 'Alex Rivera', role: 'Creative Director', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAlWwfHUbzRJixTwsej-EyP1U33B4bJvy74y9oxTLBnakvSFxg28FDi6gBh2VikXw7mYXVK5ZDB6wm59mNl8KHhNpMYKHo3wYdhYuym1S2AeIaBqY0bgu8_Ya35lRcpbk27XM0eO_zeKVe9P3ibgcetwuuBgqyXi4gicRFeL_rqqNFDiYe4GmfYowiVRMb7vyPl2dgj_PCRLTKzT5e_D54FxNrzscOmZ0EJgzdS8krreZhN6Unrzws-nNVAkLq7DPnQ6FWHY7OMgE2F', color: 'primary' },
+            { type: 'profile', name: 'Sarah Chen', role: 'Cinematographer', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAe4lMpvRGE6-Wm2hPUxqbegfDbBJrsN1nNigQZG_L0WzZNgFpQp5Wj8t3my9sX1AVIq7hIYVtNtJq7IonFQe9GkyVVvaWDpr-Hf8s_nMhZJhvcSQDoUJwKWw-rqJFRTN9-zn1rVbCatcQg2IZ1LXoNgsZlUZwE8Nh0Dua476Oh-QZMCpBQInR35thNHz7j5xBvDUjbA9aTluOy5CTwRZiq8hcg1ef0ZTlmpTnXeFem99Z4HYQxwkS-qRLst8e3CiQmdiTZZIpp29Tw', color: 'secondary' },
+            { type: 'profile', name: 'Marcus Thorne', role: 'Data Architect', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCF16UINPbitan9ISuYEo0yJ8e13E2U9IhIXxif57ONe2ax4GJf7LmchAIn38BJnfnSqPmU76gF5NV9A5IsIo3_iLArqYxCldjqGxRrPrKiOlQLOTY9nDozmz6ZdEmqUMOivhyNi4zbV03ZRDIw9Zm90G8eFbH6G5uyeT0hC59kBmDrwELdNVHH1pZk1J7vkKgLGAdScPA4WzWsB14Av3-LOMS5rBiJ7-IkvY2wOIT0pkwhgUUS5Mtwroeq9UC373fVfzbC5dt9d9D0', color: 'tertiary' }
         ];
 
         const createCardHTML = (p) => {
@@ -842,13 +1060,69 @@
         window.addEventListener('scroll', updateReel);
         window.addEventListener('resize', updateReel);
         updateReel();
+
+        // Process Logic (EXACT MATCH)
+        (function () {
+            const root = document.getElementById('process-root');
+            const ticks = root.querySelector('#ticks');
+            if(!ticks) return;
+            const n = 60, r = 206;
+            for (let i = 0; i < n; i++) {
+                const a = (i / n) * 360;
+                const rad = (a - 90) * Math.PI / 180;
+                const x = Math.cos(rad) * r, y = Math.sin(rad) * r;
+                const mj = i % 15 === 0, md = i % 5 === 0 && !mj;
+                const d = document.createElement('div');
+                d.className = 't ' + (mj ? 'mj' : md ? 'md' : 'mn');
+                d.style.cssText = `left:calc(50% + ${x}px);top:calc(50% + ${y}px);transform:rotate(${a}deg);transform-origin:center top;`;
+                ticks.appendChild(d);
+            }
+        })();
+
+        const pr_steps = [
+            { d: 'Our agile 3-step process ensures speed and spontaneity. Ideas turn into results in no time.', t: 'Subscribe', p: 'Subscribe and get access to your personal Trello board.' },
+            { d: 'Add unlimited design requests to your Trello board. One request at a Time!', t: 'Request', p: 'Add unlimited design requests to your Trello board. One request at a Time!' },
+            { d: 'Receive your cinematic content within days. We revise until you are 100% satisfied.', t: 'Deliver', p: 'Receive premium cinematic content. Revisions included until you love it.' }
+        ];
+
+        let pr_cur = 0;
+        const root = document.getElementById('process-root');
+        const pr_dial = root.querySelector('#dial');
+        const pr_desc = root.querySelector('#desc');
+        const pr_it = root.querySelector('#ititle');
+        const pr_id = root.querySelector('#idesc');
+        const pr_sps = [root.querySelector('#sp0'), root.querySelector('#sp1'), root.querySelector('#sp2')];
+
+        function pr_upd() {
+            if(!pr_dial) return;
+            pr_dial.style.transform = `rotate(${pr_cur * 120}deg)`;
+            pr_sps.forEach((s, i) => { 
+                if(!s) return;
+                s.classList.toggle('active', i === pr_cur); 
+                s.classList.toggle('inactive', i !== pr_cur); 
+                const line = s.querySelector('.uline');
+                if(line) line.style.background = (i === pr_cur) ? 'var(--neon)' : 'rgba(255,255,255,.05)';
+            });
+            pr_desc.style.opacity = '0'; pr_desc.style.transform = 'translateY(10px)';
+            setTimeout(() => {
+                const s = pr_steps[pr_cur];
+                if(pr_desc) pr_desc.textContent = s.d; 
+                if(pr_it) pr_it.textContent = s.t; 
+                if(pr_id) pr_id.textContent = s.p;
+                pr_desc.style.opacity = '1'; pr_desc.style.transform = 'translateY(0)';
+            }, 220);
+        }
+        if(pr_dial) pr_upd();
+
+        root.querySelector('#bu')?.addEventListener('click', function() { if (pr_cur > 0) { pr_cur--; pr_upd(); } });
+        root.querySelector('#bd')?.addEventListener('click', function() { if (pr_cur < 2) { pr_cur++; pr_upd(); } });
     </script>
     <script>
         // Mobile Interactions & Hover Effects
         const mobileInteractions = () => {
             const groups = document.querySelectorAll('.group');
             const moodVideos = document.querySelectorAll('.moodboard-video');
-            
+
             // Intersection Observer
             const observerOptions = {
                 threshold: 0.5,
@@ -861,7 +1135,7 @@
                         if (entry.isIntersecting) {
                             entry.target.classList.add('active-mobile');
                             const video = entry.target.querySelector('video');
-                            if (video) video.play().catch(() => {});
+                            if (video) video.play().catch(() => { });
                         } else {
                             entry.target.classList.remove('active-mobile');
                         }
@@ -872,12 +1146,12 @@
             const allInteractions = [...groups, ...moodVideos];
             allInteractions.forEach(el => {
                 observer.observe(el);
-                el.addEventListener('touchstart', function() {
+                el.addEventListener('touchstart', function () {
                     allInteractions.forEach(g => g.classList.remove('active-mobile'));
                     this.classList.add('active-mobile');
                     const video = this.tagName === 'VIDEO' ? this : this.querySelector('video');
-                    if (video) video.play().catch(() => {});
-                }, {passive: true});
+                    if (video) video.play().catch(() => { });
+                }, { passive: true });
             });
         };
 
