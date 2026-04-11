@@ -149,7 +149,7 @@
         }
 
         .scrim-overlay {
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.8));
+            display: none;
         }
 
         .h-screen-dynamic {
@@ -423,14 +423,13 @@
             </video>
         </div>
         <!-- Mute/Unmute Toggle -->
-        <div class="absolute bottom-12 right-6 md:bottom-8 md:right-8 z-[15]">
+        <div class="absolute bottom-12 right-6 md:bottom-8 md:right-8 z-50">
             <button id="audio-toggle"
-                class="w-12 h-12 rounded-full bg-black/10 backdrop-blur-md border border-black/10 flex items-center justify-center text-black hover:bg-black/20 transition-all duration-300 group">
+                class="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 group">
                 <span id="audio-icon"
                     class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">volume_off</span>
             </button>
         </div>
-        <div class="absolute inset-0 scrim-overlay z-[5]"></div>
         <!-- Pure Cinematic View (No Text) -->
         <div class="relative z-10 text-center px-6 max-w-5xl"></div>
     </section>
@@ -582,7 +581,7 @@
                     class="text-primary font-headline font-bold tracking-[0.3em] uppercase text-xs mb-4 block opacity-50">Our
                     Inner Circle</span>
                 <h2
-                    class="text-5xl md:text-8xl font-headline font-black text-white/20 tracking-tighter uppercase leading-none">
+                    class="text-5xl md:text-8xl font-headline font-black text-primary/40 tracking-tighter uppercase leading-none">
                     The <br />Collective</h2>
             </div>
 
@@ -726,20 +725,21 @@
             }
         }
 
-        const heroVideo = document.getElementById('hero-video');
         const audioToggle = document.getElementById('audio-toggle');
         const audioIcon = document.getElementById('audio-icon');
+        const vids = [
+            document.getElementById('hero-video-desktop'),
+            document.getElementById('hero-video-mobile')
+        ];
 
-        audioToggle.addEventListener('click', () => {
-            if (heroVideo.muted) {
-                heroVideo.muted = false;
-                audioIcon.textContent = 'volume_up';
-                audioToggle.classList.add('bg-primary/20', 'border-primary/30');
-            } else {
-                heroVideo.muted = true;
-                audioIcon.textContent = 'volume_off';
-                audioToggle.classList.remove('bg-primary/20', 'border-primary/30');
-            }
+        audioToggle?.addEventListener('click', () => {
+            const isMuted = vids[0].muted;
+            vids.forEach(v => {
+                if (v) v.muted = !isMuted;
+            });
+            audioIcon.textContent = isMuted ? 'volume_up' : 'volume_off';
+            audioToggle.classList.toggle('bg-primary', isMuted);
+            audioToggle.classList.toggle('text-on-primary', isMuted);
         });
 
         // Mobile Menu Logic
@@ -770,14 +770,14 @@
         const track = document.getElementById('collective-track');
         const scrollWrap = document.getElementById('collective-wrap');
         const collectiveList = [
-            { type: 'reel', name: 'Midnight Pulse', role: 'Campaign', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4', color: 'primary' },
-            { type: 'reel', name: 'Urban Flow', role: 'Brand Story', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4', color: 'secondary' },
-            { type: 'reel', name: 'Neon Nights', role: 'Social Short', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4', color: 'tertiary' },
-            { type: 'reel', name: 'Cyber Chic', role: 'Fashion Edit', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4', color: 'primary' },
-            { type: 'reel', name: 'Digital Soul', role: 'Cinematic Reel', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel2.mp4', color: 'secondary' },
-            { type: 'profile', name: 'Alex Rivera', role: 'Creative Director', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAlWwfHUbzRJixTwsej-EyP1U33B4bJvy74y9oxTLBnakvSFxg28FDi6gBh2VikXw7mYXVK5ZDB6wm59mNl8KHhNpMYKHo3wYdhYuym1S2AeIaBqY0bgu8_Ya35lRcpbk27XM0eO_zeKVe9P3ibgcetwuuBgqyXi4gicRFeL_rqqNFDiYe4GmfYowiVRMb7vyPl2dgj_PCRLTKzT5e_D54FxNrzscOmZ0EJgzdS8krreZhN6Unrzws-nNVAkLq7DPnQ6FWHY7OMgE2F', color: 'primary' },
-            { type: 'profile', name: 'Sarah Chen', role: 'Cinematographer', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAe4lMpvRGE6-Wm2hPUxqbegfDbBJrsN1nNigQZG_L0WzZNgFpQp5Wj8t3my9sX1AVIq7hIYVtNtJq7IonFQe9GkyVVvaWDpr-Hf8s_nMhZJhvcSQDoUJwKWw-rqJFRTN9-zn1rVbCatcQg2IZ1LXoNgsZlUZwE8Nh0Dua476Oh-QZMCpBQInR35thNHz7j5xBvDUjbA9aTluOy5CTwRZiq8hcg1ef0ZTlmpTnXeFem99Z4HYQxwkS-qRLst8e3CiQmdiTZZIpp29Tw', color: 'secondary' },
-            { type: 'profile', name: 'Marcus Thorne', role: 'Data Architect', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCF16UINPbitan9ISuYEo0yJ8e13E2U9IhIXxif57ONe2ax4GJf7LmchAIn38BJnfnSqPmU76gF5NV9A5IsIo3_iLArqYxCldjqGxRrPrKiOlQLOTY9nDozmz6ZdEmqUMOivhyNi4zbV03ZRDIw9Zm90G8eFbH6G5uyeT0hC59kBmDrwELdNVHH1pZk1J7vkKgLGAdScPA4WzWsB14Av3-LOMS5rBiJ7-IkvY2wOIT0pkwhgUUS5Mtwroeq9UC373fVfzbC5dt9d9D0', color: 'tertiary' }
+            { type: 'reel', name: 'Likes Camera Growth', role: 'Logo Animation', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/logo/01-03-2025_LikesCamera%20Growth%20Animation-02.mp4', color: 'primary' },
+            { type: 'reel', name: 'Veneers', role: 'Logo Animation', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/logo/08-04-2026_Veneers%20Logo%20Animation_01.mp4', color: 'secondary' },
+            { type: 'reel', name: 'Maanav', role: 'Logo Animation', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/logo/10-02-2026_Maanav%20Logo%20Animation.mp4', color: 'tertiary' },
+            { type: 'reel', name: 'Ansaan', role: 'Logo Animation', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/logo/15-05-2025_Ansaan%20Logo%20Animation_02.mp4', color: 'primary' },
+            { type: 'reel', name: 'Premium Brand', role: 'Logo Animation', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/logo/21-05-2025_Logo%20Animation_01.mp4', color: 'secondary' },
+            { type: 'reel', name: 'Astones', role: 'Logo Animation', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/logo/24-01-2025_Astones%20Logo%20animation.mp4', color: 'tertiary' },
+            { type: 'reel', name: 'DB Decor', role: 'Logo Animation', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/logo/DB%20Decor%20Logo%20Animation_02%20(1).mp4', color: 'primary' },
+            { type: 'reel', name: 'Farsh', role: 'Logo Animation', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/logo/Main%20Farsh%20Logo%20Animation_01.mp4', color: 'secondary' }
         ];
 
         const createCardHTML = (p) => {
@@ -880,6 +880,7 @@
                 }, {passive: true});
             });
         };
+
 
         // Initialize mobile interactions
         window.addEventListener('load', mobileInteractions);
