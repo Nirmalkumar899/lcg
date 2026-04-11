@@ -206,6 +206,11 @@
             transition: transform 0.3s ease;
         }
 
+        @media(max-width: 768px) {
+            .profile-card { width: 200px; }
+            .collective-container { height: 350px !important; }
+        }
+
         .profile-image-container {
             border-top-left-radius: 4rem;
             border-top-right-radius: 4rem;
@@ -393,6 +398,36 @@
         #process-root .dg { display: flex; gap: 28px; }
         #process-root .dt { display: grid; grid-template-columns: repeat(3,6px); gap: 6px; opacity: .03; }
         #process-root .dt span { width: 6px; height: 6px; border-radius: 50%; background: #fff; }
+        #process-root .dt span { width: 6px; height: 6px; border-radius: 50%; background: #fff; }
+
+        /* ═══ MOBILE RESPONSIVENESS ═══ */
+        @media(max-width: 1024px) {
+            #process-root .pg { padding: 80px 40px; }
+            #process-root .wm-container { left: 40px; opacity: 0.3; }
+        }
+        @media(max-width: 768px) {
+            #process-root .wm-container { display: none; }
+            #process-root .pg { flex-direction: column; padding: 60px 20px; gap: 40px; }
+            #process-root .mc { 
+                width: 330px; height: 330px; border-radius: 32px; 
+                box-shadow: 12px 12px 30px var(--sh-dark), -6px -6px 20px var(--sh-light);
+            }
+            #process-root .dial-wrap { width: 260px; height: 260px; }
+            #process-root .t { height: 6px; }
+            #process-root .t.mj { height: 12px; }
+            #process-root .triple { display: none; }
+            #process-root .spoke .label { font-size: 13px; }
+            #process-root .spoke .uline { width: 24px; margin-top: 6px; }
+            
+            /* Fix Spoke Alignment for Small Dial */
+            #sp0 { right: 20px !important; }
+            #sp1 { left: 20px !important; }
+            #sp2 { bottom: 16px !important; }
+
+            #process-root .sb { width: 100%; }
+            #process-root .ic-card { width: 100%; max-width: 280px; padding: 20px 16px; }
+            #process-root .ab { width: 56px; height: 56px; }
+        }
     </style>
 </head>
 
@@ -406,8 +441,8 @@
         </video>
     </div>
 
-    <!-- Global Background Atmospheric Mural -->
-    <div class="fixed inset-0 z-0 overflow-hidden opacity-45 pointer-events-none bg-black">
+    <!-- Global Background Atmospheric Mural (HIDDEN ON MOBILE TO FIX LOADING CRASH) -->
+    <div class="fixed inset-0 z-0 overflow-hidden opacity-45 pointer-events-none bg-black hidden md:block">
         <div class="moodboard-wrap flex gap-12 justify-center">
             <!-- Column 1 -->
             <div class="flex flex-col gap-12 moodboard-column">
@@ -513,6 +548,8 @@
             class="text-3xl font-bold text-white hover:text-primary transition-colors mobile-nav-link">Work</a>
         <a href="services.html"
             class="text-3xl font-bold text-white hover:text-primary transition-colors mobile-nav-link">Services</a>
+        <a href="#process-section"
+            class="text-3xl font-bold text-white hover:text-primary transition-colors mobile-nav-link">Process</a>
         <a href="clients.html"
             class="text-3xl font-bold text-white hover:text-primary transition-colors mobile-nav-link">Clients</a>
         <a href="https://www.instagram.com/lcg.reel/"
@@ -800,7 +837,7 @@
                     The <br />Collective</h2>
             </div>
 
-            <div class="collective-container relative w-full h-[480px] flex items-end">
+            <div class="collective-container relative w-full h-[350px] md:h-[480px] flex items-end">
                 <div id="collective-track" class="collective-track flex gap-8 whitespace-nowrap">
                     <!-- Cards will be populated and duplicated here -->
                 </div>
@@ -940,6 +977,15 @@
                     sessionStorage.setItem('lcg_splash_seen_v5', 'true');
                     setTimeout(() => splash.style.display = 'none', 800);
                 };
+
+                // Failsafe: If video doesn't load or play within 3.5s, force hide splash
+                setTimeout(() => {
+                    if (!splash.classList.contains('hidden')) {
+                        splash.classList.add('hidden');
+                        sessionStorage.setItem('lcg_splash_seen_v5', 'true');
+                        setTimeout(() => splash.style.display = 'none', 800);
+                    }
+                }, 3500);
             }
         }
 
