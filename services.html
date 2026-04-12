@@ -544,6 +544,26 @@
             }
         }, { passive: true });
 
+        // Mobile Touch Support for Grid
+        let touchStartGridY = 0;
+        window.addEventListener('touchstart', (e) => { touchStartGridY = e.touches[0].clientY; }, { passive: true });
+        window.addEventListener('touchend', (e) => {
+            const dy = touchStartGridY - e.changedTouches[0].clientY;
+            if (Math.abs(dy) < 30) return; // Ignore taps
+
+            if (dy > 30) { // Swipe Up (Next row)
+                if (scrollIndex < maxScroll) {
+                    scrollIndex++;
+                    updateScroll();
+                }
+            } else if (dy < -30) { // Swipe Down (Prev row)
+                if (scrollIndex > 0) {
+                    scrollIndex--;
+                    updateScroll();
+                }
+            }
+        }, { passive: true });
+
         // Tell the transition engine we are at the bottom when scrollIndex reaches max
         function checkState() {
             window.isServicesAtBottom = (scrollIndex === maxScroll);

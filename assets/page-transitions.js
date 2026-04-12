@@ -155,8 +155,18 @@
     }
 
     // ── LISTENERS ───────────────────────────────────────────────
-    function isAtBottom() { if(window.isServicesAtBottom !== undefined) return window.isServicesAtBottom; return Math.round(window.scrollY) >= (document.body.scrollHeight - window.innerHeight - 5); }
-    function isAtTop() { if(window.isServicesAtTop !== undefined) return window.isServicesAtTop; return window.scrollY <= 5; }
+    function isAtBottom() {
+        if(window.isServicesAtBottom !== undefined) return window.isServicesAtBottom;
+        const dh = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+        const wh = window.innerHeight;
+        const st = window.pageYOffset || window.scrollY;
+        return (st + wh) >= (dh - 15); // Forgiving 15px buffer for mobile
+    }
+    function isAtTop() {
+        if(window.isServicesAtTop !== undefined) return window.isServicesAtTop;
+        const st = window.pageYOffset || window.scrollY;
+        return st <= 15;
+    }
 
     window.addEventListener('wheel', (e) => {
         if (isAnimating) return;
@@ -165,6 +175,16 @@
         } else if (e.deltaY < 0 && isAtTop() && prevPage) {
             upScrollAcc += Math.abs(e.deltaY); if (upScrollAcc >= TRIGGER_THRESHOLD) triggerExit(prevPage);
         } else { overScrollAcc = 0; upScrollAcc = 0; }
+    }, { passive: true });
+
+    // Touch
+    let touchStartY = 0;
+    window.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; }, { passive: true });
+    window.addEventListener('touchend', (e) => {
+        if (isAnimating) return;
+        const dy = touchStartY - e.changedTouches[0].clientY;
+        if (dy > 70 && isAtBottom() && nextPage) triggerExit(nextPage);
+        else if (dy < -70 && isAtTop() && prevPage) triggerExit(prevPage);
     }, { passive: true });
 
     document.querySelectorAll('a[href]').forEach(a => {
