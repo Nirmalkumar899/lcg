@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Graphics Design | LCG Studio</title>
+<link rel="icon" type="image/jpeg" href="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,400;0,700;0,900;1,900&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<style>
+:root{--neon:#ff6b35;--neon-dim:rgba(255,107,53,0.12);--dark:#0c0806;--card:#120d0a;--border:rgba(255,255,255,0.06);}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);font-family:'Manrope',sans-serif;color:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+#curtain{position:fixed;inset:0;z-index:9999;background:var(--dark);pointer-events:none;}
+.pe{position:absolute;left:0;right:0;background:var(--dark);}
+.pe:nth-child(1){top:0;height:20%}.pe:nth-child(2){top:20%;height:20%}.pe:nth-child(3){top:40%;height:20%}.pe:nth-child(4){top:60%;height:20%}.pe:nth-child(5){top:80%;height:20%}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:20px 24px;background:linear-gradient(to bottom,rgba(12,8,6,.95),transparent);}
+.nav-back{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);text-decoration:none;transition:color .3s;}
+.nav-back:hover{color:var(--neon);}
+.nav-back .material-symbols-outlined{font-size:16px;}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 24px 48px;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;z-index:0;}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);animation:of 9s ease-in-out infinite;}
+.orb-1{width:450px;height:450px;background:radial-gradient(circle,rgba(255,107,53,.1) 0%,transparent 70%);top:-100px;left:-80px;animation-delay:0s;}
+.orb-2{width:280px;height:280px;background:radial-gradient(circle,rgba(255,60,100,.06) 0%,transparent 70%);bottom:80px;right:-40px;animation-delay:-5s;}
+@keyframes of{0%,100%{transform:translate(0,0);}50%{transform:translate(15px,-25px);}}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(ellipse at 30% 60%,black 20%,transparent 70%);}
+.hero-letter{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Epilogue',sans-serif;font-size:clamp(180px,38vw,380px);font-weight:900;color:rgba(255,107,53,.025);letter-spacing:-.1em;pointer-events:none;user-select:none;line-height:1;}
+.hero-content{position:relative;z-index:1;}
+.eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.eyebrow-line{width:28px;height:1px;background:var(--neon);}
+.eyebrow-text{font-size:10px;font-weight:800;letter-spacing:.4em;text-transform:uppercase;color:var(--neon);opacity:.7;}
+.hero-title{font-family:'Epilogue',sans-serif;font-size:clamp(48px,13vw,96px);font-weight:900;line-height:.88;letter-spacing:-.04em;margin-bottom:24px;}
+.hero-title .acc{font-style:italic;color:var(--neon);}
+.hero-title .ghost{-webkit-text-stroke:1px rgba(255,255,255,.14);color:transparent;}
+.hero-desc{font-size:14px;line-height:1.7;color:rgba(255,255,255,.45);max-width:340px;margin-bottom:32px;}
+.hero-cta{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--neon);color:#fff;font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;border-radius:100px;transition:all .3s;box-shadow:0 0 40px rgba(255,107,53,.3);}
+.hero-cta:hover{box-shadow:0 0 60px rgba(255,107,53,.5);transform:translateY(-2px);}
+
+section{padding:80px 24px;}
+.sec-label{display:flex;align-items:center;gap:10px;margin-bottom:36px;}
+.sec-num{font-size:9px;font-weight:800;letter-spacing:.4em;color:var(--neon);opacity:.6;}
+.sec-line{flex:1;height:1px;background:var(--border);}
+.sec-tag{font-size:9px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.2);}
+
+/* COLOR SWATCHES */
+.swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:28px;}
+.swatch{height:70px;border-radius:14px;position:relative;overflow:hidden;transition:transform .3s;cursor:default;}
+.swatch:hover{transform:scale(1.04);}
+.sw1{background:linear-gradient(135deg,#ff6b35,#ff3c64);}
+.sw2{background:linear-gradient(135deg,#daff3d,#8eb32a);}
+.sw3{background:linear-gradient(135deg,#00d4ff,#0050ff);}
+.sw4{background:linear-gradient(135deg,#a855f7,#ec4899);}
+.sw5{background:linear-gradient(135deg,#f59e0b,#ef4444);}
+.sw6{background:linear-gradient(135deg,#10b981,#0891b2);}
+.sw7{background:linear-gradient(135deg,#6366f1,#8b5cf6);}
+.sw8{background:linear-gradient(135deg,#e2e8f0,#94a3b8);}
+
+/* ROW ITEMS (what we do) */
+.gd-list{display:flex;flex-direction:column;gap:0;}
+.gd-item{display:flex;gap:16px;padding:22px 0;border-bottom:1px solid var(--border);align-items:flex-start;}
+.gd-icon{width:44px;height:44px;border-radius:12px;background:var(--neon-dim);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.gd-icon .material-symbols-outlined{font-size:20px;color:var(--neon);}
+.gd-body .gd-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:4px;}
+.gd-body .gd-desc{font-size:12px;color:rgba(255,255,255,.4);line-height:1.6;}
+
+/* DESIGN SHOWCASE CARDS */
+.showcase{display:flex;flex-direction:column;gap:16px;}
+.sc-card{border-radius:20px;overflow:hidden;border:1px solid var(--border);background:var(--card);}
+.sc-visual{height:160px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.sc-v1{background:linear-gradient(135deg,#1a0800,#2d1000);}
+.sc-v2{background:linear-gradient(135deg,#0d0a1a,#1a1030);}
+.sc-v3{background:linear-gradient(135deg,#001a0d,#002d15);}
+.sc-label-float{font-family:'Epilogue',sans-serif;font-size:36px;font-weight:900;letter-spacing:-.05em;position:relative;z-index:1;}
+.sc-v1 .sc-label-float{color:var(--neon);text-shadow:0 0 30px rgba(255,107,53,.5);}
+.sc-v2 .sc-label-float{color:#a855f7;text-shadow:0 0 30px rgba(168,85,247,.5);}
+.sc-v3 .sc-label-float{color:#10b981;text-shadow:0 0 30px rgba(16,185,129,.5);}
+.sc-info{padding:14px 16px;}
+.sc-tag{font-size:9px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:4px;}
+.sc-title{font-size:14px;font-weight:700;color:#fff;}
+
+/* STATS */
+.stats-bg{background:#0c0806;}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.s-card{background:var(--card);padding:28px 20px;text-align:center;}
+.s-card:first-child{border-radius:16px 0 0 0;}.s-card:nth-child(2){border-radius:0 16px 0 0;}.s-card:nth-child(3){border-radius:0 0 0 16px;}.s-card:last-child{border-radius:0 0 16px 0;}
+.s-num{font-family:'Epilogue',sans-serif;font-size:34px;font-weight:900;color:var(--neon);letter-spacing:-.04em;line-height:1;margin-bottom:5px;}
+.s-lbl{font-size:11px;color:rgba(255,255,255,.35);font-weight:600;}
+
+.cta-sec{text-align:center;padding:80px 24px 100px;}
+.cta-pre{font-size:10px;font-weight:800;letter-spacing:.5em;text-transform:uppercase;color:var(--neon);opacity:.6;margin-bottom:18px;}
+.cta-h{font-family:'Epilogue',sans-serif;font-size:clamp(34px,9vw,60px);font-weight:900;line-height:.9;letter-spacing:-.04em;margin-bottom:14px;}
+.cta-h .c{color:var(--neon);}
+.cta-sub{font-size:14px;color:rgba(255,255,255,.4);margin-bottom:32px;line-height:1.6;}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:17px 38px;background:var(--neon);color:#fff;font-size:11px;font-weight:900;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;border-radius:100px;transition:all .3s;box-shadow:0 0 50px rgba(255,107,53,.3);}
+.cta-btn:hover{transform:translateY(-3px);box-shadow:0 0 70px rgba(255,107,53,.5);}
+.rup{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
+.rup.in{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+<div id="curtain"><div class="pe"></div><div class="pe"></div><div class="pe"></div><div class="pe"></div><div class="pe"></div></div>
+<nav>
+  <a href="services.html" class="nav-back"><span class="material-symbols-outlined">arrow_back_ios</span>Services</a>
+  <span style="font-size:9px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.2)">LCG Studio</span>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="hero-grid"></div><div class="hero-letter">G.</div></div>
+  <div class="hero-content rup">
+    <div class="eyebrow"><div class="eyebrow-line"></div><div class="eyebrow-text">LCG Creative Studio</div></div>
+    <h1 class="hero-title"><span class="ghost">Graphics</span><br><span class="acc">Design.</span></h1>
+    <p class="hero-desc">Visuals that stop thumbs. We craft high-impact graphics that communicate your brand's story before a single word is read. Bold, intentional, unforgettable.</p>
+    <a href="https://www.instagram.com/lcg.reel/" target="_blank" class="hero-cta">See Portfolio <span class="material-symbols-outlined" style="font-size:15px">north_east</span></a>
+  </div>
+</section>
+
+<section style="background:#0c0806;">
+  <div class="sec-label"><div class="sec-num">01</div><div class="sec-line"></div><div class="sec-tag">Our Palette</div></div>
+  <p style="font-size:13px;color:rgba(255,255,255,.4);line-height:1.7;margin-bottom:24px;" class="rup">Color is the first language of design. We build palettes that carry emotion, hierarchy, and brand essence in a single glance.</p>
+  <div class="swatches rup" style="transition-delay:.1s">
+    <div class="swatch sw1"></div><div class="swatch sw2"></div><div class="swatch sw3"></div><div class="swatch sw4"></div>
+    <div class="swatch sw5"></div><div class="swatch sw6"></div><div class="swatch sw7"></div><div class="swatch sw8"></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-label"><div class="sec-num">02</div><div class="sec-line"></div><div class="sec-tag">What We Create</div></div>
+  <div class="gd-list">
+    <div class="gd-item rup"><div class="gd-icon"><span class="material-symbols-outlined">view_quilt</span></div><div class="gd-body"><div class="gd-title">Social Media Graphics</div><div class="gd-desc">Posts, carousels, Stories, banners — optimised for every platform's spec and algorithm.</div></div></div>
+    <div class="gd-item rup" style="transition-delay:.06s"><div class="gd-icon"><span class="material-symbols-outlined">print</span></div><div class="gd-body"><div class="gd-title">Print & Packaging Design</div><div class="gd-desc">Business cards, flyers, brochures, labels, and packaging that command attention in the physical world.</div></div></div>
+    <div class="gd-item rup" style="transition-delay:.12s"><div class="gd-icon"><span class="material-symbols-outlined">ads_click</span></div><div class="gd-body"><div class="gd-title">Ad Creatives</div><div class="gd-desc">High-conversion digital ad designs for Meta, Google, YouTube — performance-tested layouts.</div></div></div>
+    <div class="gd-item rup" style="transition-delay:.18s"><div class="gd-icon"><span class="material-symbols-outlined">event</span></div><div class="gd-body"><div class="gd-title">Event & Presentation Design</div><div class="gd-desc">Pitch decks, invitations, event branding, and keynote slides that elevate every moment.</div></div></div>
+    <div class="gd-item rup" style="transition-delay:.24s"><div class="gd-icon"><span class="material-symbols-outlined">shopping_bag</span></div><div class="gd-body"><div class="gd-title">Brand Collateral</div><div class="gd-desc">Stationery, merchandise, uniforms, retail signage — a cohesive branded universe.</div></div></div>
+  </div>
+</section>
+
+<section style="background:#0c0806;">
+  <div class="sec-label"><div class="sec-num">03</div><div class="sec-line"></div><div class="sec-tag">Selected Work</div></div>
+  <div class="showcase">
+    <div class="sc-card rup"><div class="sc-visual sc-v1"><div class="sc-label-float">POSTER</div></div><div class="sc-info"><div class="sc-tag">Print Design</div><div class="sc-title">Event Campaign — Neon Nights</div></div></div>
+    <div class="sc-card rup" style="transition-delay:.08s"><div class="sc-visual sc-v2"><div class="sc-label-float">AD ×9</div></div><div class="sc-info"><div class="sc-tag">Digital Ads</div><div class="sc-title">Meta Campaign — Studio Brand</div></div></div>
+    <div class="sc-card rup" style="transition-delay:.16s"><div class="sc-visual sc-v3"><div class="sc-label-float">DECK</div></div><div class="sc-info"><div class="sc-tag">Pitch Deck</div><div class="sc-title">Investor Presentation — 42 slides</div></div></div>
+  </div>
+</section>
+
+<section class="stats-bg">
+  <div class="stats-grid rup">
+    <div class="s-card"><div class="s-num">500+</div><div class="s-lbl">Designs Delivered</div></div>
+    <div class="s-card"><div class="s-num">48hr</div><div class="s-lbl">Avg. Turnaround</div></div>
+    <div class="s-card"><div class="s-num">∞</div><div class="s-lbl">Revision Rounds</div></div>
+    <div class="s-card"><div class="s-num">100%</div><div class="s-lbl">Original Artwork</div></div>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <p class="cta-pre">Let's Create</p>
+  <h2 class="cta-h rup">Design that<br>makes people <span class="c">stop.</span></h2>
+  <p class="cta-sub rup" style="transition-delay:.1s">Tell us what you need. We'll create something you'll be proud to put your name on.</p>
+  <a href="https://www.instagram.com/lcg.reel/" target="_blank" class="cta-btn rup" style="transition-delay:.2s">Start a Project <span class="material-symbols-outlined" style="font-size:15px">north_east</span></a>
+</section>
+
+<script>
+document.querySelectorAll('.pe').forEach((p,i)=>{setTimeout(()=>{p.style.transition='transform .65s cubic-bezier(.16,1,.3,1)';p.style.transform='scaleY(0)';p.style.transformOrigin='top';},50+i*60);});
+setTimeout(()=>{document.getElementById('curtain').style.display='none';},700);
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.rup').forEach(el=>{if(el.closest('.hero')){setTimeout(()=>el.classList.add('in'),200);}else io.observe(el);});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="assets/page-transitions.js"></script>
+</body>
+</html>

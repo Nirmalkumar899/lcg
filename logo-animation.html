@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Logo Animation | LCG Studio</title>
+<link rel="icon" type="image/jpeg" href="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,400;0,700;0,900;1,900&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<style>
+:root{--neon:#f59e0b;--neon-dim:rgba(245,158,11,0.12);--dark:#0d0900;--card:#150e00;--border:rgba(255,255,255,0.06);}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);font-family:'Manrope',sans-serif;color:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+#curtain{position:fixed;inset:0;z-index:9999;background:var(--dark);pointer-events:none;}
+.pe{position:absolute;left:0;right:0;background:var(--dark);}
+.pe:nth-child(1){top:0;height:20%}.pe:nth-child(2){top:20%;height:20%}.pe:nth-child(3){top:40%;height:20%}.pe:nth-child(4){top:60%;height:20%}.pe:nth-child(5){top:80%;height:20%}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:20px 24px;background:linear-gradient(to bottom,rgba(13,9,0,.95),transparent);}
+.nav-back{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);text-decoration:none;transition:color .3s;}
+.nav-back:hover{color:var(--neon);}
+.nav-back .material-symbols-outlined{font-size:16px;}
+
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 24px 48px;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;z-index:0;}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);animation:of 9s ease-in-out infinite;}
+.orb-1{width:500px;height:500px;background:radial-gradient(circle,rgba(245,158,11,.09) 0%,transparent 70%);top:-100px;right:-80px;}
+.orb-2{width:280px;height:280px;background:radial-gradient(circle,rgba(239,68,68,.05) 0%,transparent 70%);bottom:80px;left:-40px;animation-delay:-5s;}
+@keyframes of{0%,100%{transform:translate(0,0);}50%{transform:translate(-15px,25px);}}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse at 65% 45%,black 20%,transparent 70%);}
+.hero-letter{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Epilogue',sans-serif;font-size:clamp(180px,38vw,380px);font-weight:900;color:rgba(245,158,11,.025);letter-spacing:-.1em;pointer-events:none;user-select:none;}
+
+.eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.eyebrow-line{width:28px;height:1px;background:var(--neon);}
+.eyebrow-text{font-size:10px;font-weight:800;letter-spacing:.4em;text-transform:uppercase;color:var(--neon);opacity:.7;}
+.hero-title{font-family:'Epilogue',sans-serif;font-size:clamp(48px,13vw,96px);font-weight:900;line-height:.88;letter-spacing:-.04em;margin-bottom:24px;}
+.hero-title .acc{font-style:italic;color:var(--neon);}
+.hero-title .ghost{-webkit-text-stroke:1px rgba(255,255,255,.14);color:transparent;}
+.hero-desc{font-size:14px;line-height:1.7;color:rgba(255,255,255,.45);max-width:340px;margin-bottom:32px;}
+.hero-cta{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--neon);color:#000;font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;border-radius:100px;transition:all .3s;box-shadow:0 0 40px rgba(245,158,11,.3);}
+.hero-cta:hover{box-shadow:0 0 60px rgba(245,158,11,.5);transform:translateY(-2px);}
+
+section{padding:80px 24px;}
+.sec-label{display:flex;align-items:center;gap:10px;margin-bottom:36px;}
+.sec-num{font-size:9px;font-weight:800;letter-spacing:.4em;color:var(--neon);opacity:.6;}
+.sec-line{flex:1;height:1px;background:var(--border);}
+.sec-tag{font-size:9px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.2);}
+
+/* LOGO ANIMATION DEMO */
+.anim-stage{background:var(--card);border:1px solid var(--border);border-radius:24px;height:200px;display:flex;align-items:center;justify-content:center;margin-bottom:28px;position:relative;overflow:hidden;}
+.anim-rings{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+.ar{position:absolute;border-radius:50%;border:1px solid rgba(245,158,11,.08);animation:ar-spin 8s linear infinite;}
+.ar-1{width:120px;height:120px;animation-duration:6s;}
+.ar-2{width:180px;height:180px;animation-duration:10s;animation-direction:reverse;}
+.ar-3{width:240px;height:240px;animation-duration:15s;}
+@keyframes ar-spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.anim-logo{font-family:'Epilogue',sans-serif;font-size:56px;font-weight:900;color:var(--neon);letter-spacing:-.05em;position:relative;z-index:1;animation:logo-pulse 2.5s ease-in-out infinite;text-shadow:0 0 30px rgba(245,158,11,.5);}
+@keyframes logo-pulse{0%,100%{transform:scale(1);text-shadow:0 0 30px rgba(245,158,11,.5);}50%{transform:scale(1.04);text-shadow:0 0 50px rgba(245,158,11,.8);}}
+.anim-trail{position:absolute;width:100%;height:2px;background:linear-gradient(to right,transparent,rgba(245,158,11,.3),transparent);animation:trail-scan 3s ease-in-out infinite;}
+@keyframes trail-scan{0%{top:0;opacity:0;}30%{opacity:1;}100%{top:100%;opacity:0;}}
+
+/* ANIMATION TYPES */
+.anim-types{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px;}
+.at-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 14px;transition:all .3s;}
+.at-card:hover{border-color:rgba(245,158,11,.25);transform:translateY(-3px);}
+.at-icon{width:40px;height:40px;border-radius:10px;background:var(--neon-dim);display:flex;align-items:center;justify-content:center;margin-bottom:10px;}
+.at-icon .material-symbols-outlined{font-size:20px;color:var(--neon);}
+.at-name{font-size:12px;font-weight:700;color:#fff;margin-bottom:4px;}
+.at-desc{font-size:10px;color:rgba(255,255,255,.35);line-height:1.5;}
+
+/* Timeline */
+.timeline{display:flex;flex-direction:column;gap:0;}
+.tl-step{display:flex;gap:16px;padding:20px 0;border-bottom:1px solid var(--border);}
+.tl-step:last-child{border-bottom:none;}
+.tl-left{display:flex;flex-direction:column;align-items:center;flex-shrink:0;}
+.tl-dot{width:10px;height:10px;border-radius:50%;border:2px solid rgba(255,255,255,.15);flex-shrink:0;transition:all .3s;}
+.tl-step:hover .tl-dot{border-color:var(--neon);background:var(--neon);box-shadow:0 0 10px var(--neon);}
+.tl-line{width:1px;flex:1;background:linear-gradient(to bottom,rgba(255,255,255,.06),transparent);min-height:32px;}
+.tl-body{}
+.tl-time{font-size:9px;font-weight:800;letter-spacing:.2em;color:var(--neon);opacity:.5;text-transform:uppercase;margin-bottom:4px;}
+.tl-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:3px;}
+.tl-desc{font-size:11px;color:rgba(255,255,255,.4);line-height:1.5;}
+
+/* Stats */
+.stats-bg{background:#0b0700;}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.s-card{background:var(--card);padding:28px 20px;text-align:center;}
+.s-card:first-child{border-radius:16px 0 0 0;}.s-card:nth-child(2){border-radius:0 16px 0 0;}.s-card:nth-child(3){border-radius:0 0 0 16px;}.s-card:last-child{border-radius:0 0 16px 0;}
+.s-num{font-family:'Epilogue',sans-serif;font-size:34px;font-weight:900;color:var(--neon);letter-spacing:-.04em;line-height:1;margin-bottom:5px;}
+.s-lbl{font-size:11px;color:rgba(255,255,255,.35);font-weight:600;}
+
+.cta-sec{text-align:center;padding:80px 24px 100px;}
+.cta-pre{font-size:10px;font-weight:800;letter-spacing:.5em;text-transform:uppercase;color:var(--neon);opacity:.6;margin-bottom:18px;}
+.cta-h{font-family:'Epilogue',sans-serif;font-size:clamp(34px,9vw,60px);font-weight:900;line-height:.9;letter-spacing:-.04em;margin-bottom:14px;}
+.cta-h .c{color:var(--neon);}
+.cta-sub{font-size:14px;color:rgba(255,255,255,.4);margin-bottom:32px;line-height:1.6;}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:17px 38px;background:var(--neon);color:#000;font-size:11px;font-weight:900;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;border-radius:100px;transition:all .3s;box-shadow:0 0 50px rgba(245,158,11,.3);}
+.cta-btn:hover{transform:translateY(-3px);box-shadow:0 0 70px rgba(245,158,11,.5);}
+.rup{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
+.rup.in{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+<div id="curtain"><div class="pe"></div><div class="pe"></div><div class="pe"></div><div class="pe"></div><div class="pe"></div></div>
+<nav>
+  <a href="services.html" class="nav-back"><span class="material-symbols-outlined">arrow_back_ios</span>Services</a>
+  <span style="font-size:9px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.2)">LCG Studio</span>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="hero-grid"></div><div class="hero-letter">L.</div></div>
+  <div class="hero-content rup">
+    <div class="eyebrow"><div class="eyebrow-line"></div><div class="eyebrow-text">LCG Creative Studio</div></div>
+    <h1 class="hero-title"><span class="ghost">Logo</span><br><span class="acc">Animation.</span></h1>
+    <p class="hero-desc">Your logo is the first impression. We breathe life into it — crafting cinematic animated intros that make your brand unforgettable from frame one.</p>
+    <a href="https://www.instagram.com/lcg.reel/" target="_blank" class="hero-cta">See Showreel <span class="material-symbols-outlined" style="font-size:15px">north_east</span></a>
+  </div>
+</section>
+
+<section style="background:#0b0700;">
+  <div class="sec-label"><div class="sec-num">01</div><div class="sec-line"></div><div class="sec-tag">Live Demo</div></div>
+  <div class="anim-stage rup">
+    <div class="anim-rings">
+      <div class="ar ar-1"></div><div class="ar ar-2"></div><div class="ar ar-3"></div>
+    </div>
+    <div class="anim-logo">LCG</div>
+    <div class="anim-trail"></div>
+  </div>
+
+  <div class="sec-label"><div class="sec-num">02</div><div class="sec-line"></div><div class="sec-tag">Animation Styles</div></div>
+  <div class="anim-types rup">
+    <div class="at-card"><div class="at-icon"><span class="material-symbols-outlined">draw</span></div><div class="at-name">Reveal</div><div class="at-desc">Elegant path-draw and stroke animations</div></div>
+    <div class="at-card"><div class="at-icon"><span class="material-symbols-outlined">animation</span></div><div class="at-name">Kinetic</div><div class="at-desc">High-energy motion graphic intros</div></div>
+    <div class="at-card"><div class="at-icon"><span class="material-symbols-outlined">blur_on</span></div><div class="at-name">Particle</div><div class="at-desc">Logo assembled from cinematic particles</div></div>
+    <div class="at-card"><div class="at-icon"><span class="material-symbols-outlined">3d_rotation</span></div><div class="at-name">3D Spin</div><div class="at-desc">Full three-dimensional logo rotations</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-label"><div class="sec-num">03</div><div class="sec-line"></div><div class="sec-tag">Production Timeline</div></div>
+  <div class="timeline">
+    <div class="tl-step rup"><div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-body"><div class="tl-time">Day 1</div><div class="tl-title">Brief & Direction</div><div class="tl-desc">We understand your brand personality, desired mood, and intended use-cases for the animation.</div></div></div>
+    <div class="tl-step rup" style="transition-delay:.07s"><div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-body"><div class="tl-time">Day 2–3</div><div class="tl-title">Style Frames</div><div class="tl-desc">We present 2 distinct visual directions with style frame stills for your approval before animation begins.</div></div></div>
+    <div class="tl-step rup" style="transition-delay:.14s"><div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-body"><div class="tl-time">Day 4–6</div><div class="tl-title">Animation Production</div><div class="tl-desc">Full motion production with sound design, timing refinement, and motion polish.</div></div></div>
+    <div class="tl-step rup" style="transition-delay:.21s"><div class="tl-left"><div class="tl-dot"></div></div><div class="tl-body"><div class="tl-time">Day 7</div><div class="tl-title">Final Delivery</div><div class="tl-desc">MP4, ProRes, GIF, and transparent WebM files — every format you'll ever need.</div></div></div>
+  </div>
+</section>
+
+<section class="stats-bg">
+  <div class="stats-grid rup">
+    <div class="s-card"><div class="s-num">100+</div><div class="s-lbl">Logos Animated</div></div>
+    <div class="s-card"><div class="s-num">7</div><div class="s-lbl">Day Delivery</div></div>
+    <div class="s-card"><div class="s-num">4K</div><div class="s-lbl">Resolution Output</div></div>
+    <div class="s-card"><div class="s-num">∞</div><div class="s-lbl">Revisions</div></div>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <p class="cta-pre">Bring It to Life</p>
+  <h2 class="cta-h rup">Make your logo<br><span class="c">move.</span></h2>
+  <p class="cta-sub rup" style="transition-delay:.1s">A great logo animation plays before every video. Make sure yours commands attention from the very first frame.</p>
+  <a href="https://www.instagram.com/lcg.reel/" target="_blank" class="cta-btn rup" style="transition-delay:.2s">Start Animating <span class="material-symbols-outlined" style="font-size:15px">north_east</span></a>
+</section>
+
+<script>
+document.querySelectorAll('.pe').forEach((p,i)=>{setTimeout(()=>{p.style.transition='transform .65s cubic-bezier(.16,1,.3,1)';p.style.transform='scaleY(0)';p.style.transformOrigin='top';},50+i*60);});
+setTimeout(()=>{document.getElementById('curtain').style.display='none';},700);
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.rup').forEach(el=>{if(el.closest('.hero')){setTimeout(()=>el.classList.add('in'),200);}else io.observe(el);});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="assets/page-transitions.js"></script>
+</body>
+</html>

@@ -99,6 +99,36 @@
             overflow-x: hidden;
         }
 
+        /* ── LIGHT THEME OVERRIDES ── */
+        html.light-theme {
+            filter: invert(1) hue-rotate(180deg) brightness(1.05);
+            background-color: #f7f7f7;
+        }
+        
+        /* Revert media so pictures don't look like x-rays */
+        html.light-theme img,
+        html.light-theme video {
+            filter: invert(1) hue-rotate(180deg);
+        }
+
+        /* Keep the moodboard stylistic filters intact but reverted */
+        html.light-theme .moodboard-video {
+            filter: invert(1) hue-rotate(180deg) grayscale(0.4) opacity(0.7) !important;
+        }
+        html.light-theme .moodboard-video:hover {
+            filter: invert(1) hue-rotate(180deg) grayscale(0) opacity(1) !important;
+        }
+        
+        /* Remove the heavy inverted "fog" gradients in light mode */
+        html.light-theme .vignette-heavy {
+            display: none !important;
+        }
+        html.light-theme .bg-gradient-to-t.from-black,
+        html.light-theme .bg-gradient-to-t.from-black\/60,
+        html.light-theme .bg-gradient-to-t.from-black\/80 {
+            opacity: 0.1 !important;
+        }
+
         .font-headline {
             font-family: 'Epilogue', sans-serif;
         }
@@ -779,6 +809,11 @@
                     target="_blank">Instagram</a></li>
         </ul>
         <div class="flex items-center gap-4">
+            <!-- Theme Toggle -->
+            <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center text-white/80 hover:text-white transition-colors bg-white/5 hover:bg-white/10 rounded-full border border-white/10" aria-label="Toggle Theme">
+                <span class="material-symbols-outlined text-[20px]">light_mode</span>
+            </button>
+
             <a href="#contact"
                 class="hidden sm:inline-flex px-6 py-2 bg-primary text-on-primary rounded-full font-medium hover:bg-primary/90 transition-colors">Get
                 Started</a>
@@ -1467,84 +1502,121 @@
 
     <!-- Cinematic 'In the Field' Section (Cascading 3D Wall) -->
 
-    <section id="in-the-field"
-        class="relative min-h-[140vh] bg-black overflow-hidden py-40 flex items-center justify-center">
+    <!-- World-Class Awwwards 'In the Field' Section -->
+    <section id="in-the-field" class="relative min-h-[140vh] bg-black overflow-hidden flex items-center justify-center py-20">
 
-        <!-- Background Massive Text -->
-        <div
-            class="absolute inset-0 flex items-center justify-center opacity-[0.05] select-none pointer-events-none z-0">
-            <h2 class="text-[40vw] font-headline font-black leading-none tracking-tighter">FIELD</h2>
+        <!-- 1. Master Video Background (Visibile ONLY through the text) -->
+        <div class="absolute inset-0 z-0 flex items-center justify-center scale-110 pointer-events-none">
+            <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-100"
+                src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4"></video>
+            <div class="absolute inset-0 bg-black/10"></div>
         </div>
 
-        <div class="max-w-[1700px] mx-auto px-6 relative z-10 w-full">
+        <!-- 2. The Text Mask Layer (Multiply Blend Mode creates the transparent window) -->
+        <div class="bts-mask-layer absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none" 
+             style="background: #000; color: #fff; mix-blend-mode: multiply;">
+            <h2 class="w-full px-4 text-center font-headline font-black uppercase tracking-tighter leading-[0.8] flex flex-col items-center justify-center">
+                <span class="block text-[clamp(4rem,10vw,14rem)]">NOT JUST IN</span>
+                <span class="block text-[clamp(4rem,10vw,14rem)] text-primary mt-2" style="text-shadow: 0 0 100px rgba(218,255,61,0.6);">THE FEED,</span>
+                <span class="block text-[clamp(4rem,10vw,14rem)] mt-2">IN THE FIELD.</span>
+            </h2>
+        </div>
 
-            <!-- Cascading Reel Wall -->
-            <div class="relative flex justify-center items-center gap-6 md:gap-12 h-[80vh]">
+        <!-- 3. Floating Interactive 3D BTS Polaroids -->
+        <div id="bts-gallery" class="absolute inset-0 z-20 pointer-events-none overflow-hidden" style="perspective: 1500px;">
+            
+            <div class="bts-card absolute left-[8%] md:left-[15%] top-[15%] w-[35vw] md:w-[18vw] min-w-[160px] aspect-[9/16] rounded-3xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.9)] border-2 border-white/10" data-speed="0.04" style="transform: rotate(-8deg);">
+                <video autoplay loop muted playsinline class="w-full h-full object-cover" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
+            </div>
+            
+            <div class="bts-card absolute right-[5%] md:right-[15%] top-[50%] md:top-[40%] w-[45vw] md:w-[22vw] min-w-[200px] aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,1)] border-2 border-white/10" data-speed="-0.03" style="transform: rotate(6deg) translateY(-20%);">
+                <video autoplay loop muted playsinline class="w-full h-full object-cover" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
+            </div>
 
-                <!-- Column 1 (Small, Tilted) -->
-                <div
-                    class="hidden lg:block w-[18%] h-[60%] mt-[-10%] rotate-[-6deg] group hover:rotate-0 transition-all duration-1000">
-                    <div
-                        class="relative w-full h-full rounded-[3.5rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.9)] border border-white/10">
-                        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover"
-                            src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
-                    </div>
-                </div>
+            <div class="bts-card hidden md:block absolute left-[35%] bottom-[8%] w-[16vw] min-w-[180px] aspect-square rounded-full overflow-hidden shadow-[0_30px_50px_-10px_rgba(0,0,0,0.8)] border-2 border-white/10" data-speed="0.06" style="transform: rotate(-12deg);">
+                <video autoplay loop muted playsinline class="w-full h-full object-cover scale-125" src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4"></video>
+            </div>
 
-                <!-- Column 2 (Large, Central-Left) -->
-                <div
-                    class="w-[45%] md:w-[28%] h-[85%] mt-[5%] rotate-[3deg] group hover:rotate-0 transition-all duration-1000 z-20">
-                    <div
-                        class="relative w-full h-full rounded-[4rem] overflow-hidden shadow-[0_60px_120px_-30px_rgba(0,0,0,1)] border border-white/10">
-                        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover"
-                            src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel2.mp4"></video>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Column 3 (Medium, Central-Right) -->
-                <div
-                    class="w-[45%] md:w-[22%] h-[70%] mt-[-5%] rotate-[-4deg] group hover:rotate-0 transition-all duration-1000 z-10">
-                    <div
-                        class="relative w-full h-full rounded-[3.5rem] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)] border border-white/10">
-                        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover"
-                            src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/farshreel1.mp4"></video>
-                    </div>
-                </div>
-
-                <!-- Column 4 (Small, Right Edge) -->
-                <div
-                    class="hidden md:block w-[15%] h-[55%] mt-[15%] rotate-[5deg] group hover:rotate-0 transition-all duration-1000">
-                    <div
-                        class="relative w-full h-full rounded-[3rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] border border-white/10">
-                        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover"
-                            src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel3.mp4"></video>
-                    </div>
-                </div>
-
-                <!-- Layered Headline -->
-                <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-30">
-                    <h2
-                        class="text-7xl md:text-[9vw] font-headline font-black text-white leading-[0.75] tracking-tighter uppercase text-center drop-shadow-2xl">
-                        NOT JUST IN <span class="text-primary">THE FEED</span>, <br />
-                        <span class="italic opacity-95">IN THE FIELD</span>
-                    </h2>
-                    <div
-                        class="hidden md:block mt-8 text-white/40 font-headline font-bold text-xl tracking-[0.5em] uppercase">
-                        Digital Cinematheque & Growth Engineering
-                    </div>
-                </div>
-
-                <!-- Front-most Fragment (Visual Magic) -->
-                <div
-                    class="absolute bottom-[-10%] left-[-5%] w-[12%] h-[30%] rotate-[12deg] z-40 opacity-40 blur-sm pointer-events-none">
-                    <video autoplay loop muted playsinline class="w-full h-full object-cover rounded-3xl"
-                        src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/assets/reel1.mp4"></video>
+            <!-- Foreground Graphic Element -->
+            <div class="absolute bottom-12 left-1/2 -translate-x-1/2 z-30 pointer-events-none mix-blend-difference text-center w-full">
+                <div class="text-white/60 font-headline font-bold text-[10px] md:text-sm tracking-[0.6em] uppercase">
+                    Digital Cinematheque &amp; Growth Engineering
                 </div>
             </div>
+
         </div>
     </section>
+
+    <style>
+        /* Awwwards Hover Interactions for BTS Cards */
+        .bts-card {
+            opacity: 0.5;
+            filter: grayscale(1) blur(1px);
+            transition: opacity 0.5s, filter 0.5s, box-shadow 0.6s, border-color 0.4s;
+            pointer-events: auto;
+            cursor: crosshair;
+        }
+        .bts-card:hover {
+            opacity: 1 !important;
+            filter: grayscale(0) blur(0px) !important;
+            z-index: 50 !important;
+            box-shadow: 0 40px 100px -20px rgba(218,255,61,0.25) !important;
+            border-color: rgba(218,255,61,0.5);
+        }
+
+        /* Light Theme Fix ensuring mask integrity */
+        html.light-theme .bts-card {
+            border-color: rgba(0,0,0,0.1);
+        }
+        html.light-theme .bts-card:hover {
+            border-color: var(--primary);
+        }
+        html.light-theme .bts-mask-layer h2 {
+            /* The text shadow in light mode needs to adapt to avoid blowing out the white background */
+            text-shadow: 0 0 50px rgba(218,255,61,1) !important;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btsSection = document.getElementById('in-the-field');
+            const btsCards = document.querySelectorAll('.bts-card');
+
+            if (btsSection) {
+                // Parallax Mouse Move Effect
+                btsSection.addEventListener('mousemove', (e) => {
+                    const rect = btsSection.getBoundingClientRect();
+                    // Calculate mouse position relative to center of section (-1 to 1)
+                    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+                    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+
+                    btsCards.forEach(card => {
+                        const speed = parseFloat(card.getAttribute('data-speed'));
+                        const baseTransform = card.style.transform;
+                        
+                        // Extract base rotation if any
+                        let rotateMatch = baseTransform.match(/rotate\(([-\d.]+)deg\)/);
+                        let baseRotate = rotateMatch ? parseFloat(rotateMatch[1]) : 0;
+
+                        // Calculate dynamic transforms
+                        const moveX = x * speed * 800; // pixels to shift
+                        const moveY = y * speed * 800;
+                        
+                        // Apply GSAP-like silky smooth transform update
+                        card.style.transform = `translate(${moveX}px, ${moveY}px) rotate(${baseRotate + (x*5)}deg) scale(1.02)`;
+                    });
+                });
+
+                // Reset on leave
+                btsSection.addEventListener('mouseleave', () => {
+                    btsCards.forEach(card => {
+                        // Resets to initial inline transform
+                        card.style.transform = ''; 
+                    });
+                });
+            }
+        });
+    </script>
 
     <!-- Integrated Our Process Section (EXACT MATCH) -->
     <section id="process-root">
@@ -2046,6 +2118,30 @@
             }
         });
     </script>
+
+    <!-- ── Theme Toggle Script ── -->
+    <script>
+        const themeBtn = document.getElementById('theme-toggle');
+        const themeIcon = themeBtn.querySelector('span');
+
+        if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.add('light-theme');
+            themeIcon.textContent = 'dark_mode';
+        }
+
+        themeBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('light-theme');
+            
+            if (document.documentElement.classList.contains('light-theme')) {
+                themeIcon.textContent = 'dark_mode';
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeIcon.textContent = 'light_mode';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
+
     <!-- ── Cinematic Page Transition Engine ── -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="assets/page-transitions.js"></script>

@@ -7,11 +7,27 @@
 (function () {
     'use strict';
 
-    const PAGES = ['index.html', 'services.html', 'brand-identity.html', 'process.html', 'clients.html'];
+    const PAGES = [
+        'index.html', 
+        'services.html', 
+        'brand-identity.html', 
+        'social-media.html',
+        'graphics-design.html',
+        'website-design.html',
+        'app-design.html',
+        'logo-animation.html',
+        'process.html', 
+        'clients.html'
+    ];
     const PAGE_LABELS = {
         'index.html':           'Home',
         'services.html':        'Services',
         'brand-identity.html':  'Brand Identity',
+        'social-media.html':    'Social Media',
+        'graphics-design.html': 'Graphics Design',
+        'website-design.html':  'Website Design',
+        'app-design.html':      'App Design',
+        'logo-animation.html':  'Logo Animation',
         'process.html':         'Process',
         'clients.html':         'Clients',
     };

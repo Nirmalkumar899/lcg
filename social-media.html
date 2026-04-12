@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Social Media Management | LCG Studio</title>
+<link rel="icon" type="image/jpeg" href="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,400;0,700;0,900;1,900&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<style>
+:root{--neon:#00d4ff;--neon-dim:rgba(0,212,255,0.12);--dark:#060910;--card:#0d1117;--border:rgba(255,255,255,0.06);}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);font-family:'Manrope',sans-serif;color:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+/* ENTRANCE */
+#curtain{position:fixed;inset:0;z-index:9999;background:var(--dark);pointer-events:none;}
+.pe{position:absolute;left:0;right:0;background:var(--dark);}
+.pe:nth-child(1){top:0;height:20%;}
+.pe:nth-child(2){top:20%;height:20%;}
+.pe:nth-child(3){top:40%;height:20%;}
+.pe:nth-child(4){top:60%;height:20%;}
+.pe:nth-child(5){top:80%;height:20%;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:20px 24px;background:linear-gradient(to bottom,rgba(6,9,16,.95),transparent);}
+.nav-back{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);text-decoration:none;transition:color .3s;}
+.nav-back:hover{color:var(--neon);}
+.nav-back .material-symbols-outlined{font-size:16px;}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 24px 48px;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;z-index:0;}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);animation:orb-float 8s ease-in-out infinite;}
+.orb-1{width:400px;height:400px;background:radial-gradient(circle,rgba(0,212,255,.1) 0%,transparent 70%);top:-80px;right:-80px;animation-delay:0s;}
+.orb-2{width:250px;height:250px;background:radial-gradient(circle,rgba(0,80,255,.07) 0%,transparent 70%);bottom:100px;left:-50px;animation-delay:-4s;}
+@keyframes orb-float{0%,100%{transform:translate(0,0);}50%{transform:translate(-20px,25px);}}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:50px 50px;mask-image:radial-gradient(ellipse at 70% 40%,black 20%,transparent 70%);}
+.hero-letter{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Epilogue',sans-serif;font-size:clamp(180px,38vw,380px);font-weight:900;color:rgba(0,212,255,.03);letter-spacing:-.1em;pointer-events:none;user-select:none;line-height:1;}
+.hero-content{position:relative;z-index:1;}
+.eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.eyebrow-line{width:28px;height:1px;background:var(--neon);}
+.eyebrow-text{font-size:10px;font-weight:800;letter-spacing:.4em;text-transform:uppercase;color:var(--neon);opacity:.7;}
+.hero-title{font-family:'Epilogue',sans-serif;font-size:clamp(48px,13vw,96px);font-weight:900;line-height:.88;letter-spacing:-.04em;margin-bottom:24px;}
+.hero-title .acc{font-style:italic;color:var(--neon);}
+.hero-title .ghost{-webkit-text-stroke:1px rgba(255,255,255,.14);color:transparent;}
+.hero-desc{font-size:14px;font-weight:400;line-height:1.7;color:rgba(255,255,255,.45);max-width:340px;margin-bottom:32px;}
+.hero-cta{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--neon);color:#000;font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;border-radius:100px;transition:all .3s;box-shadow:0 0 40px rgba(0,212,255,.25);}
+.hero-cta:hover{box-shadow:0 0 60px rgba(0,212,255,.45);transform:translateY(-2px);}
+
+/* SECTIONS */
+section{padding:80px 24px;}
+.sec-label{display:flex;align-items:center;gap:10px;margin-bottom:36px;}
+.sec-num{font-size:9px;font-weight:800;letter-spacing:.4em;color:var(--neon);opacity:.6;}
+.sec-line{flex:1;height:1px;background:var(--border);}
+.sec-tag{font-size:9px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.2);}
+
+/* METRICS CARDS */
+.metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px;}
+.metric-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px 16px;position:relative;overflow:hidden;transition:border-color .3s;}
+.metric-card:hover{border-color:rgba(0,212,255,.25);}
+.metric-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--neon),transparent);}
+.metric-val{font-family:'Epilogue',sans-serif;font-size:32px;font-weight:900;color:var(--neon);letter-spacing:-.04em;line-height:1;margin-bottom:4px;}
+.metric-label{font-size:11px;color:rgba(255,255,255,.4);font-weight:600;}
+
+/* SOCIAL POST MOCKUP */
+.post-mockup{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:20px;margin-bottom:24px;}
+.post-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.post-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--neon),#0050ff);flex-shrink:0;}
+.post-name{font-size:13px;font-weight:700;color:#fff;}
+.post-handle{font-size:11px;color:rgba(255,255,255,.35);}
+.post-img{width:100%;aspect-ratio:4/3;border-radius:14px;background:linear-gradient(135deg,#0a1628,#0d2040);display:flex;align-items:center;justify-content:center;margin-bottom:14px;position:relative;overflow:hidden;}
+.post-img-inner{font-family:'Epilogue',sans-serif;font-size:48px;font-weight:900;color:var(--neon);opacity:.15;letter-spacing:-.05em;}
+.post-img::after{content:'LCG';position:absolute;font-family:'Epilogue',sans-serif;font-size:56px;font-weight:900;color:rgba(0,212,255,.06);letter-spacing:-.05em;}
+.post-stats{display:flex;gap:18px;}
+.post-stat{display:flex;align-items:center;gap:5px;font-size:12px;color:rgba(255,255,255,.4);}
+.post-stat .material-symbols-outlined{font-size:16px;}
+
+/* PLATFORM PILLS */
+.platforms{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;}
+.platform-pill{display:flex;align-items:center;gap:7px;padding:8px 14px;border:1px solid var(--border);border-radius:100px;font-size:11px;font-weight:700;color:rgba(255,255,255,.6);background:var(--card);transition:all .3s;}
+.platform-pill:hover{border-color:var(--neon);color:var(--neon);}
+
+/* WHAT WE DO list */
+.wwd-list{display:flex;flex-direction:column;gap:0;}
+.wwd-item{display:flex;gap:16px;padding:22px 0;border-bottom:1px solid var(--border);transition:background .3s;}
+.wwd-item:last-child{border-bottom:none;}
+.wwd-n{font-size:10px;font-weight:800;letter-spacing:.2em;color:rgba(0,212,255,.4);padding-top:2px;min-width:28px;}
+.wwd-body{}
+.wwd-title{font-size:16px;font-weight:700;color:#fff;margin-bottom:5px;}
+.wwd-desc{font-size:12px;color:rgba(255,255,255,.4);line-height:1.6;}
+
+/* RESULTS */
+.results-bg{background:#060910;}
+.results-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.r-card{background:var(--card);padding:28px 20px;text-align:center;}
+.r-card:first-child{border-radius:16px 0 0 0;}
+.r-card:nth-child(2){border-radius:0 16px 0 0;}
+.r-card:nth-child(3){border-radius:0 0 0 16px;}
+.r-card:last-child{border-radius:0 0 16px 0;}
+.r-num{font-family:'Epilogue',sans-serif;font-size:34px;font-weight:900;color:var(--neon);letter-spacing:-.04em;line-height:1;margin-bottom:5px;}
+.r-lbl{font-size:11px;color:rgba(255,255,255,.35);font-weight:600;}
+
+/* CTA */
+.cta-sec{text-align:center;padding:80px 24px 100px;}
+.cta-pre{font-size:10px;font-weight:800;letter-spacing:.5em;text-transform:uppercase;color:var(--neon);opacity:.6;margin-bottom:18px;}
+.cta-h{font-family:'Epilogue',sans-serif;font-size:clamp(34px,9vw,60px);font-weight:900;line-height:.9;letter-spacing:-.04em;margin-bottom:14px;}
+.cta-h .c{color:var(--neon);}
+.cta-sub{font-size:14px;color:rgba(255,255,255,.4);margin-bottom:32px;line-height:1.6;}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:17px 38px;background:var(--neon);color:#000;font-size:11px;font-weight:900;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;border-radius:100px;transition:all .3s;box-shadow:0 0 50px rgba(0,212,255,.25);}
+.cta-btn:hover{transform:translateY(-3px);box-shadow:0 0 70px rgba(0,212,255,.45);}
+
+.rup{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
+.rup.in{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+<div id="curtain"><div class="pe"></div><div class="pe"></div><div class="pe"></div><div class="pe"></div><div class="pe"></div></div>
+
+<nav>
+  <a href="services.html" class="nav-back"><span class="material-symbols-outlined">arrow_back_ios</span>Services</a>
+  <span style="font-size:9px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.2)">LCG Studio</span>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg">
+    <div class="orb orb-1"></div><div class="orb orb-2"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-letter">S.</div>
+  </div>
+  <div class="hero-content rup">
+    <div class="eyebrow"><div class="eyebrow-line"></div><div class="eyebrow-text">LCG Creative Studio</div></div>
+    <h1 class="hero-title"><span class="ghost">Social</span><br><span class="acc">Media.</span></h1>
+    <p class="hero-desc">We don't post. We orchestrate. Every caption, every visual, every algorithm beat — engineered to grow your audience and convert them into loyal customers.</p>
+    <a href="https://www.instagram.com/lcg.reel/" target="_blank" class="hero-cta">See Our Work <span class="material-symbols-outlined" style="font-size:15px">north_east</span></a>
+  </div>
+</section>
+
+<section style="background:#060910;">
+  <div class="sec-label"><div class="sec-num">01</div><div class="sec-line"></div><div class="sec-tag">Live Results</div></div>
+  <div class="metrics-grid rup">
+    <div class="metric-card"><div class="metric-val" data-target="340">0</div><div class="metric-label">% Avg. Reach Growth</div></div>
+    <div class="metric-card"><div class="metric-val" data-target="12">0</div><div class="metric-label">Platforms Managed</div></div>
+    <div class="metric-card"><div class="metric-val" data-target="4.8">0</div><div class="metric-label">% Avg. Engagement Rate</div></div>
+    <div class="metric-card"><div class="metric-val" data-target="50">0</div><div class="metric-label">+ Brands Scaled</div></div>
+  </div>
+  <div class="post-mockup rup" style="transition-delay:.1s">
+    <div class="post-header">
+      <div class="post-avatar"></div>
+      <div><div class="post-name">@yourbrand</div><div class="post-handle">Managed by LCG Studio</div></div>
+    </div>
+    <div class="post-img"><div class="post-img-inner">LCG</div></div>
+    <div class="post-stats">
+      <div class="post-stat"><span class="material-symbols-outlined">favorite</span>2,841</div>
+      <div class="post-stat"><span class="material-symbols-outlined">chat_bubble</span>187</div>
+      <div class="post-stat"><span class="material-symbols-outlined">share</span>433</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-label"><div class="sec-num">02</div><div class="sec-line"></div><div class="sec-tag">Platforms</div></div>
+  <div class="platforms rup">
+    <div class="platform-pill"><span class="material-symbols-outlined" style="font-size:16px">photo_camera</span>Instagram</div>
+    <div class="platform-pill"><span class="material-symbols-outlined" style="font-size:16px">play_circle</span>YouTube</div>
+    <div class="platform-pill"><span class="material-symbols-outlined" style="font-size:16px">videocam</span>Reels & TikTok</div>
+    <div class="platform-pill"><span class="material-symbols-outlined" style="font-size:16px">groups</span>Facebook</div>
+    <div class="platform-pill"><span class="material-symbols-outlined" style="font-size:16px">business_center</span>LinkedIn</div>
+    <div class="platform-pill"><span class="material-symbols-outlined" style="font-size:16px">chat</span>X / Twitter</div>
+  </div>
+
+  <div class="sec-label" style="margin-top:40px"><div class="sec-num">03</div><div class="sec-line"></div><div class="sec-tag">What We Do</div></div>
+  <div class="wwd-list">
+    <div class="wwd-item rup"><div class="wwd-n">01</div><div class="wwd-body"><div class="wwd-title">Content Strategy</div><div class="wwd-desc">Monthly content calendars, topic clusters, and trend-reactive planning that keeps your brand always relevant.</div></div></div>
+    <div class="wwd-item rup" style="transition-delay:.07s"><div class="wwd-n">02</div><div class="wwd-body"><div class="wwd-title">Cinematic Content Creation</div><div class="wwd-desc">Scroll-stopping Reels, Stories, carousels, and static posts — created and shot by our team.</div></div></div>
+    <div class="wwd-item rup" style="transition-delay:.14s"><div class="wwd-n">03</div><div class="wwd-body"><div class="wwd-title">Community Management</div><div class="wwd-desc">We handle your DMs, comments, and community interactions daily — keeping your audience engaged.</div></div></div>
+    <div class="wwd-item rup" style="transition-delay:.21s"><div class="wwd-n">04</div><div class="wwd-body"><div class="wwd-title">Analytics & Reporting</div><div class="wwd-desc">Weekly performance dashboards and monthly deep-dives with clear growth metrics and next-step actions.</div></div></div>
+    <div class="wwd-item rup" style="transition-delay:.28s"><div class="wwd-n">05</div><div class="wwd-body"><div class="wwd-title">Paid Social Ads</div><div class="wwd-desc">Targeted ad campaigns on Meta & Google that convert followers into paying customers.</div></div></div>
+  </div>
+</section>
+
+<section class="results-bg">
+  <div class="sec-label"><div class="sec-num">04</div><div class="sec-line"></div><div class="sec-tag">Our Numbers</div></div>
+  <div class="results-grid rup">
+    <div class="r-card"><div class="r-num">2M+</div><div class="r-lbl">Total Reach Generated</div></div>
+    <div class="r-card"><div class="r-num">50+</div><div class="r-lbl">Brands Managed</div></div>
+    <div class="r-card"><div class="r-num">30</div><div class="r-lbl">Day Avg. Onboarding</div></div>
+    <div class="r-card"><div class="r-num">98%</div><div class="r-lbl">Client Retention</div></div>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <p class="cta-pre">Ready to Grow?</p>
+  <h2 class="cta-h rup">Let's make<br>your brand <span class="c">viral.</span></h2>
+  <p class="cta-sub rup" style="transition-delay:.1s">We only work with brands serious about digital growth. Limited spots available.</p>
+  <a href="https://www.instagram.com/lcg.reel/" target="_blank" class="cta-btn rup" style="transition-delay:.2s">Start Growing <span class="material-symbols-outlined" style="font-size:15px">north_east</span></a>
+</section>
+
+<script>
+document.querySelectorAll('.pe').forEach((p,i)=>{setTimeout(()=>{p.style.transition='transform .65s cubic-bezier(.16,1,.3,1)';p.style.transform='scaleY(0)';p.style.transformOrigin='top';},50+i*60);});
+setTimeout(()=>{document.getElementById('curtain').style.display='none';},700);
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.rup').forEach(el=>{
+  if(el.closest('.hero')){setTimeout(()=>el.classList.add('in'),200);}
+  else io.observe(el);
+});
+// Counter animation
+const counters=document.querySelectorAll('[data-target]');
+const co=new IntersectionObserver(entries=>entries.forEach(e=>{
+  if(!e.isIntersecting)return;
+  const t=parseFloat(e.target.dataset.target);
+  let s=0;const dur=1800;const step=16;
+  const inc=()=>{s+=step;const p=Math.min(s/dur,1);const v=t*p;e.target.textContent=Number.isInteger(t)?Math.round(v):v.toFixed(1);if(p<1)requestAnimationFrame(inc);};
+  requestAnimationFrame(inc);co.unobserve(e.target);
+}),{threshold:.5});
+counters.forEach(c=>co.observe(c));
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="assets/page-transitions.js"></script>
+</body>
+</html>
