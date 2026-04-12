@@ -27,7 +27,8 @@
             font-family: 'Manrope', sans-serif;
             color: #222;
             margin: 0;
-            overflow: hidden;
+            /* overflow:hidden removed — mobile needs to scroll */
+            overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -52,7 +53,7 @@
             text-shadow:
                 2px 2px 4px var(--s-dark),
                 -1px -1px 2px var(--s-light),
-                0 0 20px rgba(0,0,0,0.1);
+                0 0 20px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
 
@@ -93,7 +94,7 @@
         .card {
             background: var(--bg);
             border-radius: 40px;
-            box-shadow: 
+            box-shadow:
                 16px 16px 32px var(--s-dark),
                 -16px -16px 32px var(--s-light);
             aspect-ratio: 1/1;
@@ -105,18 +106,18 @@
             position: relative;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 
+            box-shadow:
                 24px 24px 48px var(--s-dark),
                 -24px -24px 48px var(--s-light);
         }
 
         .card.sunken {
-            box-shadow: 
+            box-shadow:
                 inset 10px 10px 20px var(--s-dark),
                 inset -10px -10px 20px var(--s-light);
             background: var(--bg);
@@ -131,7 +132,7 @@
             text-align: center;
             line-height: 1.4;
             pointer-events: none;
-            text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
         }
 
         .card-icon {
@@ -139,7 +140,7 @@
             color: var(--accent);
             pointer-events: none;
             opacity: 1;
-            filter: drop-shadow(0 0 5px rgba(0,0,0,0.1));
+            filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.1));
         }
 
         /* Control Buttons */
@@ -169,7 +170,7 @@
 
         .minus-btn {
             background: var(--bg);
-            box-shadow: 
+            box-shadow:
                 6px 6px 12px var(--s-dark),
                 -6px -6px 12px var(--s-light);
             color: #888;
@@ -247,15 +248,18 @@
                 align-items: center;
                 text-align: center;
             }
+
             .controls {
                 width: 100%;
                 gap: 30px;
             }
+
             .inset-list {
                 width: 100%;
                 max-width: 320px;
                 margin: 0 auto;
             }
+
             .grid-mask {
                 height: 500px;
                 width: 100%;
@@ -263,63 +267,143 @@
             }
         }
 
+        /* ─────────────────────────────────────────────────────
+           PREMIUM MOBILE LAYOUT (768px and below) — Services
+        ───────────────────────────────────────────────────── */
         @media (max-width: 768px) {
-            .services-grid-inner {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
+
+            /* Allow vertical scroll, clip horizontal only */
+            body { overflow-y: auto; overflow-x: hidden; }
+
+            /* Main layout: vertical flex column, perfectly padded */
+            .main-container {
+                height: auto;
+                min-height: 100dvh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 70px 16px 80px;
+                gap: 0;
+                overflow: visible;
             }
+
+            /* Controls block: centered, tight */
+            .controls {
+                width: 100%;
+                gap: 0;
+                align-items: center;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            /* Heading: use fluid clamped size */
             .text-8xl {
-                font-size: 3.2rem !important;
-                line-height: 1;
+                font-size: clamp(2.4rem, 10vw, 3.2rem) !important;
+                line-height: 0.88 !important;
+                letter-spacing: -0.04em;
+                margin-bottom: 10px;
             }
+
+            /* Hide decorative icon row — wastes vertical space */
+            .controls > div > .flex.gap-2.mb-8 { display: none; }
+
+            /* Hide the inset list panel */
+            .inset-list { display: none; }
+
+            /* Button row: centered, horizontal, tight gap */
+            .flex.items-start.gap-10 {
+                justify-content: center;
+                align-items: center;
+                gap: 14px;
+                margin-bottom: 14px;
+            }
+
+            .btn-circle {
+                width: 50px;
+                height: 50px;
+                flex-shrink: 0;
+            }
+            .plus-btn { margin-bottom: 0; }
+
+            /* Grid mask: show ALL services — no clipping on mobile */
+            .grid-mask {
+                width: 100%;
+                height: auto !important;         /* expand to fit all cards */
+                min-height: unset !important;
+                max-height: none !important;
+                overflow: visible !important;    /* no clip */
+                mask-image: none !important;     /* no fade-out effect */
+                -webkit-mask-image: none !important;
+                margin: 0;
+                padding: 0;
+            }
+
+            /* The JS-scrolled inner grid: reset transform and let it flow */
+            .services-grid-inner {
+                transform: none !important;      /* override any GSAP translateY */
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            /* Hide the + / − buttons — not needed when all cards are visible */
+            #btn-plus, #btn-minus {
+                display: none !important;
+            }
+
+            /* Also hide the button flex-col container */
+            .flex.items-start.gap-10 .flex.flex-col {
+                display: none !important;
+            }
+
+            /* Reset card-4 inline stagger transform — causes misalignment */
+            #card-4 { transform: none !important; }
+
             .card {
-                padding: 15px;
-                border-radius: 25px;
+                padding: 12px 10px;
+                border-radius: 20px;
+                aspect-ratio: 1 / 1;
             }
+
             .card-icon {
                 font-size: 1.5rem;
+                margin-bottom: 6px !important;
             }
+
             .service-label {
-                font-size: 8px;
-            }
-            .btn-circle {
-                width: 55px;
-                height: 55px;
-            }
-            .inset-list {
-                display: none;
-            }
-            .grid-mask {
-                height: 400px;
-                mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+                font-size: 9px;
+                letter-spacing: 0.12em;
             }
         }
 
-        @media (max-width: 480px) {
-            .main-container {
-                padding-top: 80px;
-                gap: 20px;
-            }
-            .services-grid-inner {
-                grid-template-columns: repeat(1, 1fr);
-                max-width: 260px;
-            }
+        /* Extra-small phones (≤400px) */
+        @media (max-width: 400px) {
+            .main-container { padding: 64px 12px 72px; }
+
             .text-8xl {
-                font-size: 2.5rem !important;
+                font-size: clamp(2.1rem, 9vw, 2.5rem) !important;
             }
-            .controls {
-                gap: 15px;
+
+            /* Still unlock the mask on tiny phones */
+            .grid-mask {
+                height: auto !important;
+                min-height: unset !important;
+                max-height: none !important;
+                overflow: visible !important;
+                mask-image: none !important;
+                -webkit-mask-image: none !important;
             }
-            .nav-link {
-                background: var(--bg);
-                padding: 6px 12px;
-                border-radius: 15px;
-                font-size: 9px;
+
+            .services-grid-inner { gap: 10px; }
+
+            .card {
+                padding: 10px 8px;
+                border-radius: 16px;
             }
-            .bg-brand {
-                font-size: 80vw;
-                opacity: 0.05;
-            }
+
+            .card-icon { font-size: 1.3rem; }
+            .service-label { font-size: 8px; }
+
+            .bg-brand { font-size: 80vw; opacity: 0.05; }
         }
 
         .w-badge {
@@ -341,7 +425,6 @@
             z-index: 100;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
-
     </style>
 </head>
 
@@ -522,7 +605,7 @@
         const scrollCooldown = 400; // ms
 
         window.addEventListener('wheel', (e) => {
-            if (window.isAtBottomTransition) return; 
+            if (window.isAtBottomTransition) return;
 
             const now = Date.now();
             if (now - lastScrollTime < scrollCooldown) return;
@@ -567,16 +650,38 @@
         // Tell the transition engine we are at the bottom when scrollIndex reaches max
         function checkState() {
             window.isServicesAtBottom = (scrollIndex === maxScroll);
-            window.isServicesAtTop    = (scrollIndex === 0);
+            window.isServicesAtTop = (scrollIndex === 0);
         }
-        
+
         // Wrap updateScroll to check bottom state
         const originalUpdateScroll = updateScroll;
-        updateScroll = function() {
+        updateScroll = function () {
             originalUpdateScroll();
             checkState();
         };
         checkState(); // Initial check
+
+        // ─────────────────────────────────────────────────────────────────
+        // MOBILE OVERRIDE: On phones, show all cards via natural page scroll.
+        // Clear the isServicesAtBottom/Top overrides so page-transitions.js
+        // uses real window scroll position for transition triggers.
+        // ─────────────────────────────────────────────────────────────────
+        (function applyMobileMode() {
+            const isMobile = window.innerWidth <= 768;
+            if (!isMobile) return;
+
+            // Delete overrides — page-transitions.js falls back to native scroll
+            delete window.isServicesAtBottom;
+            delete window.isServicesAtTop;
+
+            // Unlock the grid: reset any GSAP transform so all cards are visible
+            const gridInner = document.getElementById('grid-inner');
+            if (gridInner) gridInner.style.transform = 'none';
+
+            // Block the touchend swipe handler from re-setting these overrides
+            // by monkey-patching checkState to be a no-op on mobile
+            updateScroll = function() { /* no-op on mobile — grid is static */ };
+        })();
     </script>
     <!-- ── Cinematic Page Transition Engine ── -->
     <script src="assets/page-transitions.js"></script>
