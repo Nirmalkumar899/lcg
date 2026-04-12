@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services | LCG Cinematic</title>
+    <link rel="icon" type="image/jpeg" href="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;900&family=Manrope:wght@300;400;600;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;900&family=Manrope:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700" rel="stylesheet" />
     <style>
         :root {
@@ -27,7 +25,6 @@
             font-family: 'Manrope', sans-serif;
             color: #222;
             margin: 0;
-            /* overflow:hidden removed — mobile needs to scroll */
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
@@ -47,7 +44,7 @@
             letter-spacing: -0.05em;
         }
 
-        /* Neumorphic Typography but with Lime Color */
+        /* Neumorphic Typography */
         .n-text {
             color: var(--accent);
             text-shadow:
@@ -68,12 +65,9 @@
             gap: 8px;
             transition: color 0.3s ease;
         }
+        .nav-link:hover { color: #222; }
 
-        .nav-link:hover {
-            color: #222;
-        }
-
-        /* Main Container */
+        /* ── DESKTOP LAYOUT ── */
         .main-container {
             height: 100vh;
             display: grid;
@@ -83,14 +77,13 @@
             gap: 40px;
         }
 
-        /* Control Panel */
         .controls {
             display: flex;
             flex-direction: column;
             gap: 40px;
         }
 
-        /* Improved Neumorphic Cards */
+        /* Neumorphic Cards */
         .card {
             background: var(--bg);
             border-radius: 40px;
@@ -108,14 +101,12 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
-
         .card:hover {
             transform: translateY(-5px);
             box-shadow:
                 24px 24px 48px var(--s-dark),
                 -24px -24px 48px var(--s-light);
         }
-
         .card.sunken {
             box-shadow:
                 inset 10px 10px 20px var(--s-dark),
@@ -155,19 +146,16 @@
             border: none;
             transition: all 0.3s ease;
         }
-
         .plus-btn {
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             box-shadow: 0 8px 16px var(--accent-glow);
             color: #000;
             margin-bottom: 20px;
         }
-
         .plus-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 12px 24px var(--accent-glow);
         }
-
         .minus-btn {
             background: var(--bg);
             box-shadow:
@@ -175,7 +163,6 @@
                 -6px -6px 12px var(--s-light);
             color: #888;
         }
-
         .minus-btn:hover {
             box-shadow:
                 4px 4px 8px var(--s-dark),
@@ -183,7 +170,7 @@
             transform: scale(0.98);
         }
 
-        /* Inset List Area */
+        /* Inset List */
         .inset-list {
             background: var(--bg);
             border-radius: 30px;
@@ -196,7 +183,6 @@
             flex-direction: column;
             gap: 15px;
         }
-
         .list-line {
             height: 8px;
             background: rgba(0, 0, 0, 0.035);
@@ -205,7 +191,6 @@
             overflow: hidden;
             position: relative;
         }
-
         .line-fill {
             height: 100%;
             background: var(--accent);
@@ -213,7 +198,6 @@
             transition: width 0.5s ease;
             opacity: 0.1;
         }
-
         .line-fill.active {
             width: 100%;
             opacity: 0.3;
@@ -227,7 +211,6 @@
             margin: -40px -20px;
             mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
         }
-
         .services-grid-inner {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -235,7 +218,6 @@
             transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        /* Responsive Styles */
         @media (max-width: 1200px) {
             .main-container {
                 grid-template-columns: 1fr;
@@ -248,184 +230,409 @@
                 align-items: center;
                 text-align: center;
             }
-
-            .controls {
-                width: 100%;
-                gap: 30px;
-            }
-
-            .inset-list {
-                width: 100%;
-                max-width: 320px;
-                margin: 0 auto;
-            }
-
-            .grid-mask {
-                height: 500px;
-                width: 100%;
-                margin: 0;
-            }
+            .controls { width: 100%; gap: 30px; }
+            .inset-list { width: 100%; max-width: 320px; margin: 0 auto; }
+            .grid-mask { height: 500px; width: 100%; margin: 0; }
         }
 
-        /* ─────────────────────────────────────────────────────
-           PREMIUM MOBILE LAYOUT (768px and below) — Services
-        ───────────────────────────────────────────────────── */
+        /* ═══════════════════════════════════════════════════════
+           MOBILE LAYOUT  ≤ 768px  — Split panel + drag-to-drop
+        ═══════════════════════════════════════════════════════ */
         @media (max-width: 768px) {
 
-            /* Allow vertical scroll, clip horizontal only */
-            body { overflow-y: auto; overflow-x: hidden; }
+            /* Hide ALL desktop elements */
+            .desktop-only { display: none !important; }
 
-            /* Main layout: vertical flex column, perfectly padded */
-            .main-container {
-                height: auto;
-                min-height: 100dvh;
+            body {
+                overflow: hidden;
+                height: 100dvh;
+            }
+
+            /* Mobile top nav */
+            .mobile-nav {
+                position: fixed;
+                top: 0; left: 0; right: 0;
+                z-index: 200;
+                display: flex !important;
+                align-items: center;
+                justify-content: space-between;
+                padding: 16px 20px;
+            }
+
+            /* Mobile split layout */
+            .mobile-layout {
+                display: flex !important;
+                height: 100dvh;
+                width: 100%;
+            }
+
+            /* LEFT panel */
+            .m-left {
+                width: 48%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding: 64px 14px 32px 16px;
+                flex-shrink: 0;
+            }
+            .m-title-group { margin-bottom: 20px; }
+            .m-eyebrow {
+                font-size: 8px;
+                font-weight: 800;
+                letter-spacing: 0.4em;
+                text-transform: uppercase;
+                color: var(--accent);
+                opacity: 0.7;
+                margin-bottom: 8px;
+            }
+            .m-title {
+                font-family: 'Epilogue', sans-serif;
+                font-size: clamp(26px, 7vw, 38px);
+                font-weight: 900;
+                line-height: 0.9;
+                letter-spacing: -0.04em;
+                color: #1a1a1a;
+            }
+            .m-title .acc { color: var(--accent); font-style: italic; }
+
+            /* Drop zone */
+            .drop-zone {
+                flex: 1;
+                max-height: 260px;
+                border-radius: 22px;
+                border: 2px dashed rgba(0,0,0,0.12);
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                padding: 70px 16px 80px;
-                gap: 0;
-                overflow: visible;
-            }
-
-            /* Controls block: centered, tight */
-            .controls {
-                width: 100%;
-                gap: 0;
-                align-items: center;
-                text-align: center;
-                margin-bottom: 10px;
-            }
-
-            /* Heading: use fluid clamped size */
-            .text-8xl {
-                font-size: clamp(2.4rem, 10vw, 3.2rem) !important;
-                line-height: 0.88 !important;
-                letter-spacing: -0.04em;
-                margin-bottom: 10px;
-            }
-
-            /* Hide decorative icon row — wastes vertical space */
-            .controls > div > .flex.gap-2.mb-8 { display: none; }
-
-            /* Hide the inset list panel */
-            .inset-list { display: none; }
-
-            /* Button row: centered, horizontal, tight gap */
-            .flex.items-start.gap-10 {
                 justify-content: center;
+                gap: 10px;
+                background: rgba(255,255,255,0.45);
+                position: relative;
+                overflow: hidden;
+                transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+                box-shadow: inset 5px 5px 10px var(--s-dark), inset -3px -3px 8px var(--s-light);
+            }
+            .drop-zone.dz-active {
+                border-color: var(--accent);
+                background: rgba(142,179,42,0.07);
+                box-shadow: inset 3px 3px 6px var(--s-dark), inset -2px -2px 6px var(--s-light), 0 0 30px rgba(142,179,42,0.15);
+            }
+            .drop-zone.dz-filled {
+                border-style: solid;
+                border-color: var(--accent);
+            }
+
+            .dz-hint {
+                display: flex;
+                flex-direction: column;
                 align-items: center;
-                gap: 14px;
-                margin-bottom: 14px;
+                gap: 8px;
+                opacity: 0.35;
+                transition: opacity 0.3s;
+                pointer-events: none;
+            }
+            .drop-zone.dz-active .dz-hint,
+            .drop-zone.dz-filled .dz-hint { opacity: 0; }
+
+            .dz-arrow-wrap {
+                width: 36px; height: 36px;
+                border-radius: 50%;
+                border: 2px dashed rgba(0,0,0,0.18);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: dz-bounce 2s ease-in-out infinite;
+            }
+            @keyframes dz-bounce {
+                0%,100% { transform: translateX(0); }
+                50% { transform: translateX(-5px); }
+            }
+            .dz-arrow-wrap .material-symbols-outlined { font-size: 16px; color: #666; }
+
+            .dz-text {
+                font-size: 10px;
+                font-weight: 700;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                color: #777;
+                text-align: center;
+                line-height: 1.4;
             }
 
-            .btn-circle {
-                width: 50px;
-                height: 50px;
-                flex-shrink: 0;
+            /* Dropped preview */
+            .dz-preview {
+                position: absolute;
+                inset: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                opacity: 0;
+                transform: scale(0.85);
+                transition: all 0.45s cubic-bezier(0.16,1,0.3,1);
+                pointer-events: none;
             }
-            .plus-btn { margin-bottom: 0; }
-
-            /* Grid mask: show ALL services — no clipping on mobile */
-            .grid-mask {
-                width: 100%;
-                height: auto !important;         /* expand to fit all cards */
-                min-height: unset !important;
-                max-height: none !important;
-                overflow: visible !important;    /* no clip */
-                mask-image: none !important;     /* no fade-out effect */
-                -webkit-mask-image: none !important;
-                margin: 0;
-                padding: 0;
+            .dz-preview.visible {
+                opacity: 1;
+                transform: scale(1);
+                pointer-events: auto;
             }
-
-            /* The JS-scrolled inner grid: reset transform and let it flow */
-            .services-grid-inner {
-                transform: none !important;      /* override any GSAP translateY */
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-
-            /* Hide the + / − buttons — not needed when all cards are visible */
-            #btn-plus, #btn-minus {
-                display: none !important;
-            }
-
-            /* Also hide the button flex-col container */
-            .flex.items-start.gap-10 .flex.flex-col {
-                display: none !important;
-            }
-
-            /* Reset card-4 inline stagger transform — causes misalignment */
-            #card-4 { transform: none !important; }
-
-            .card {
-                padding: 12px 10px;
-                border-radius: 20px;
-                aspect-ratio: 1 / 1;
-            }
-
-            .card-icon {
-                font-size: 1.5rem;
-                margin-bottom: 6px !important;
-            }
-
-            .service-label {
-                font-size: 9px;
-                letter-spacing: 0.12em;
-            }
-        }
-
-        /* Extra-small phones (≤400px) */
-        @media (max-width: 400px) {
-            .main-container { padding: 64px 12px 72px; }
-
-            .text-8xl {
-                font-size: clamp(2.1rem, 9vw, 2.5rem) !important;
-            }
-
-            /* Still unlock the mask on tiny phones */
-            .grid-mask {
-                height: auto !important;
-                min-height: unset !important;
-                max-height: none !important;
-                overflow: visible !important;
-                mask-image: none !important;
-                -webkit-mask-image: none !important;
-            }
-
-            .services-grid-inner { gap: 10px; }
-
-            .card {
-                padding: 10px 8px;
+            .dz-icon-wrap {
+                width: 56px; height: 56px;
                 border-radius: 16px;
+                background: linear-gradient(135deg, var(--accent), #b8d433);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 10px 28px rgba(142,179,42,0.4);
+            }
+            .dz-icon-wrap .material-symbols-outlined { font-size: 26px; color: #000; }
+            .dz-label {
+                font-size: 11px;
+                font-weight: 800;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: #333;
+            }
+            .dz-cta {
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+                padding: 8px 16px;
+                background: #1a1a1a;
+                color: #fff;
+                font-size: 9px;
+                font-weight: 800;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                text-decoration: none;
+                border-radius: 100px;
+                cursor: pointer;
+                border: none;
+                transition: all 0.3s;
+                margin-top: 2px;
+            }
+            .dz-cta:hover { background: var(--accent); color: #000; }
+
+            /* Swipe guide */
+            .swipe-guide {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-top: 12px;
+                opacity: 0.35;
+            }
+            .sg-arrows { display: flex; gap: 3px; }
+            .sg-arrows span {
+                display: block;
+                width: 5px; height: 5px;
+                border-top: 1.5px solid #555;
+                border-left: 1.5px solid #555;
+                transform: rotate(-135deg);
+                animation: sg-pulse 1.8s ease-in-out infinite;
+            }
+            .sg-arrows span:nth-child(2) { animation-delay: -0.3s; }
+            .sg-arrows span:nth-child(3) { animation-delay: -0.6s; }
+            @keyframes sg-pulse {
+                0%,100% { opacity: 0.2; }
+                50% { opacity: 1; }
+            }
+            .sg-text {
+                font-size: 9px;
+                font-weight: 700;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: #777;
             }
 
-            .card-icon { font-size: 1.3rem; }
-            .service-label { font-size: 8px; }
+            /* RIGHT panel */
+            .m-right {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 64px 16px 32px 0;
+                overflow: hidden;
+                position: relative;
+            }
+            .m-right::before, .m-right::after {
+                content: '';
+                position: absolute;
+                left: 0; right: 0;
+                z-index: 10;
+                pointer-events: none;
+                height: 60px;
+            }
+            .m-right::before { top: 0; background: linear-gradient(to bottom, var(--bg), transparent); }
+            .m-right::after  { bottom: 0; background: linear-gradient(to top, var(--bg), transparent); }
 
-            .bg-brand { font-size: 80vw; opacity: 0.05; }
+            .m-cards-wrap { width: 100%; position: relative; }
+
+            .m-cards-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+                transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+            }
+
+            /* Mobile service cards */
+            .m-svc-card {
+                aspect-ratio: 1;
+                border-radius: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                position: relative;
+                touch-action: none;
+                user-select: none;
+                -webkit-user-select: none;
+                transition: box-shadow 0.3s, transform 0.3s, opacity 0.3s;
+            }
+            .m-svc-card.m-raised {
+                background: var(--bg);
+                box-shadow:
+                    8px 8px 16px var(--s-dark),
+                    -5px -5px 12px var(--s-light);
+                border: 1px solid rgba(255,255,255,0.6);
+                cursor: grab;
+            }
+            .m-svc-card.m-raised:active { cursor: grabbing; }
+            .m-svc-card.m-sunken {
+                background: var(--bg);
+                box-shadow:
+                    inset 5px 5px 10px var(--s-dark),
+                    inset -3px -3px 8px var(--s-light);
+            }
+            .m-svc-card.m-dragging {
+                opacity: 0.25;
+                transform: scale(0.93);
+            }
+            .m-svc-icon {
+                font-size: 22px;
+                color: var(--accent);
+                pointer-events: none;
+            }
+            .m-svc-label {
+                font-size: 8px;
+                font-weight: 800;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: var(--accent-dark);
+                text-align: center;
+                line-height: 1.4;
+                pointer-events: none;
+            }
+
+            /* Scroll dots */
+            .m-dots {
+                display: flex;
+                justify-content: center;
+                gap: 6px;
+                margin-top: 12px;
+            }
+            .m-dot {
+                width: 5px; height: 5px;
+                border-radius: 50%;
+                background: rgba(0,0,0,0.15);
+                transition: all 0.3s;
+            }
+            .m-dot.active {
+                background: var(--accent);
+                width: 14px;
+                border-radius: 3px;
+            }
+
+            /* Ghost drag */
+            .m-ghost {
+                position: fixed;
+                z-index: 9999;
+                pointer-events: none;
+                border-radius: 20px;
+                background: var(--bg);
+                box-shadow: 12px 12px 32px rgba(0,0,0,0.18), 0 0 50px rgba(142,179,42,0.2);
+                border: 2px solid rgba(142,179,42,0.3);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                opacity: 0;
+                transition: opacity 0.15s;
+            }
+
+            /* Curtain (transition overlay) */
+            .m-curtain {
+                position: fixed;
+                inset: 0;
+                z-index: 99999;
+                background: #0d0f10;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s;
+            }
+            .m-curtain.on {
+                opacity: 1;
+                pointer-events: all;
+            }
+            .curtain-inner {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+                transform: scale(0.8);
+                opacity: 0;
+                transition: all 0.4s cubic-bezier(0.16,1,0.3,1) 0.2s;
+            }
+            .m-curtain.on .curtain-inner { transform: scale(1); opacity: 1; }
+            .curtain-mark {
+                font-family: 'Epilogue', sans-serif;
+                font-size: 56px;
+                font-weight: 900;
+                color: #daff3d;
+                letter-spacing: -0.04em;
+                line-height: 1;
+            }
+            .curtain-sub {
+                font-size: 9px;
+                font-weight: 700;
+                letter-spacing: 0.4em;
+                text-transform: uppercase;
+                color: rgba(255,255,255,0.35);
+            }
         }
 
-
+        /* Extra-small phones */
+        @media (max-width: 400px) {
+            .m-left { width: 46%; padding: 60px 10px 24px 12px; }
+        }
     </style>
 </head>
 
 <body>
-    <div class="bg-brand">Design</div>
 
+    <!-- ══════════════════════════════════════════
+         DESKTOP VERSION  (hidden on mobile)
+    ══════════════════════════════════════════ -->
+    <div class="bg-brand desktop-only">Design</div>
 
-    <!-- Top Navigation -->
-    <div class="fixed top-10 left-12 right-12 flex justify-between items-center z-50">
+    <!-- Desktop Top Navigation -->
+    <div class="fixed top-10 left-12 right-12 flex justify-between items-center z-50 desktop-only">
         <a href="index.html" class="nav-link">
             <span class="material-symbols-outlined text-lg">west</span> BACK
         </a>
         <div class="text-[9px] font-bold text-zinc-400 tracking-widest uppercase">
-            Product & Digital Design Studio — LCG
+            Product &amp; Digital Design Studio — LCG
         </div>
     </div>
 
-    <main class="main-container">
-        <!-- Left Section: Typography and Controls -->
+    <main class="main-container desktop-only">
+        <!-- Left Section -->
         <div class="controls">
             <div>
                 <h1 class="text-8xl font-black n-text leading-[0.85] tracking-tighter mb-4">OUR<br>SERVICES</h1>
@@ -447,52 +654,28 @@
                 </div>
 
                 <div class="inset-list">
-                    <div class="list-line">
-                        <div class="line-fill active"></div>
-                    </div>
-                    <div class="list-line">
-                        <div class="line-fill"></div>
-                    </div>
-                    <div class="list-line">
-                        <div class="line-fill"></div>
-                    </div>
-                    <div class="list-line">
-                        <div class="line-fill"></div>
-                    </div>
-                    <div class="list-line">
-                        <div class="line-fill"></div>
-                    </div>
-                    <div class="list-line">
-                        <div class="line-fill"></div>
-                    </div>
-                    <div class="list-line">
-                        <div class="line-fill"></div>
-                    </div>
-                    <div class="list-line">
-                        <div class="line-fill"></div>
-                    </div>
-                    <div class="list-line">
-                        <div class="line-fill"></div>
-                    </div>
-                    <div class="list-line">
-                        <div class="line-fill"></div>
-                    </div>
-                    <div class="list-line">
-                        <div class="line-fill"></div>
-                    </div>
-                    <div class="list-line">
-                        <div class="line-fill"></div>
-                    </div>
+                    <div class="list-line"><div class="line-fill active"></div></div>
+                    <div class="list-line"><div class="line-fill"></div></div>
+                    <div class="list-line"><div class="line-fill"></div></div>
+                    <div class="list-line"><div class="line-fill"></div></div>
+                    <div class="list-line"><div class="line-fill"></div></div>
+                    <div class="list-line"><div class="line-fill"></div></div>
+                    <div class="list-line"><div class="line-fill"></div></div>
+                    <div class="list-line"><div class="line-fill"></div></div>
+                    <div class="list-line"><div class="line-fill"></div></div>
+                    <div class="list-line"><div class="line-fill"></div></div>
+                    <div class="list-line"><div class="line-fill"></div></div>
+                    <div class="list-line"><div class="line-fill"></div></div>
                 </div>
             </div>
         </div>
 
-        <!-- Right Section: Cards -->
+        <!-- Right Section: Cards Grid -->
         <div class="grid-mask">
             <div class="services-grid-inner" id="grid-inner">
                 <!-- Row 1 -->
                 <div id="card-0" class="card sunken"></div>
-                <div id="card-1" class="card">
+                <div id="card-1" class="card" onclick="window.location.href='brand-identity.html'">
                     <div class="flex flex-col items-center">
                         <span class="material-symbols-outlined card-icon mb-4">person</span>
                         <div class="service-label">Brand<br>Identity</div>
@@ -525,7 +708,7 @@
                 </div>
                 <div id="card-8" class="card sunken"></div>
 
-                <!-- Row 4 (Extra for scrolling) -->
+                <!-- Row 4 -->
                 <div id="card-9" class="card">
                     <div class="flex flex-col items-center">
                         <span class="material-symbols-outlined card-icon mb-4">devices</span>
@@ -543,130 +726,343 @@
         </div>
     </main>
 
+    <!-- Desktop scroll script -->
     <script>
         let scrollIndex = 0;
-        const maxScroll = 2; // Fixed for current grid height
+        const maxScroll = 2;
 
         function updateScroll() {
             const shift = scrollIndex * 240;
-            gsap.to("#grid-inner", {
-                y: -shift,
-                duration: 1.2,
-                ease: "expo.out"
-            });
-
-            // Update lines
+            gsap.to("#grid-inner", { y: -shift, duration: 1.2, ease: "expo.out" });
             const lines = document.querySelectorAll('.line-fill');
             lines.forEach((line, i) => {
-                if (i <= scrollIndex * 4 + 1) {
-                    line.classList.add('active');
-                } else {
-                    line.classList.remove('active');
-                }
+                if (i <= scrollIndex * 4 + 1) line.classList.add('active');
+                else line.classList.remove('active');
             });
         }
 
-        document.getElementById('btn-plus').addEventListener('click', () => {
-            if (scrollIndex < maxScroll) {
-                scrollIndex++;
-                updateScroll();
-                gsap.fromTo("#btn-plus", { scale: 0.9 }, { scale: 1, duration: 0.4, ease: "back.out(2)" });
-            }
-        });
-
-        document.getElementById('btn-minus').addEventListener('click', () => {
-            if (scrollIndex > 0) {
-                scrollIndex--;
-                updateScroll();
-                gsap.fromTo("#btn-minus", { scale: 0.9 }, { scale: 1, duration: 0.4, ease: "back.out(2)" });
-            }
-        });
-
-        // Handle Mouse Wheel for the Grid + Transition Trigger
-        let lastScrollTime = 0;
-        const scrollCooldown = 400; // ms
-
-        window.addEventListener('wheel', (e) => {
-            if (window.isAtBottomTransition) return;
-
-            const now = Date.now();
-            if (now - lastScrollTime < scrollCooldown) return;
-
-            if (Math.abs(e.deltaY) < 10) return; // Ignore tiny movements
-
-            if (e.deltaY > 0) { // Scroll Down
-                if (scrollIndex < maxScroll) {
-                    scrollIndex++;
-                    updateScroll();
-                    lastScrollTime = now;
-                }
-            } else if (e.deltaY < 0) { // Scroll Up
-                if (scrollIndex > 0) {
-                    scrollIndex--;
-                    updateScroll();
-                    lastScrollTime = now;
-                }
-            }
-        }, { passive: true });
-
-        // Mobile Touch Support for Grid
-        let touchStartGridY = 0;
-        window.addEventListener('touchstart', (e) => { touchStartGridY = e.touches[0].clientY; }, { passive: true });
-        window.addEventListener('touchend', (e) => {
-            const dy = touchStartGridY - e.changedTouches[0].clientY;
-            if (Math.abs(dy) < 30) return; // Ignore taps
-
-            if (dy > 30) { // Swipe Up (Next row)
-                if (scrollIndex < maxScroll) {
-                    scrollIndex++;
-                    updateScroll();
-                }
-            } else if (dy < -30) { // Swipe Down (Prev row)
-                if (scrollIndex > 0) {
-                    scrollIndex--;
-                    updateScroll();
-                }
-            }
-        }, { passive: true });
-
-        // Tell the transition engine we are at the bottom when scrollIndex reaches max
-        function checkState() {
-            window.isServicesAtBottom = (scrollIndex === maxScroll);
-            window.isServicesAtTop = (scrollIndex === 0);
+        const btnPlus  = document.getElementById('btn-plus');
+        const btnMinus = document.getElementById('btn-minus');
+        if (btnPlus) {
+            btnPlus.addEventListener('click', () => {
+                if (scrollIndex < maxScroll) { scrollIndex++; updateScroll(); gsap.fromTo("#btn-plus", { scale: 0.9 }, { scale: 1, duration: 0.4, ease: "back.out(2)" }); }
+            });
+            btnMinus.addEventListener('click', () => {
+                if (scrollIndex > 0) { scrollIndex--; updateScroll(); gsap.fromTo("#btn-minus", { scale: 0.9 }, { scale: 1, duration: 0.4, ease: "back.out(2)" }); }
+            });
         }
 
-        // Wrap updateScroll to check bottom state
-        const originalUpdateScroll = updateScroll;
-        updateScroll = function () {
-            originalUpdateScroll();
-            checkState();
-        };
-        checkState(); // Initial check
-
-        // ─────────────────────────────────────────────────────────────────
-        // MOBILE OVERRIDE: On phones, show all cards via natural page scroll.
-        // Clear the isServicesAtBottom/Top overrides so page-transitions.js
-        // uses real window scroll position for transition triggers.
-        // ─────────────────────────────────────────────────────────────────
-        (function applyMobileMode() {
-            const isMobile = window.innerWidth <= 768;
-            if (!isMobile) return;
-
-            // Delete overrides — page-transitions.js falls back to native scroll
-            delete window.isServicesAtBottom;
-            delete window.isServicesAtTop;
-
-            // Unlock the grid: reset any GSAP transform so all cards are visible
-            const gridInner = document.getElementById('grid-inner');
-            if (gridInner) gridInner.style.transform = 'none';
-
-            // Block the touchend swipe handler from re-setting these overrides
-            // by monkey-patching checkState to be a no-op on mobile
-            updateScroll = function() { /* no-op on mobile — grid is static */ };
-        })();
+        let lastScrollTime = 0;
+        window.addEventListener('wheel', (e) => {
+            if (window.innerWidth <= 768) return; // skip on mobile
+            const now = Date.now();
+            if (now - lastScrollTime < 400) return;
+            if (Math.abs(e.deltaY) < 10) return;
+            if (e.deltaY > 0 && scrollIndex < maxScroll) { scrollIndex++; updateScroll(); lastScrollTime = now; }
+            else if (e.deltaY < 0 && scrollIndex > 0) { scrollIndex--; updateScroll(); lastScrollTime = now; }
+        }, { passive: true });
     </script>
-    <!-- ── Cinematic Page Transition Engine ── -->
+
+
+    <!-- ══════════════════════════════════════════
+         MOBILE VERSION  (hidden on desktop via CSS)
+    ══════════════════════════════════════════ -->
+
+    <!-- Page transition curtain -->
+    <div class="m-curtain" id="mCurtain">
+        <div class="curtain-inner">
+            <div class="curtain-mark" id="curtainMark">B.</div>
+            <div class="curtain-sub" id="curtainSub">Brand Identity</div>
+        </div>
+    </div>
+
+    <!-- Ghost drag element -->
+    <div class="m-ghost" id="mGhost"></div>
+
+    <!-- Mobile top nav -->
+    <nav class="mobile-nav" style="display:none;">
+        <a href="index.html" style="display:flex;align-items:center;gap:6px;font-size:10px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:#888;text-decoration:none;">
+            <span class="material-symbols-outlined" style="font-size:15px">west</span> Back
+        </a>
+        <span style="font-size:8px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:#aaa;">LCG</span>
+    </nav>
+
+    <!-- Mobile split layout -->
+    <div class="mobile-layout" id="mobileLayout" style="display:none;">
+
+        <!-- LEFT -->
+        <div class="m-left">
+            <div class="m-title-group">
+                <div class="m-eyebrow">What we do</div>
+                <h1 class="m-title">Our<br><span class="acc">Services.</span></h1>
+            </div>
+
+            <div class="drop-zone" id="dropZone">
+                <div class="dz-hint" id="dzHint">
+                    <div class="dz-arrow-wrap">
+                        <span class="material-symbols-outlined">west</span>
+                    </div>
+                    <div class="dz-text">Swipe a card<br>here</div>
+                </div>
+                <div class="dz-preview" id="dzPreview">
+                    <div class="dz-icon-wrap" id="dzIconWrap">
+                        <span class="material-symbols-outlined" id="dzIconGlyph">person</span>
+                    </div>
+                    <div class="dz-label" id="dzLabel">Brand Identity</div>
+                    <button class="dz-cta" id="dzCta">
+                        Explore
+                        <span class="material-symbols-outlined" style="font-size:12px">north_east</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="swipe-guide">
+                <div class="sg-arrows">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="sg-text">Swipe card left</div>
+            </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="m-right" id="mRight">
+            <div class="m-cards-wrap">
+                <div class="m-cards-grid" id="mGrid">
+                    <!-- injected by JS -->
+                </div>
+                <div class="m-dots" id="mDots"></div>
+            </div>
+        </div>
+
+    </div><!-- mobile-layout -->
+
+    <script>
+    // ── Only run mobile JS on small screens ──
+    if (window.innerWidth <= 768) {
+        // Show mobile layout, hide desktop
+        document.getElementById('mobileLayout').style.display = 'flex';
+        document.querySelector('.mobile-nav').style.display = 'flex';
+
+        const SVCS = [
+            { id:'brand-identity', icon:'person',    label:'Brand\nIdentity',   url:'brand-identity.html' },
+            { id:'social-media',   icon:'share',     label:'Social\nMedia',     url:null },
+            { id:'graphics',       icon:'campaign',  label:'Graphics\nDesign',  url:null },
+            { id:'logo-anim',      icon:'movie_edit',label:'Logo\nAnim',        url:null },
+            { id:'website',        icon:'language',  label:'Website\nDesign',   url:null },
+            { id:'app-design',     icon:'devices',   label:'App\nDesign',       url:null },
+        ];
+
+        const LAYOUT = [
+            {type:'sunken'},{type:'raised',svc:SVCS[0]},
+            {type:'raised',svc:SVCS[1]},{type:'sunken'},
+            {type:'sunken'},{type:'raised',svc:SVCS[2]},
+            {type:'raised',svc:SVCS[3]},{type:'sunken'},
+            {type:'sunken'},{type:'raised',svc:SVCS[4]},
+            {type:'raised',svc:SVCS[5]},{type:'sunken'},
+        ];
+
+        const mGrid = document.getElementById('mGrid');
+        LAYOUT.forEach(item => {
+            const el = document.createElement('div');
+            if (item.type === 'sunken') {
+                el.className = 'm-svc-card m-sunken';
+            } else {
+                el.className = 'm-svc-card m-raised';
+                el.dataset.icon  = item.svc.icon;
+                el.dataset.label = item.svc.label;
+                el.dataset.url   = item.svc.url || '';
+                el.innerHTML = `
+                    <span class="material-symbols-outlined m-svc-icon">${item.svc.icon}</span>
+                    <div class="m-svc-label">${item.svc.label.replace('\n','<br>')}</div>
+                `;
+            }
+            mGrid.appendChild(el);
+        });
+
+        // Scroll dots
+        const ROWS = 3;
+        let curRow = 0;
+        const dotsEl = document.getElementById('mDots');
+        for (let i = 0; i < ROWS; i++) {
+            const d = document.createElement('div');
+            d.className = 'm-dot' + (i===0 ? ' active' : '');
+            dotsEl.appendChild(d);
+        }
+        function rowPx() {
+            const c = mGrid.querySelector('.m-svc-card');
+            return c ? c.offsetHeight + 12 : 0;
+        }
+        function goRow(r) {
+            curRow = Math.max(0, Math.min(ROWS-1, r));
+            mGrid.style.transform = `translateY(-${curRow * rowPx() * 2}px)`;
+            dotsEl.querySelectorAll('.m-dot').forEach((d,i) => d.classList.toggle('active', i===curRow));
+        }
+
+        // Touch scroll (right panel only, when not dragging)
+        let tScrollY = 0, scrolling = false;
+        document.getElementById('mRight').addEventListener('touchstart', e => {
+            tScrollY = e.touches[0].clientY; scrolling = true;
+        }, { passive: true });
+        document.getElementById('mRight').addEventListener('touchend', e => {
+            if (!scrolling) return;
+            const dy = tScrollY - e.changedTouches[0].clientY;
+            if (Math.abs(dy) > 40) goRow(curRow + (dy > 0 ? 1 : -1));
+            scrolling = false;
+        }, { passive: true });
+
+        // ── DRAG LOGIC ──
+        const dropZone  = document.getElementById('dropZone');
+        const dzHint    = document.getElementById('dzHint');
+        const dzPreview = document.getElementById('dzPreview');
+        const dzIconWrap = document.getElementById('dzIconWrap');
+        const dzIconGlyph= document.getElementById('dzIconGlyph');
+        const dzLabel   = document.getElementById('dzLabel');
+        const dzCta     = document.getElementById('dzCta');
+        const ghost     = document.getElementById('mGhost');
+        const curtain   = document.getElementById('mCurtain');
+        const cMark     = document.getElementById('curtainMark');
+        const cSub      = document.getElementById('curtainSub');
+
+        let dragging=null, ghostW=0, ghostH=0, offX=0, offY=0;
+        let tCardX=0, tCardY=0, isDragging=false, touchCard=null;
+
+        function dzRect() { return dropZone.getBoundingClientRect(); }
+        function overDZ(x,y) {
+            const r = dzRect(), pad = 24;
+            return x > r.left-pad && x < r.right+pad && y > r.top-pad && y < r.bottom+pad;
+        }
+
+        function fillDZ(card) {
+            const icon  = card.dataset.icon;
+            const label = card.dataset.label.replace('\n',' ');
+            const url   = card.dataset.url;
+            dzIconGlyph.textContent = icon;
+            dzLabel.textContent     = label;
+            dzCta.style.display     = url ? 'inline-flex' : 'none';
+            dzCta.onclick = url ? () => goPage(url, label) : null;
+            dzHint.style.opacity = '0';
+            dzPreview.classList.add('visible');
+            dropZone.classList.add('dz-filled');
+            dropZone.classList.remove('dz-active');
+        }
+
+        function clearDZ() {
+            dzPreview.classList.remove('visible');
+            dzHint.style.opacity = '';
+            dropZone.classList.remove('dz-filled','dz-active');
+        }
+
+        function goPage(url, label) {
+            const ab = url.replace('.html','').replace('-',' ');
+            cMark.textContent = ab.split(' ').map(w=>w[0]).join('').toUpperCase()+'.';
+            cSub.textContent  = label;
+            curtain.classList.add('on');
+            setTimeout(() => {
+                sessionStorage.setItem('lcg_navigating','1');
+                window.location.href = url;
+            }, 650);
+        }
+
+        function startDrag(card, cx, cy) {
+            dragging = card;
+            const r = card.getBoundingClientRect();
+            ghostW = r.width; ghostH = r.height;
+            offX = cx - r.left; offY = cy - r.top;
+            ghost.style.width  = ghostW+'px';
+            ghost.style.height = ghostH+'px';
+            ghost.innerHTML    = card.innerHTML;
+            ghost.style.left   = r.left+'px';
+            ghost.style.top    = r.top+'px';
+            ghost.style.opacity= '1';
+            ghost.style.transform = '';
+            card.classList.add('m-dragging');
+            scrolling = false; // stop scroll detection while dragging
+        }
+
+        function moveDrag(cx, cy) {
+            if (!dragging) return;
+            ghost.style.left = (cx - offX)+'px';
+            ghost.style.top  = (cy - offY)+'px';
+            if (overDZ(cx, cy)) {
+                ghost.style.transform = 'scale(0.88) rotate(-2deg)';
+                dropZone.classList.add('dz-active');
+            } else {
+                ghost.style.transform = '';
+                dropZone.classList.remove('dz-active');
+            }
+        }
+
+        function endDrag(cx, cy) {
+            if (!dragging) return;
+            const card = dragging;
+            const over = overDZ(cx, cy);
+
+            if (over) {
+                const dz = dzRect();
+                ghost.style.transition = 'left 0.35s cubic-bezier(0.16,1,0.3,1),top 0.35s cubic-bezier(0.16,1,0.3,1),transform 0.35s,opacity 0.35s';
+                ghost.style.left    = (dz.left + dz.width/2  - ghostW/2)+'px';
+                ghost.style.top     = (dz.top  + dz.height/2 - ghostH/2)+'px';
+                ghost.style.transform = 'scale(0.3)';
+                ghost.style.opacity   = '0';
+                setTimeout(() => {
+                    ghost.style.transition = '';
+                    ghost.style.opacity    = '0';
+                    fillDZ(card);
+                    if (card.dataset.url) setTimeout(() => goPage(card.dataset.url, card.dataset.label.replace('\n',' ')), 460);
+                }, 370);
+            } else {
+                const cr = card.getBoundingClientRect();
+                ghost.style.transition = 'left 0.3s cubic-bezier(0.16,1,0.3,1),top 0.3s cubic-bezier(0.16,1,0.3,1),opacity 0.3s';
+                ghost.style.left    = cr.left+'px';
+                ghost.style.top     = cr.top+'px';
+                ghost.style.opacity = '0';
+                setTimeout(() => { ghost.style.transition = ''; }, 300);
+            }
+
+            card.classList.remove('m-dragging');
+            dropZone.classList.remove('dz-active');
+            dragging = null;
+        }
+
+        // Touch events on cards
+        mGrid.addEventListener('touchstart', e => {
+            const card = e.target.closest('.m-raised');
+            if (!card) return;
+            touchCard = card;
+            tCardX = e.touches[0].clientX;
+            tCardY = e.touches[0].clientY;
+            isDragging = false;
+        }, { passive: true });
+
+        document.addEventListener('touchmove', e => {
+            if (!touchCard) return;
+            const t = e.touches[0];
+            const dx = tCardX - t.clientX;
+            const dy = Math.abs(t.clientY - tCardY);
+
+            if (!isDragging && dx > 14 && dy < dx * 1.4) {
+                isDragging = true;
+                scrolling  = false;
+                startDrag(touchCard, tCardX, tCardY);
+            }
+            if (isDragging) {
+                e.preventDefault();
+                moveDrag(t.clientX, t.clientY);
+            }
+        }, { passive: false });
+
+        document.addEventListener('touchend', e => {
+            if (touchCard && isDragging) {
+                const t = e.changedTouches[0];
+                endDrag(t.clientX, t.clientY);
+            }
+            touchCard  = null;
+            isDragging = false;
+        }, { passive: true });
+    }
+    </script>
+
+    <!-- Cinematic Page Transition Engine -->
     <script src="assets/page-transitions.js"></script>
 </body>
-
 </html>

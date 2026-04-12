@@ -7,12 +7,13 @@
 (function () {
     'use strict';
 
-    const PAGES = ['index.html', 'services.html', 'process.html', 'clients.html'];
+    const PAGES = ['index.html', 'services.html', 'brand-identity.html', 'process.html', 'clients.html'];
     const PAGE_LABELS = {
-        'index.html':    'Home',
-        'services.html': 'Services',
-        'process.html':  'Process',
-        'clients.html':  'Clients',
+        'index.html':           'Home',
+        'services.html':        'Services',
+        'brand-identity.html':  'Brand Identity',
+        'process.html':         'Process',
+        'clients.html':         'Clients',
     };
 
     let rawPath = window.location.pathname.split('/').pop().toLowerCase();

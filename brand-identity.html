@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Brand Identity | LCG Digital Cinematheque</title>
+    <link rel="icon" type="image/jpeg" href="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,400;0,700;0,900;1,900&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --neon: #daff3d;
+            --neon-dim: rgba(218,255,61,0.15);
+            --dark: #0a0b0c;
+            --card: #111315;
+            --border: rgba(255,255,255,0.06);
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--dark);
+            font-family: 'Manrope', sans-serif;
+            color: #fff;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── ENTRANCE ANIMATION ── */
+        body.page-entering .reveal-up {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        .reveal-up {
+            transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+        }
+
+        /* ── TOP NAV ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            background: linear-gradient(to bottom, rgba(10,11,12,0.95), transparent);
+        }
+
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .nav-back:hover { color: var(--neon); }
+        .nav-back .material-symbols-outlined { font-size: 16px; }
+
+        .nav-label {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.2);
+        }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0 24px 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        /* Animated gradient orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: orb-float 8s ease-in-out infinite;
+        }
+        .orb-1 {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(218,255,61,0.12) 0%, transparent 70%);
+            top: -100px; left: -100px;
+            animation-delay: 0s;
+        }
+        .orb-2 {
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(255,115,70,0.08) 0%, transparent 70%);
+            bottom: 100px; right: -50px;
+            animation-delay: -3s;
+        }
+        .orb-3 {
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, rgba(218,255,61,0.06) 0%, transparent 70%);
+            top: 50%; left: 40%;
+            animation-delay: -6s;
+        }
+        @keyframes orb-float {
+            0%, 100% { transform: translate(0,0) scale(1); }
+            33% { transform: translate(20px,-30px) scale(1.05); }
+            66% { transform: translate(-15px,20px) scale(0.97); }
+        }
+
+        /* Grid texture */
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse at 30% 50%, black 20%, transparent 70%);
+        }
+
+        /* Large background letter */
+        .hero-letter {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Epilogue', sans-serif;
+            font-size: clamp(200px, 40vw, 400px);
+            font-weight: 900;
+            color: rgba(218,255,61,0.03);
+            letter-spacing: -0.1em;
+            pointer-events: none;
+            user-select: none;
+            line-height: 1;
+        }
+
+        .hero-content { position: relative; z-index: 1; }
+
+        .hero-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .hero-eyebrow-line {
+            width: 32px; height: 1px;
+            background: var(--neon);
+        }
+        .hero-eyebrow-text {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--neon);
+            opacity: 0.7;
+        }
+
+        .hero-title {
+            font-family: 'Epilogue', sans-serif;
+            font-size: clamp(52px, 14vw, 100px);
+            font-weight: 900;
+            line-height: 0.88;
+            letter-spacing: -0.04em;
+            margin-bottom: 28px;
+        }
+        .hero-title .accent {
+            font-style: italic;
+            color: var(--neon);
+        }
+        .hero-title .ghost {
+            -webkit-text-stroke: 1px rgba(255,255,255,0.15);
+            color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.45);
+            max-width: 340px;
+            margin-bottom: 36px;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: var(--neon);
+            color: #000;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 100px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 40px rgba(218,255,61,0.25);
+        }
+        .hero-cta:hover {
+            box-shadow: 0 0 60px rgba(218,255,61,0.4);
+            transform: translateY(-2px);
+        }
+
+        .hero-scroll-hint {
+            position: absolute;
+            bottom: 20px;
+            right: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            opacity: 0.25;
+        }
+        .hero-scroll-hint span { font-size: 8px; letter-spacing: 0.3em; text-transform: uppercase; }
+        .scroll-line {
+            width: 1px; height: 40px;
+            background: linear-gradient(to bottom, white, transparent);
+            animation: scroll-pulse 2s ease-in-out infinite;
+        }
+        @keyframes scroll-pulse {
+            0%, 100% { opacity: 0.3; transform: scaleY(1); }
+            50% { opacity: 0.8; transform: scaleY(1.2); }
+        }
+
+        /* ── SECTION BASE ── */
+        section { padding: 80px 24px; }
+
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+        .section-label-num {
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 0.4em;
+            color: var(--neon);
+            opacity: 0.6;
+        }
+        .section-label-line {
+            flex: 1; height: 1px;
+            background: var(--border);
+        }
+        .section-label-text {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.2);
+        }
+
+        /* ── WHAT IS BRAND IDENTITY ── */
+        .what-section { background: var(--dark); }
+
+        .what-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        .what-headline {
+            font-family: 'Epilogue', sans-serif;
+            font-size: clamp(32px, 8vw, 56px);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+        }
+
+        .what-body {
+            font-size: 15px;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .what-body strong {
+            color: rgba(255,255,255,0.9);
+            font-weight: 600;
+        }
+
+        /* ── PILLARS ── */
+        .pillars-section { background: #060708; }
+
+        .pillar-row {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .pillar {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+            cursor: default;
+            position: relative;
+        }
+        .pillar:not(:last-child) { margin-bottom: 12px; }
+
+        .pillar:hover {
+            border-color: rgba(218,255,61,0.2);
+            background: rgba(218,255,61,0.02);
+        }
+        .pillar:hover .pillar-num { color: var(--neon); }
+        .pillar:hover .pillar-bar { background: var(--neon); width: 100%; }
+
+        .pillar-num {
+            font-family: 'Epilogue', sans-serif;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.2em;
+            color: rgba(255,255,255,0.15);
+            padding: 24px 16px;
+            min-width: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid var(--border);
+            transition: color 0.4s;
+        }
+
+        .pillar-content {
+            flex: 1;
+            padding: 24px 20px;
+        }
+
+        .pillar-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+            letter-spacing: -0.01em;
+        }
+
+        .pillar-desc {
+            font-size: 12px;
+            color: rgba(255,255,255,0.4);
+            line-height: 1.6;
+        }
+
+        .pillar-icon {
+            font-size: 24px;
+            color: rgba(255,255,255,0.08);
+            padding: 24px 16px;
+            display: flex;
+            align-items: center;
+            transition: color 0.4s;
+        }
+        .pillar:hover .pillar-icon { color: rgba(218,255,61,0.3); }
+
+        .pillar-bar {
+            position: absolute;
+            bottom: 0; left: 0;
+            height: 2px; width: 0%;
+            background: var(--neon);
+            transition: width 0.6s cubic-bezier(0.16,1,0.3,1);
+        }
+
+        /* ── PROCESS STRIP ── */
+        .process-section {
+            background: var(--dark);
+            overflow: hidden;
+        }
+
+        .process-headline {
+            font-family: 'Epilogue', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            margin-bottom: 32px;
+        }
+
+        .process-strip {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .process-step {
+            display: flex;
+            gap: 20px;
+            padding: 28px 0;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+        .process-step:last-child { border-bottom: none; }
+
+        .step-connector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            flex-shrink: 0;
+        }
+        .step-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.15);
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+        .process-step:hover .step-dot {
+            border-color: var(--neon);
+            box-shadow: 0 0 10px var(--neon);
+            background: var(--neon);
+        }
+        .step-line {
+            width: 1px;
+            flex: 1;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.06), transparent);
+            min-height: 40px;
+        }
+
+        .step-body { flex: 1; }
+
+        .step-index {
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 0.3em;
+            color: rgba(255,255,255,0.2);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .step-name {
+            font-family: 'Epilogue', sans-serif;
+            font-size: 22px;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .step-detail {
+            font-size: 13px;
+            color: rgba(255,255,255,0.4);
+            line-height: 1.6;
+        }
+
+        .step-duration {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: var(--neon);
+            opacity: 0.6;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        /* ── VISUAL SHOWCASE ── */
+        .showcase-section {
+            background: #060708;
+            padding: 80px 0 80px 24px;
+        }
+
+        .showcase-scroll {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            padding-right: 24px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding-bottom: 4px;
+        }
+        .showcase-scroll::-webkit-scrollbar { display: none; }
+
+        .showcase-card {
+            flex-shrink: 0;
+            width: 240px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--card);
+            transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+        }
+        .showcase-card:hover { transform: translateY(-8px); }
+
+        .showcase-visual {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Unique visuals per card */
+        .vis-1 { background: linear-gradient(135deg, #0f1a00, #1a2d00); }
+        .vis-2 { background: linear-gradient(135deg, #0a0a14, #14141f); }
+        .vis-3 { background: linear-gradient(135deg, #1a0a00, #2d1400); }
+        .vis-4 { background: linear-gradient(135deg, #00141a, #001f2d); }
+
+        .vis-logo {
+            font-family: 'Epilogue', sans-serif;
+            font-size: 48px;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+        }
+        .vis-1 .vis-logo { color: var(--neon); text-shadow: 0 0 30px rgba(218,255,61,0.4); }
+        .vis-2 .vis-logo { color: #a78bfa; text-shadow: 0 0 30px rgba(167,139,250,0.4); }
+        .vis-3 .vis-logo { color: #fb923c; text-shadow: 0 0 30px rgba(251,146,60,0.4); }
+        .vis-4 .vis-logo { color: #34d399; text-shadow: 0 0 30px rgba(52,211,153,0.4); }
+
+        .vis-rings {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid;
+            opacity: 0.1;
+            animation: ring-pulse 3s ease-in-out infinite;
+        }
+        .ring-1 { width: 80px; height: 80px; animation-delay: 0s; }
+        .ring-2 { width: 130px; height: 130px; animation-delay: -1s; }
+        .ring-3 { width: 180px; height: 180px; animation-delay: -2s; }
+
+        .vis-1 .ring { border-color: var(--neon); }
+        .vis-2 .ring { border-color: #a78bfa; }
+        .vis-3 .ring { border-color: #fb923c; }
+        .vis-4 .ring { border-color: #34d399; }
+
+        @keyframes ring-pulse {
+            0%, 100% { opacity: 0.06; transform: scale(1); }
+            50% { opacity: 0.12; transform: scale(1.04); }
+        }
+
+        .showcase-info {
+            padding: 18px 16px;
+        }
+        .showcase-tag {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.25);
+            margin-bottom: 6px;
+        }
+        .showcase-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* ── DELIVERABLES ── */
+        .deliverables-section { background: var(--dark); }
+
+        .deliverables-headline {
+            font-family: 'Epilogue', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            margin-bottom: 32px;
+        }
+        .deliverables-headline span { color: var(--neon); font-style: italic; }
+
+        .deliverables-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .deliverable-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--card);
+            transition: all 0.3s;
+        }
+        .deliverable-item:hover {
+            border-color: rgba(218,255,61,0.2);
+            background: rgba(218,255,61,0.03);
+        }
+
+        .del-icon {
+            width: 36px; height: 36px;
+            border-radius: 10px;
+            background: var(--neon-dim);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .del-icon .material-symbols-outlined {
+            font-size: 18px;
+            color: var(--neon);
+        }
+
+        .del-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.3;
+        }
+
+        /* ── STATS ── */
+        .stats-section { background: #060708; }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+        }
+
+        .stat-card {
+            background: var(--card);
+            padding: 28px 20px;
+            text-align: center;
+            transition: background 0.3s;
+        }
+        .stat-card:first-child { border-radius: 16px 0 0 0; }
+        .stat-card:nth-child(2) { border-radius: 0 16px 0 0; }
+        .stat-card:nth-child(3) { border-radius: 0 0 0 16px; }
+        .stat-card:last-child { border-radius: 0 0 16px 0; }
+        .stat-card:hover { background: rgba(218,255,61,0.05); }
+
+        .stat-num {
+            font-family: 'Epilogue', sans-serif;
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--neon);
+            letter-spacing: -0.04em;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .stat-label {
+            font-size: 11px;
+            color: rgba(255,255,255,0.35);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        /* ── CTA SECTION ── */
+        .cta-section {
+            background: var(--dark);
+            text-align: center;
+            padding: 80px 24px 100px;
+        }
+
+        .cta-pre {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: var(--neon);
+            opacity: 0.6;
+            margin-bottom: 20px;
+        }
+
+        .cta-headline {
+            font-family: 'Epilogue', sans-serif;
+            font-size: clamp(36px, 10vw, 64px);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+            margin-bottom: 16px;
+        }
+        .cta-headline .neon { color: var(--neon); }
+        .cta-headline .ghost {
+            -webkit-text-stroke: 1px rgba(255,255,255,0.2);
+            color: transparent;
+        }
+
+        .cta-sub {
+            font-size: 14px;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 36px;
+            line-height: 1.6;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 40px;
+            background: var(--neon);
+            color: #000;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 100px;
+            transition: all 0.3s;
+            box-shadow: 0 0 60px rgba(218,255,61,0.3);
+        }
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 80px rgba(218,255,61,0.5);
+        }
+
+        .cta-note {
+            margin-top: 16px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.2);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 480px) {
+            .hero { padding: 0 20px 40px; }
+            section { padding: 60px 20px; }
+            .showcase-section { padding: 60px 0 60px 20px; }
+            .cta-section { padding: 60px 20px 80px; }
+        }
+
+        /* ── PAGE ENTER TRANSITION ── */
+        .page-enter-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .pe-panel {
+            position: absolute;
+            left: 0; right: 0;
+            height: calc(100% / 5);
+            background: var(--dark);
+            transform-origin: top center;
+        }
+        .pe-panel:nth-child(1) { top: 0%; }
+        .pe-panel:nth-child(2) { top: 20%; }
+        .pe-panel:nth-child(3) { top: 40%; }
+        .pe-panel:nth-child(4) { top: 60%; }
+        .pe-panel:nth-child(5) { top: 80%; }
+    </style>
+</head>
+<body>
+
+<!-- Page enter wipe panels -->
+<div class="page-enter-overlay" id="enterOverlay">
+    <div class="pe-panel"></div>
+    <div class="pe-panel"></div>
+    <div class="pe-panel"></div>
+    <div class="pe-panel"></div>
+    <div class="pe-panel"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+    <a href="services.html" class="nav-back">
+        <span class="material-symbols-outlined">arrow_back_ios</span>
+        Services
+    </a>
+    <div class="nav-label">LCG Studio</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-letter">B.</div>
+    </div>
+
+    <div class="hero-content reveal-up" style="transition-delay: 0.1s">
+        <div class="hero-eyebrow">
+            <div class="hero-eyebrow-line"></div>
+            <div class="hero-eyebrow-text">LCG Creative Studio</div>
+        </div>
+
+        <h1 class="hero-title">
+            <span class="ghost">Brand</span><br>
+            <span class="accent">Identity.</span>
+        </h1>
+
+        <p class="hero-desc">
+            We don't just design logos. We architect entire visual languages that make your brand impossible to ignore — and impossible to forget.
+        </p>
+
+        <a href="https://www.instagram.com/lcg.reel/" target="_blank" class="hero-cta">
+            See Our Work
+            <span class="material-symbols-outlined" style="font-size:16px">north_east</span>
+        </a>
+    </div>
+
+    <div class="hero-scroll-hint">
+        <span>scroll</span>
+        <div class="scroll-line"></div>
+    </div>
+</section>
+
+<!-- WHAT IS BRAND IDENTITY -->
+<section class="what-section">
+    <div class="section-label">
+        <div class="section-label-num">01</div>
+        <div class="section-label-line"></div>
+        <div class="section-label-text">The Foundation</div>
+    </div>
+
+    <div class="what-grid">
+        <h2 class="what-headline reveal-up">
+            Your brand<br>is your<br><span style="color:var(--neon)">reputation</span><br>made visual.
+        </h2>
+
+        <p class="what-body reveal-up" style="transition-delay:0.1s">
+            Every touchpoint a customer has with your business forms an impression. <strong>Brand identity</strong> is the deliberate system we build to ensure every single one of those impressions is consistent, premium, and emotionally powerful.
+            <br><br>
+            From the weight of your typography to the exact curve of your logo mark — <strong>we obsess over the details</strong> that your competitors overlook.
+        </p>
+    </div>
+</section>
+
+<!-- PILLARS -->
+<section class="pillars-section">
+    <div class="section-label">
+        <div class="section-label-num">02</div>
+        <div class="section-label-line"></div>
+        <div class="section-label-text">What We Build</div>
+    </div>
+
+    <div class="pillar-row">
+
+        <div class="pillar reveal-up" style="transition-delay:0.0s">
+            <div class="pillar-num">01</div>
+            <div class="pillar-content">
+                <div class="pillar-title">Logo System</div>
+                <div class="pillar-desc">Primary mark, wordmark, icon, and contextual variants. Every format, every size.</div>
+            </div>
+            <div class="pillar-icon"><span class="material-symbols-outlined">gesture</span></div>
+            <div class="pillar-bar"></div>
+        </div>
+
+        <div class="pillar reveal-up" style="transition-delay:0.08s">
+            <div class="pillar-num">02</div>
+            <div class="pillar-content">
+                <div class="pillar-title">Color Architecture</div>
+                <div class="pillar-desc">Primary, secondary, and accent palettes with exact HEX, RGB values and usage rules.</div>
+            </div>
+            <div class="pillar-icon"><span class="material-symbols-outlined">palette</span></div>
+            <div class="pillar-bar"></div>
+        </div>
+
+        <div class="pillar reveal-up" style="transition-delay:0.16s">
+            <div class="pillar-num">03</div>
+            <div class="pillar-content">
+                <div class="pillar-title">Typography System</div>
+                <div class="pillar-desc">Curated typeface pairings that express your brand personality at every scale.</div>
+            </div>
+            <div class="pillar-icon"><span class="material-symbols-outlined">title</span></div>
+            <div class="pillar-bar"></div>
+        </div>
+
+        <div class="pillar reveal-up" style="transition-delay:0.24s">
+            <div class="pillar-num">04</div>
+            <div class="pillar-content">
+                <div class="pillar-title">Visual Language</div>
+                <div class="pillar-desc">Photography style, illustration system, icon sets, and motion principles.</div>
+            </div>
+            <div class="pillar-icon"><span class="material-symbols-outlined">auto_awesome</span></div>
+            <div class="pillar-bar"></div>
+        </div>
+
+        <div class="pillar reveal-up" style="transition-delay:0.32s">
+            <div class="pillar-num">05</div>
+            <div class="pillar-content">
+                <div class="pillar-title">Brand Guidelines</div>
+                <div class="pillar-desc">A comprehensive document your entire team can use to stay perfectly on-brand.</div>
+            </div>
+            <div class="pillar-icon"><span class="material-symbols-outlined">menu_book</span></div>
+            <div class="pillar-bar"></div>
+        </div>
+
+    </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section">
+    <div class="section-label">
+        <div class="section-label-num">03</div>
+        <div class="section-label-line"></div>
+        <div class="section-label-text">How It Works</div>
+    </div>
+
+    <h2 class="process-headline reveal-up">Our 4-Phase<br><span style="color:var(--neon)">Framework</span></h2>
+
+    <div class="process-strip">
+
+        <div class="process-step reveal-up" style="transition-delay:0.0s">
+            <div class="step-connector">
+                <div class="step-dot"></div>
+                <div class="step-line"></div>
+            </div>
+            <div class="step-body">
+                <div class="step-index">Phase 01</div>
+                <div class="step-name">Discovery</div>
+                <div class="step-detail">We dig deep into your business, audience, competitors, and aspirations. This is where we find the truth your brand should stand on.</div>
+                <div class="step-duration">2 – 3 Days</div>
+            </div>
+        </div>
+
+        <div class="process-step reveal-up" style="transition-delay:0.08s">
+            <div class="step-connector">
+                <div class="step-dot"></div>
+                <div class="step-line"></div>
+            </div>
+            <div class="step-body">
+                <div class="step-index">Phase 02</div>
+                <div class="step-name">Strategy</div>
+                <div class="step-detail">Positioning, personality, voice, and visual direction. We build the strategic foundation before we touch a design tool.</div>
+                <div class="step-duration">2 – 3 Days</div>
+            </div>
+        </div>
+
+        <div class="process-step reveal-up" style="transition-delay:0.16s">
+            <div class="step-connector">
+                <div class="step-dot"></div>
+                <div class="step-line"></div>
+            </div>
+            <div class="step-body">
+                <div class="step-index">Phase 03</div>
+                <div class="step-name">Design</div>
+                <div class="step-detail">Logo exploration, color development, typography selection, and full system creation. Three rounds of refinement included.</div>
+                <div class="step-duration">5 – 7 Days</div>
+            </div>
+        </div>
+
+        <div class="process-step reveal-up" style="transition-delay:0.24s">
+            <div class="step-connector">
+                <div class="step-dot"></div>
+            </div>
+            <div class="step-body">
+                <div class="step-index">Phase 04</div>
+                <div class="step-name">Delivery</div>
+                <div class="step-detail">All final files in every format, guidelines document, and a 30-minute walkthrough of your complete brand system.</div>
+                <div class="step-duration">1 – 2 Days</div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- VISUAL SHOWCASE -->
+<section class="showcase-section">
+    <div style="padding-right: 24px; margin-bottom: 32px;">
+        <div class="section-label">
+            <div class="section-label-num">04</div>
+            <div class="section-label-line"></div>
+            <div class="section-label-text">The Work</div>
+        </div>
+        <h2 class="process-headline reveal-up">Selected<br><span style="color:var(--neon)">Brands</span></h2>
+    </div>
+
+    <div class="showcase-scroll">
+
+        <div class="showcase-card">
+            <div class="showcase-visual vis-1">
+                <div class="vis-rings">
+                    <div class="ring ring-1"></div>
+                    <div class="ring ring-2"></div>
+                    <div class="ring ring-3"></div>
+                </div>
+                <div class="vis-logo">LCG</div>
+            </div>
+            <div class="showcase-info">
+                <div class="showcase-tag">Identity System</div>
+                <div class="showcase-title">LCG Studio</div>
+            </div>
+        </div>
+
+        <div class="showcase-card">
+            <div class="showcase-visual vis-2">
+                <div class="vis-rings">
+                    <div class="ring ring-1"></div>
+                    <div class="ring ring-2"></div>
+                    <div class="ring ring-3"></div>
+                </div>
+                <div class="vis-logo" style="font-size:36px">ASTø</div>
+            </div>
+            <div class="showcase-info">
+                <div class="showcase-tag">Brand Refresh</div>
+                <div class="showcase-title">Astones</div>
+            </div>
+        </div>
+
+        <div class="showcase-card">
+            <div class="showcase-visual vis-3">
+                <div class="vis-rings">
+                    <div class="ring ring-1"></div>
+                    <div class="ring ring-2"></div>
+                    <div class="ring ring-3"></div>
+                </div>
+                <div class="vis-logo" style="font-size:36px">MNV</div>
+            </div>
+            <div class="showcase-info">
+                <div class="showcase-tag">Full Identity</div>
+                <div class="showcase-title">Maanav</div>
+            </div>
+        </div>
+
+        <div class="showcase-card">
+            <div class="showcase-visual vis-4">
+                <div class="vis-rings">
+                    <div class="ring ring-1"></div>
+                    <div class="ring ring-2"></div>
+                    <div class="ring ring-3"></div>
+                </div>
+                <div class="vis-logo" style="font-size:32px">DB</div>
+            </div>
+            <div class="showcase-info">
+                <div class="showcase-tag">Logo System</div>
+                <div class="showcase-title">DB Decor</div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- DELIVERABLES -->
+<section class="deliverables-section">
+    <div class="section-label">
+        <div class="section-label-num">05</div>
+        <div class="section-label-line"></div>
+        <div class="section-label-text">What You Get</div>
+    </div>
+
+    <h2 class="deliverables-headline reveal-up">Everything you need.<br><span>Nothing you don't.</span></h2>
+
+    <div class="deliverables-grid">
+
+        <div class="deliverable-item reveal-up" style="transition-delay:0.00s">
+            <div class="del-icon"><span class="material-symbols-outlined">gesture</span></div>
+            <div class="del-label">Logo Suite<br>(6+ files)</div>
+        </div>
+
+        <div class="deliverable-item reveal-up" style="transition-delay:0.06s">
+            <div class="del-icon"><span class="material-symbols-outlined">palette</span></div>
+            <div class="del-label">Color<br>Palettes</div>
+        </div>
+
+        <div class="deliverable-item reveal-up" style="transition-delay:0.12s">
+            <div class="del-icon"><span class="material-symbols-outlined">title</span></div>
+            <div class="del-label">Typography<br>System</div>
+        </div>
+
+        <div class="deliverable-item reveal-up" style="transition-delay:0.18s">
+            <div class="del-icon"><span class="material-symbols-outlined">menu_book</span></div>
+            <div class="del-label">Brand<br>Guidelines</div>
+        </div>
+
+        <div class="deliverable-item reveal-up" style="transition-delay:0.24s">
+            <div class="del-icon"><span class="material-symbols-outlined">image</span></div>
+            <div class="del-label">Social Media<br>Templates</div>
+        </div>
+
+        <div class="deliverable-item reveal-up" style="transition-delay:0.30s">
+            <div class="del-icon"><span class="material-symbols-outlined">folder_zip</span></div>
+            <div class="del-label">All Source<br>Files (AI/EPS)</div>
+        </div>
+
+    </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-num">40+</div>
+            <div class="stat-label">Brands Built</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-num">14</div>
+            <div class="stat-label">Day Avg. Delivery</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Client Satisfaction</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-num">3×</div>
+            <div class="stat-label">Revision Rounds</div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+    <p class="cta-pre">Ready to Stand Out?</p>
+    <h2 class="cta-headline reveal-up">
+        Let's build<br>
+        your <span class="neon">brand</span><br>
+        <span class="ghost">legacy.</span>
+    </h2>
+    <p class="cta-sub reveal-up" style="transition-delay:0.1s">Spots are limited. We work with select brands who are serious about their visual identity.</p>
+    <a href="https://www.instagram.com/lcg.reel/" target="_blank" class="cta-btn reveal-up" style="transition-delay:0.2s">
+        Start Your Brand
+        <span class="material-symbols-outlined" style="font-size:16px">north_east</span>
+    </a>
+    <p class="cta-note reveal-up" style="transition-delay:0.3s">Free 15-min discovery call · No commitment required</p>
+</section>
+
+<script>
+    // ── PAGE ENTRANCE ANIMATION ──
+    const panels = document.querySelectorAll('.pe-panel');
+    const overlay = document.getElementById('enterOverlay');
+
+    function runEntrance() {
+        // Animate panels away
+        panels.forEach((p, i) => {
+            p.style.transition = `transform ${0.7}s cubic-bezier(0.16,1,0.3,1) ${i * 0.06}s`;
+            p.style.transform = 'scaleY(0)';
+            p.style.transformOrigin = 'top center';
+        });
+        setTimeout(() => { overlay.style.display = 'none'; }, 800);
+
+        // Reveal content
+        setTimeout(() => {
+            document.querySelectorAll('.reveal-up').forEach((el, i) => {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            });
+        }, 300);
+    }
+
+    // Set initial states
+    document.querySelectorAll('.reveal-up').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(40px)';
+    });
+
+    window.addEventListener('load', () => {
+        setTimeout(runEntrance, 50);
+    });
+
+    // ── SCROLL-TRIGGERED REVEALS ──
+    const ioOpts = { threshold: 0.15, rootMargin: '0px 0px -40px 0px' };
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                io.unobserve(entry.target);
+            }
+        });
+    }, ioOpts);
+
+    // Observe non-hero reveals after entrance
+    setTimeout(() => {
+        document.querySelectorAll('.reveal-up').forEach(el => {
+            // Only observe elements not in hero (those animate on entrance)
+            if (!el.closest('.hero')) {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1)';
+                io.observe(el);
+            }
+        });
+    }, 1000);
+
+    // ── PILLAR HOVER ANIMATION RESET ──
+    document.querySelectorAll('.pillar').forEach(pillar => {
+        pillar.addEventListener('mouseleave', () => {
+            pillar.querySelector('.pillar-bar').style.width = '0%';
+        });
+    });
+</script>
+
+<!-- Cinematic Page Transition Engine -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="assets/page-transitions.js"></script>
+
+</body>
+</html>
