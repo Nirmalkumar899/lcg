@@ -7,7 +7,8 @@
     <title>Clients | LCG Showcase</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/jpeg" href="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg">
+    <link rel="icon" type="image/jpeg"
+        href="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800;900&amp;family=Manrope:wght@300;400;500;600&amp;display=swap"
@@ -97,6 +98,7 @@
             z-index: 50;
             opacity: 0.5;
         }
+
         /* Tinder-style Stack for Mobile */
         @media (max-width: 1024px) {
             .client-card {
@@ -105,34 +107,41 @@
                 padding-bottom: 2rem;
                 transition: transform 0.5s ease;
             }
+
             .client-card:nth-child(2n) {
                 transform: rotate(1deg);
             }
+
             .client-card:nth-child(2n+1) {
                 transform: rotate(-1deg);
             }
+
             .client-card.active-mobile {
                 transform: rotate(0deg) scale(1.02);
                 z-index: 10;
             }
+
             #client-grid {
                 display: flex;
                 flex-direction: column;
                 gap: 0 !important;
             }
         }
-        
+
         /* Mobile Touch States */
         @media (max-width: 1024px) {
             .group.active-mobile .group-hover\:opacity-0 {
                 opacity: 0 !important;
             }
+
             .group.active-mobile .group-hover\:opacity-100 {
                 opacity: 1 !important;
             }
+
             .group.active-mobile .group-hover\:scale-100 {
                 transform: scale(1) !important;
             }
+
             .group.active-mobile .group-hover\:scale-110 {
                 transform: scale(1.1) !important;
             }
@@ -147,14 +156,16 @@
     <nav class="fixed top-0 left-0 right-0 z-[60] glass-nav border-b border-white/5">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="index.html" class="flex items-center gap-2">
-                <img src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg" 
-                     alt="LCG" class="h-8 w-auto object-contain">
+                <img src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg"
+                    alt="LCG" class="h-8 w-auto object-contain">
             </a>
             <div class="hidden lg:flex items-center gap-8 text-sm font-headline font-bold uppercase tracking-widest">
                 <a href="index.html#work" class="text-white/70 hover:text-primary transition-colors">Work</a>
                 <a href="clients.html" class="text-primary transition-colors">Clients</a>
                 <a href="services.html" class="text-white/70 hover:text-primary transition-colors">Services</a>
-                <a href="#" class="px-5 py-2 bg-primary text-on-primary rounded-full transition-transform hover:scale-105">Let's Talk</a>
+                <a href="#"
+                    class="px-5 py-2 bg-primary text-on-primary rounded-full transition-transform hover:scale-105">Let's
+                    Talk</a>
             </div>
             <!-- Mobile Menu Toggle -->
             <button id="mobile-menu-toggle" class="md:hidden w-10 h-10 flex items-center justify-center text-white">
@@ -184,8 +195,10 @@
     <main class="pt-32 pb-20 px-6">
         <header class="max-w-7xl mx-auto mb-20">
             <span class="text-primary/60 font-mono text-xs tracking-[0.5em] uppercase mb-4 block">Archive 2024</span>
-            <h1 class="text-5xl md:text-7xl font-headline font-black tracking-tighter mb-4">The <br/><span class="text-primary italic">Portfolio</span> Grid</h1>
-            <p class="text-on-surface-variant max-w-xl text-lg">Every brand is a movement. Explore the digital chronicles of the visionaries we've managed.</p>
+            <h1 class="text-5xl md:text-7xl font-headline font-black tracking-tighter mb-4">The <br /><span
+                    class="text-primary italic">Portfolio</span> Grid</h1>
+            <p class="text-on-surface-variant max-w-xl text-lg">Every brand is a movement. Explore the digital
+                chronicles of the visionaries we've managed.</p>
         </header>
 
         <!-- Dynamic Grid -->
@@ -196,8 +209,8 @@
 
     <footer class="py-20 border-t border-white/5">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-            <img src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg" 
-                 alt="LCG" class="h-8 w-auto object-contain grayscale">
+            <img src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/IMG_7414.jpg"
+                alt="LCG" class="h-8 w-auto object-contain grayscale">
             <p class="text-gray-500 text-sm">© 2024 LCG Showcase. All Rights Reserved.</p>
         </div>
     </footer>
@@ -372,13 +385,13 @@
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                
+
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                
+
                 const rotateX = (centerY - y) / 10;
                 const rotateY = (x - centerX) / 10;
-                
+
                 inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
                 if (bg) {
                     bg.style.transform = `scale(1.1) translate(${-rotateY * 2}px, ${rotateX * 2}px)`;
@@ -407,7 +420,7 @@
                     if (window.innerWidth <= 1024) {
                         if (entry.isIntersecting) {
                             entry.target.classList.add('active-mobile');
-                            entry.target.querySelectorAll('video').forEach(v => v.play().catch(() => {}));
+                            entry.target.querySelectorAll('video').forEach(v => v.play().catch(() => { }));
                         } else {
                             entry.target.classList.remove('active-mobile');
                         }
@@ -420,8 +433,8 @@
                 group.addEventListener('touchstart', () => {
                     groups.forEach(g => g.classList.remove('active-mobile'));
                     group.classList.add('active-mobile');
-                    group.querySelectorAll('video').forEach(v => v.play().catch(() => {}));
-                }, {passive: true});
+                    group.querySelectorAll('video').forEach(v => v.play().catch(() => { }));
+                }, { passive: true });
             });
         };
 
@@ -454,4 +467,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="assets/page-transitions.js"></script>
 </body>
+
 </html>

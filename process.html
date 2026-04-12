@@ -221,6 +221,148 @@
             .dial-wrap{width:360px;height:360px;}
             .wm-text{font-size:80px;}
         }
+
+        /* ═══════════════════════════════════════════
+           PREMIUM MOBILE LAYOUT ─ 768px and below
+           Everything fits on one screen, no overflow
+        ═══════════════════════════════════════════ */
+        @media (max-width: 768px) {
+
+            /* Allow vertical scroll, kill horizontal overflow */
+            body {
+                height: auto;
+                min-height: 100vh;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+
+            /* Hide the massive rotated watermark — wastes space on mobile */
+            .wm-container { display: none !important; }
+
+            /* Nav: tuck to edges, add glass blur background for legibility */
+            .tn {
+                padding: 14px 16px;
+                background: rgba(14, 16, 18, 0.85);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border-bottom: 1px solid rgba(255,255,255,0.04);
+            }
+            .tn a {
+                font-size: 10px;
+                gap: 5px;
+            }
+            .tn .s {
+                font-size: 8px;
+                max-width: 160px;
+                text-align: right;
+            }
+
+            /* Main layout: vertical stack, full-screen, centered */
+            .pg {
+                height: auto;
+                min-height: 100dvh;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding: 70px 16px 24px;
+                gap: 16px;
+            }
+
+            /* Description text above the dial */
+            .pg > div:first-child {
+                width: 100%;
+                gap: 0 !important;
+            }
+            .pg > div:first-child > div:first-child {
+                text-align: center;
+            }
+            #desc {
+                font-size: 13px !important;
+                line-height: 1.5 !important;
+                max-width: 100% !important;
+                color: #888;
+                margin-bottom: 10px !important;
+            }
+            /* Hide the tiny icon row — wastes space */
+            .pg > div:first-child > div:first-child > div[style*="opacity:0.1"] {
+                display: none;
+            }
+
+            /* Dial card: scale down to fit the screen width */
+            .mc {
+                width: min(320px, 88vw) !important;
+                height: min(320px, 88vw) !important;
+                border-radius: 36px !important;
+                flex-shrink: 0 !important;
+            }
+            .dial-wrap {
+                width: calc(min(320px, 88vw) * 0.77) !important;
+                height: calc(min(320px, 88vw) * 0.77) !important;
+            }
+
+            /* Spoke labels: smaller to fit the shrunken dial */
+            .spoke .label { font-size: 11px !important; }
+            .spoke .uline { width: 20px !important; margin-top: 5px !important; }
+
+            /* Hub: scale down proportionally */
+            .hub {
+                width: 42px !important;
+                height: 42px !important;
+            }
+            .hub::after { width: 11px !important; height: 11px !important; }
+
+            /* Right sidebar becomes a horizontal bottom bar */
+            .sb {
+                width: 100% !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                gap: 12px !important;
+                flex-wrap: nowrap;
+            }
+
+            /* Info card takes available width */
+            .ic-card {
+                width: auto !important;
+                flex: 1 !important;
+                padding: 16px 14px !important;
+                border-radius: 18px !important;
+                text-align: left !important;
+            }
+            .ic-card h3 { font-size: 14px !important; margin-bottom: 6px !important; }
+            .ic-card p  { font-size: 11px !important; line-height: 1.4 !important; }
+
+            /* Dots grid — hide on mobile (decorative, wastes space) */
+            .sb .dg { display: none !important; }
+
+            /* Annotation arrow — hide (no space for it) */
+            .sb .an { display: none !important; }
+
+            /* Buttons: side by side in a compact column */
+            .sb > div[style*="flex-direction:column"] {
+                flex-direction: row !important;
+                gap: 10px !important;
+                flex-shrink: 0;
+            }
+            .ab {
+                width: 48px !important;
+                height: 48px !important;
+            }
+            .ab .material-symbols-outlined { font-size: 22px !important; }
+        }
+
+        /* Extra-small phones (below 400px) */
+        @media (max-width: 400px) {
+            .mc {
+                width: min(290px, 90vw) !important;
+                height: min(290px, 90vw) !important;
+            }
+            .dial-wrap {
+                width: calc(min(290px, 90vw) * 0.77) !important;
+                height: calc(min(290px, 90vw) * 0.77) !important;
+            }
+            .pg { padding: 66px 12px 20px; gap: 12px; }
+        }
     </style>
 </head>
 <body>
