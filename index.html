@@ -433,8 +433,13 @@
 
 <body class="bg-black text-on-surface selection:bg-primary selection:text-on-primary">
     <!-- Splash Screen -->
-    <div id="splash-screen" class="flex items-center justify-center bg-black">
-        <video id="splash-video" playsinline class="w-full h-full object-cover">
+    <div id="splash-screen" class="fixed inset-0 z-[9999] flex items-center justify-center bg-black">
+        <video id="splash-video" 
+               playsinline 
+               webkit-playsinline 
+               preload="auto" 
+               muted
+               class="w-full h-full object-cover">
             <source
                 src="https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/gif%20logo/WhatsApp%20Video%202026-04-10%20at%206.19.09%20PM.mp4"
                 type="video/mp4">
@@ -1405,44 +1410,50 @@
 
 
     <script>
-        // Splash Screen Logic
+        // Splash Screen Logic (v2.0 - High Reliability)
         const splash = document.getElementById('splash-screen');
         const splashVideo = document.getElementById('splash-video');
+        let splashStarted = false;
 
-        const splashSeen = sessionStorage.getItem('lcg_splash_seen_v5');
+        const handleSplashEnd = () => {
+            if (splash.classList.contains('hidden')) return;
+            splash.classList.add('hidden');
+            sessionStorage.setItem('lcg_splash_seen_v6', 'true');
+            setTimeout(() => {
+                splash.style.display = 'none';
+            }, 800);
+        };
 
-        if (splashSeen) {
-            if (splash) splash.style.display = 'none';
+        if (sessionStorage.getItem('lcg_splash_seen_v6')) {
+            splash.style.display = 'none';
         } else {
-            if (splashVideo) {
-                // Try to play with music first
-                splashVideo.muted = false;
+            // Wait for enough data to play smooth
+            splashVideo.addEventListener('canplay', () => {
+                if (splashStarted) return;
+                splashStarted = true;
 
+                // Attempt unmuted first
+                splashVideo.muted = false;
                 const playPromise = splashVideo.play();
 
                 if (playPromise !== undefined) {
-                    playPromise.catch(error => {
-                        console.log("Audio autoplay blocked by browser. Muteking to allow visuals.");
+                    playPromise.catch(() => {
+                        console.log("Autoplay unmuted blocked - falling back to muted cinematic");
                         splashVideo.muted = true;
                         splashVideo.play();
                     });
                 }
+            });
 
-                splashVideo.onended = () => {
-                    splash.classList.add('hidden');
-                    sessionStorage.setItem('lcg_splash_seen_v5', 'true');
-                    setTimeout(() => splash.style.display = 'none', 800);
-                };
+            splashVideo.onended = handleSplashEnd;
 
-                // Failsafe: If video doesn't load or play within 3.5s, force hide splash
-                setTimeout(() => {
-                    if (!splash.classList.contains('hidden')) {
-                        splash.classList.add('hidden');
-                        sessionStorage.setItem('lcg_splash_seen_v5', 'true');
-                        setTimeout(() => splash.style.display = 'none', 800);
-                    }
-                }, 3500);
-            }
+            // Failsafe: Hide if it takes too long to load or ends unexpectedly
+            setTimeout(() => {
+                if (!splashStarted) {
+                    console.warn("Splash took too long to load data. Transitioning to site.");
+                    handleSplashEnd();
+                }
+            }, 6000);
         }
 
         const audioToggle = document.getElementById('audio-toggle');
@@ -1499,10 +1510,7 @@
             { type: 'reel', name: 'Astones', role: 'Industrial', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/logo/24-01-2025_Astones%20Logo%20animation.mp4', color: 'primary' },
             { type: 'reel', name: 'DB Decor', role: 'Interior Soul', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/logo/DB%20Decor%20Logo%20Animation_02%20(1).mp4', color: 'secondary' },
             { type: 'reel', name: 'LCG New', role: 'Core Asset', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/logo/LCG%20Logo%20Animation%20New_02.mp4', color: 'tertiary' },
-            { type: 'reel', name: 'Farsh Main', role: 'Artist Logo', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/logo/Main%20Farsh%20Logo%20Animation_01.mp4', color: 'primary' },
-            { type: 'profile', name: 'Alex Rivera', role: 'Creative Director', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAlWwfHUbzRJixTwsej-EyP1U33B4bJvy74y9oxTLBnakvSFxg28FDi6gBh2VikXw7mYXVK5ZDB6wm59mNl8KHhNpMYKHo3wYdhYuym1S2AeIaBqY0bgu8_Ya35lRcpbk27XM0eO_zeKVe9P3ibgcetwuuBgqyXi4gicRFeL_rqqNFDiYe4GmfYowiVRMb7vyPl2dgj_PCRLTKzT5e_D54FxNrzscOmZ0EJgzdS8krreZhN6Unrzws-nNVAkLq7DPnQ6FWHY7OMgE2F', color: 'primary' },
-            { type: 'profile', name: 'Sarah Chen', role: 'Cinematographer', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAe4lMpvRGE6-Wm2hPUxqbegfDbBJrsN1nNigQZG_L0WzZNgFpQp5Wj8t3my9sX1AVIq7hIYVtNtJq7IonFQe9GkyVVvaWDpr-Hf8s_nMhZJhvcSQDoUJwKWw-rqJFRTN9-zn1rVbCatcQg2IZ1LXoNgsZlUZwE8Nh0Dua476Oh-QZMCpBQInR35thNHz7j5xBvDUjbA9aTluOy5CTwRZiq8hcg1ef0ZTlmpTnXeFem99Z4HYQxwkS-qRLst8e3CiQmdiTZZIpp29Tw', color: 'secondary' },
-            { type: 'profile', name: 'Marcus Thorne', role: 'Data Architect', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCF16UINPbitan9ISuYEo0yJ8e13E2U9IhIXxif57ONe2ax4GJf7LmchAIn38BJnfnSqPmU76gF5NV9A5IsIo3_iLArqYxCldjqGxRrPrKiOlQLOTY9nDozmz6ZdEmqUMOivhyNi4zbV03ZRDIw9Zm90G8eFbH6G5uyeT0hC59kBmDrwELdNVHH1pZk1J7vkKgLGAdScPA4WzWsB14Av3-LOMS5rBiJ7-IkvY2wOIT0pkwhgUUS5Mtwroeq9UC373fVfzbC5dt9d9D0', color: 'tertiary' }
+            { type: 'reel', name: 'Farsh Main', role: 'Artist Logo', src: 'https://wcnujolfbitmtrrelkhq.supabase.co/storage/v1/object/public/logo/Main%20Farsh%20Logo%20Animation_01.mp4', color: 'primary' }
         ];
 
         const createCardHTML = (p) => {
